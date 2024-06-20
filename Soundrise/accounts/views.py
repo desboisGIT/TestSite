@@ -9,7 +9,7 @@ def register(request):
     return render(request, 'pages/register.html')
 
 def logout(request):
-    return render(request, 'pages/login.html')
+    return render(request, 'pages/logout.html')
 
 def profile(request, id):
     context = {

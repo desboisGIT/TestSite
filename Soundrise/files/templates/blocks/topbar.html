@@ -3,7 +3,7 @@
     <nav class="navbar navbar-dark bg-dark">
         <a href="{% url 'content:index' %}" class="navbar-brand">Soundrise</a>
         <div class="navbar">
-            <a href="" class="nav-item nav-link">login</a>
+            <a href="{% url 'accounts:login' %}" class="nav-item nav-link">login</a>
             <a href="{% url 'accounts:register' %}" class="nav-item nav-link">Register</a>
             <a href="{% url 'accounts:logout' %}" class="nav-item nav-link">logout</a>
             <a href="{% url 'accounts:profile' id=1 %}" class="nav-item nav-link">profile</a>
