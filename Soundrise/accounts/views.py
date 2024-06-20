@@ -4,7 +4,7 @@ from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .forms import RegisterForm
+from .forms import ParametreForm, ParametreProForm, RegisterForm
 from accounts.models import CustomUser
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -19,7 +19,7 @@ def login_view(request):
         user = authenticate(request, username=username_or_email, password=password)
         if user is not None:
             login(request, user)
-            return redirect('accounts:login_succes')  # Redirect to home page after login
+            return redirect('accounts:success')  # Redirect to home page after login
         else:
             error_message = "Invalid username or password. Please try again."
             
@@ -27,7 +27,6 @@ def login_view(request):
     return render(request, 'pages/login.html', {'form': register_form, 'error_message': error_message})
 
 def register_view(request):
-    print("bbbb")
     print(os.path.join(BASE_DIR, 'files', 'static/'))
     register_form = RegisterForm()
     if request.method == 'POST':
@@ -51,8 +50,7 @@ def profile(request, id):
 def success(request):
     return render(request, 'pages/success.html')
 
-def parametre(request):
-    return render(request,'pages/parametre.html')
+
 
 def parametre_about(request):
     return render(request,'pages/parametre/about.html')
@@ -65,3 +63,15 @@ def parametre_confidentiality(request):
 
 def recherche(request):
     return render(request,'pages/recherche.html')
+
+def parametre(request):
+    if request.method == 'POST':
+        form = ParametreForm(request.POST,instance=request.user)
+        form2 = ParametreProForm(request.POST,instance=request.user)
+        if form.is_valid():
+            form.save()
+                  
+        elif form2.is_valid():
+            form2.save()
+
+    return render(request, 'pages/parametre.html')

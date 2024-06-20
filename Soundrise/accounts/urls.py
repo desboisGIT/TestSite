@@ -14,4 +14,6 @@ urlpatterns = [
     path('parametre/cookie/', views.parametre_cookie, name='parametre_cookie'),
     path('parametre/confidentiality/', views.parametre_confidentiality, name='parametre_confidentiality'),
     path('recherhche/', views.recherche, name='recherhce'),
+
+   
 ]

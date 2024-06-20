@@ -11,3 +11,14 @@ class RegisterForm(UserCreationForm):
         model = CustomUser
         fields = ['full_name', 'username', 'email', 'country', 'password1', 'password2']
 
+class ParametreForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields = ['full_name','username', 'tel','email', 'password','country']
+
+
+
+class ParametreProForm(forms.ModelForm):
+    class Meta:
+        model = CustomUser
+        fields=['mail_pro']
