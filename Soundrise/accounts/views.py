@@ -1,3 +1,9 @@
 from django.shortcuts import render
 
-# Create your views here.
+from django.http import HttpResponse
+
+def login(request):
+    return HttpResponse("Welcome to the login Page")
+
+def register(request):
+    return render(request, 'pages/register.html')
