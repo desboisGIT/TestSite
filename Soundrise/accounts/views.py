@@ -5,9 +5,10 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import ParametreForm, ParametreProForm, RegisterForm
-from accounts.models import Beats, CustomUser
+from accounts.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from beats.models import Beats
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -42,14 +43,19 @@ def logout_view(request):
     logout(request)
     return redirect('accounts:login')
 
+
 @login_required
 def profile(request, username=None):
     if username is None:
         user = request.user  # Logged-in user's profile
     else:
         user = get_object_or_404(CustomUser, username=username)  # Profile of the user with given username
-    
-    uploaded_beats = Beats.objects.filter(artist=1)
+
+    print(f"Logged-in User: {request.user}")  # Debug print
+    print(f"Profile User: {user}")  # Debug print
+
+    uploaded_beats = Beats.objects.filter(artist=user)
+    print(f"Uploaded Beats: {uploaded_beats}")  # Debug print
     
     context = {
         'user_profile': user,
@@ -57,6 +63,7 @@ def profile(request, username=None):
     }
     
     return render(request, 'pages/profile.html', context)
+
 
 def success(request):
     return render(request, 'pages/success.html')

@@ -1,29 +1,47 @@
 {% extends 'layout/layout.html' %}
 
 {% block content %}
-    <h1>User Profile</h1>
-    <h2>{{ user_profile.username }}</h2>
-    <p>Full Name: {{ user_profile.full_name }}</p>
-    <p>Email: {{ user_profile.email }}</p>
-    <p>Country: {{ user_profile.country }}</p>
-    <p>Profile Picture: <img src="{{ user_profile.profile_picture }}" alt="Profile Picture"></p>
-    <p>Profile Description: {{ user_profile.profile_free_text }}</p>
-    <p>Telephone: {{ user_profile.tel }}</p>
-    <p>Professional Mail: {{ user_profile.mail_pro }}</p>
-
-    <hr>
-    <h2>Uploaded Beats</h2>
-    {% if uploaded_beats %}
-        <ul>
-            {% for beat in uploaded_beats %}
-                <li>{{ beat.title }} - {{ beat.genre }} - {{ beat.release_date }}</li>
-                <!-- Display more details of the beat as needed -->
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No beats uploaded yet.</p>
-    {% endif %}
-
-<a href="{% url 'accounts:parametre'%}"> Parametre </a>
-
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            <img src="{{ user_profile.profile_picture }}" class="img-fluid rounded-circle mb-3" alt="Profile Picture">
+            <h2>{{ user_profile.username }}</h2>
+            <p class="text-muted">{{ user_profile.full_name }}</p>
+            <p><strong>Email:</strong> {{ user_profile.email }}</p>
+            <p><strong>Country:</strong> {{ user_profile.country }}</p>
+            <p><strong>Profile Description:</strong> {{ user_profile.profile_free_text }}</p>
+            <p><strong>Telephone:</strong> {{ user_profile.tel }}</p>
+            <p><strong>Professional Mail:</strong> {{ user_profile.mail_pro }}</p>
+        </div>
+        <div class="col-md-8">
+            <h2 class="mb-4">Uploaded Beats</h2>
+            {% if uploaded_beats %}
+                <div class="list-group">
+                    {% for beat in uploaded_beats %}
+                        <div class="list-group-item list-group-item-action mb-3">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <img src="{{ beat.cover_image.url }}" class="img-fluid rounded" alt="{{ beat.title }} Cover">
+                                </div>
+                                <div class="col-md-9">
+                                    <h5 class="mb-1">{{ beat.title }}</h5>
+                                    <p class="mb-1">{{ beat.genre }} - {{ beat.release_date }}</p>
+                                    <p class="mb-1">{{ beat.description }}</p>
+                                    <audio controls class="w-100">
+                                        <source src="{{ beat.audio_file.url }}" type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+                                    <p>{{ BASE_DIR }}{{ beat.audio_file.url }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="text-muted">No beats uploaded yet.</p>
+            {% endif %}
+            <a href="{% url 'accounts:parametre' %}" class="btn btn-primary mt-3">Parametre</a>
+        </div>
+    </div>
+</div>
 {% endblock content %}
