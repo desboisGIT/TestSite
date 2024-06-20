@@ -5,4 +5,5 @@ app_name = 'beatmakers'
 
 urlpatterns = [
     path('profile/<str:profile_name>/', views.profile_view, name='profile_page'),
+    path('sell/', views.sell, name='sell'),
 ]

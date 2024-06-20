@@ -1,19 +1,15 @@
 {% block bottombar %}
-<nav class="navbar navbar-inverse navbar-fixed-bottom">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="#">WebSiteName</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Page 1</a></li>
-        <li><a href="#">Page 2</a></li>
-        <li><a href="#">Page 3</a></li>
-      </ul>
+<nav class="navbar navbar-light bg-dark fixed-bottom">
+    <div class="container">
+        <a href="{% url 'beatmakers:sell' %}" class="nav-item nav-link">Sell</a>
+      <div class="navbar">
+        <a href="{% url 'accounts:parametre' %}" class="nav-item nav-link">About</a>
+        <a href="{% url 'accounts:parametre' %}" class="nav-item nav-link">Confidenciality</a>
+        <a href="{% url 'accounts:parametre' %}" class="nav-item nav-link">Cookie</a>
+        <p>Soundrise  copyright © all rights reserved-----------if you see this you a gigga chad</p>
     </div>
-    
-    
-</nav>
+    </div>
+  </nav>    
     
   
 {% endblock bottombar %}

@@ -1,10 +1,5 @@
-<title>Login Successful</title>
 {% extends 'layout/layout.html' %}
-{% block success %}
-    <div class="container">
-        <div class="message">
-            <p>Login successful!</p>
-        </div>
-        <a href="{% url 'index' %}" class="button">Go to Home Page</a>
-  </div>
-  {% endblock success %}
+{% block content %}
+<h2>Login Successful</h2>
+<p>Welcome to the site!</p>
+{% endblock %}
