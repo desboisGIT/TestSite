@@ -1,11 +1,13 @@
 import os
 from pathlib import Path
 from pyexpat.errors import messages
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import ParametreForm, ParametreProForm, RegisterForm
-from accounts.models import CustomUser
+from accounts.models import Beats, CustomUser
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -40,10 +42,19 @@ def logout_view(request):
     logout(request)
     return redirect('accounts:login')
 
-def profile(request, id):
+@login_required
+def profile(request, username=None):
+    if username is None:
+        user = request.user  # Logged-in user's profile
+    else:
+        user = get_object_or_404(CustomUser, username=username)  # Profile of the user with given username
+    
+    uploaded_beats = Beats.objects.filter(artist=1)
+    
     context = {
-                'name': id,
-              }
+        'user_profile': user,
+        'uploaded_beats': uploaded_beats,
+    }
     
     return render(request, 'pages/profile.html', context)
 
