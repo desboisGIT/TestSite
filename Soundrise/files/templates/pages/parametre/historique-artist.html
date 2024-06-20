@@ -1,0 +1,869 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+                
+    <div class="recherche-act">
+        <div class="nothing"></div>
+        <div class="nothing"></div>
+        <button class="but-act" onclick="navigate('historique-beat')" ><a></a>Beat</button>
+        <button class="but-act" onclick="navigate('parametre-historique-artist')"></a>Artiste</button>
+        <button class="but-act"onclick="navigate('parametre-historique-recherche')" ><a href=></a>Recherche</button>
+        <div class="nothing"></div>
+        <div class="nothing"></div>
+    </div>
+
+    <div class="box-art">
+        <div class="titre1-art">Aujourd'hui
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">Momo45</div>   
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">Beatmaker</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">Jeus8</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">Tyler_V</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">lola_R</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-art">ynes</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">Momo45</div>   
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">Beatmaker</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">Jeus8</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">Tyler_V</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">lola_R</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-art">ynes</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="titre2-art">Cette semaine
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">MATHS17</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-rart">LOic</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">HYU</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">YOEL</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">JOJOprod</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">GIms</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">Momo45</div>   
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">Beatmaker</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">Jeus8</div>
+                <<div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">Tyler_V</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">lola_R</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-art">ynes</div>
+                   <div class="sub"> 
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="titre3-art">Ce mois-ci
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">Desbois</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+                  
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-art">Loic_65</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+                  
+            </div>
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">ZERB</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">PAUL</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">LOLO99</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo1-art" src="/static/images/parametre/C1.png"></img>
+                <div class="nom-art">Momo45</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>  
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">Beatmaker</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo2-art" src="/static/images/parametre/C3.webp"></img>
+                <div class="nom-art">Jeus8</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo4-art" src="/static/images/parametre/C5.webp"></img>
+                <div class="nom-art">Tyler_V</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo-art" src="/static/images/parametre/C2.jpg"></img>
+                <div class="nom-art">lola_R</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            <div class="compte-art">
+                <img class="logo3-art" src="/static/images/parametre/C4.webp"></img>
+                <div class="nom-art">ynes</div>
+                <div class="sub">
+                    <div class="tooltip-container">
+                        <span class="tooltip">45k</span>
+                        <span class="text-follow">
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 95 114"
+                            class="svgIcon"
+                        >
+                            <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                            <path
+                            fill="black"
+                            d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                            ></path>
+                        </svg>
+                        Follow</span
+                        >
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    
+</div>
+{% endblock content %}

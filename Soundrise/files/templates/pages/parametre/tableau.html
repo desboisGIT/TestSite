@@ -1,0 +1,204 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+    <div class="revenus">
+        <div class="graph">
+            <div class="graph2"  onclick="navigate('revenus-infos')">
+        
+
+            <div class="ligne-tab">
+                <div class="t">Revenus($)</div>
+                
+            </div>
+            <div class="ligne-tab">
+                <div class="chiffre">100k</div>
+                <div class="l"></div>
+            </div>
+            <div class="ligne-tab">
+                <div class="chiffre">10k</div>
+                <div class="l"></div>
+            </div>
+            <div class="ligne-tab">
+                <div class="chiffre">1k</div>
+                <div class="l"></div>
+            </div>
+            <div class="ligne-tab">
+                <div class="chiffre">100</div>
+                <div class="l"></div>
+            </div>
+            <div class="ligne-tab">
+                <div class="chiffre">10</div>
+                <div class="l"></div>
+            </div>
+            <div class="ligne2-tab">
+                <div class="chiffre2">0</div>
+                <div class="l2">1</div>
+                <div class="l2">2</div>
+                <div class="l2">3</div>
+                <div class="l2">4</div>
+                <div class="l2">5</div>
+                <div class="l2">10</div>
+                <div class="l2">20</div>
+                <div class="l2">30</div>
+                <div class="t2">Semaine(s+)</div>
+                    
+            </div>
+            </div>
+            
+        </div>
+
+        <div class ="donnees">
+            <div class="donnees2" onclick="navigate('dernier-beat')">
+            <div class="donnees3">Dernier Beat
+            <div class="j">
+                <div class="analy">Ecoutes</div>
+                <div class="data-tab">1.6K</div>
+                
+            
+            </div>  
+            <div class="j">
+                <div class="analy">Ventes</div>
+                <div class="data-tab" >600</div>
+                
+                
+            </div>
+            <div class="j">
+                <div class="analy">Revenus</div>
+                <div class="data-tab">3.4k</div>
+                
+                
+            </div>
+            <div >
+                <div ></div>
+                <div ></div>
+            </div>
+            </div>
+            </div>
+        </div>
+    </div>
+    <div class = "stats">
+        <div class="stat1">
+            <div class="stat2-1" onclick="navigate('ecoutes-infos')">Ecoutes
+            <div class="nombre">10k</div>
+            <div class="info-tab">en hausse de 35%</div>
+            </div>
+        </div>
+        <div class="stat1">
+            <div class="stat2-2" onclick="navigate('abonnes-infos')">Abonnés
+            <div class="nombre">100k</div>
+            <div class="info-tab">en hausse de 15%</div>
+            </div>
+        </div>
+        <div class="stat1">
+            <div class="stat2-3" onclick="navigate('moyennes-infos')">Moyenne
+                <div class="moyennes">
+                <div class="typ">Ecoutes</div>
+                <div class="num">103k</div>
+                </div>
+            
+            <div class="moyennes">
+                <div class="typ">Ventes</div>
+                <div class="num">1.6k</div>
+            </div>
+            <div class="moyennes">
+                <div class="typ" >revenus</div>
+                <div class="num">20.76k</div> 
+            </div>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="liste-tab">
+        <div class="liste2-tab">
+        <div class="categorie-tab">
+            <div class="infos-tab">Beat</div>
+            <div class="infos-tab">Likes</div>
+            <div class="infos-tab">Revenus</div>
+            <div></div>
+        </div>
+        <div class="beatinfos">
+            <div class="li-tab" onclick="navigate('dernier-beat')">
+                <img class="inf1" src="/static/images/parametre/c4.webp"></img>  
+                <div class="inf2">
+                    <button class="Btn">
+                        <span class="leftContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg>
+                        <span class="like">Like</span>
+                        </span>
+                        <span class="likeCount">
+                        2,050
+                        </span>
+                    </button>
+                </div>
+                <div class="inf3">10k$</div>
+                
+            </div>
+            <div class="li-tab">
+                <img class="inf1" src="/static/images/parametre/c4.webp"></img>
+                <div class="inf2">
+                    <button class="Btn">
+                        <span class="leftContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg>
+                        <span class="like">Like</span>
+                        </span>
+                        <span class="likeCount">
+                        2,050
+                        </span>
+                    </button>
+                </div>
+                <div class="inf3">1.6k$</div>
+            </div>
+            <div class="li-tab">
+                <img class="inf1" src="/static/images/parametre/c4.webp"></img>
+                <div class="inf2">
+                    <button class="Btn">
+                        <span class="leftContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg>
+                        <span class="like">Like</span>
+                        </span>
+                        <span class="likeCount">
+                        2,050
+                        </span>
+                    </button>
+                </div>
+                <div class="inf3">200$</div>
+            </div>
+            <div class="li-tab">
+                <img class="inf1" src="/static/images/parametre/c4.webp"></img>
+                <div class="inf2">
+                    <button class="Btn">
+                        <span class="leftContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg>
+                        <span class="like">Like</span>
+                        </span>
+                        <span class="likeCount">
+                        2,050
+                        </span>
+                    </button>
+                </div>
+                <div class="inf3">3.4k$</div>
+            </div>
+            <div class="li-tab">
+                <img class="inf1" src="/static/images/parametre/c4.webp"></img>
+                <div class="inf2">
+                    <button class="Btn">
+                        <span class="leftContainer">
+                        <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path></svg>
+                        <span class="like">Like</span>
+                        </span>
+                        <span class="likeCount">
+                        2,050
+                        </span>
+                    </button>
+                </div>
+                <div class="inf3">800$</div>
+            </div>
+            
+
+        </div>
+    
+        </div>
+    </div>
+</div>
+{% endblock content %}

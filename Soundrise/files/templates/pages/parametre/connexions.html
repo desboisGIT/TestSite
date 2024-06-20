@@ -1,0 +1,64 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+    <div class="plus-haut">Connexions</div>
+    <div class="haut">
+        <div class="box-con">
+            
+            <div class="ligne-con"></div>
+            <div class="contenu-con">
+                
+                <div class="box2-con">
+                <div class="box-con2">
+                    <img class="logo1-con" src="/static/images/parametre/l1.png"></img>
+                    <div class="marq">Deezer</div>
+                    <button class="connect"  onclick="navigate('add-deezer')">Se connecter</button>
+                </div>
+                </div>
+                <div class="box2-con">
+                <div class="box-con2">
+                    <img class="logo2-con" src="/static/images/parametre/l2.png"></img>
+                    <div class="marq">Spotify</div>
+                    <button class="connect"  onclick="navigate('add-spotify')">Se connecter</button>
+                </div>
+                </div>
+                <div class="box2-con">
+                <div class="box-con2">
+                    <img class="logo3-con" src="/static/images/parametre/l3.png"></img>
+                    <div class="marq">Soundcloud</div>
+                    <button class="connect"  onclick="navigate('add-soundcloud')">Se connecter</button> 
+                </div>
+                </div>
+                <div class="box2-con">
+                 <div class="box-con2"> 
+                    <img class="logo4-con" src="/static/images/parametre/l4.png"></img>
+                    <div class="marq4">Youtube</div>
+                    <button class="connect"  onclick="navigate('add-ytb')">Se connecter</button> 
+                 </div>
+                </div>
+                <div class="box2-con">
+                <div class="box-con2">
+                    
+                    <img class="logo5-con" src="/static/images/parametre/l5.png"></img>
+                    <div class="marq5">Fl studio</div>
+                    <button class="connect"  onclick="navigate('add-flstudio')">Se connecter</button> 
+                </div> 
+                </div>
+                <div class="box2-con">
+                <div class="box-con2">   
+                    <div class="logo6-con"></div>
+                    <div class="marq6">Autre</div>
+                    <button class="connect"  onclick="navigate('add-autre')">Se connecter</button>
+                </div>
+                </div>
+            </div>
+            
+            
+        
+        </div>
+    </div>
+    
+
+</div>
+{% endblock content %}

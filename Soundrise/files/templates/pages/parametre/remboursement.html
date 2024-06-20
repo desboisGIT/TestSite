@@ -1,0 +1,117 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+    <div class="onglet-rem" >
+    <div class="box-rem">Sélectionnez la transaction
+        <div class="tri-rem">
+            <div class="tr1-rem">Id</div>
+            <div class="tr2-rem">date</div>
+            <div class="tr3-rem">Catégorie</div>
+            <div class="tr4-rem">Montant</div>
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">38</div>
+            <div class="contenu-rem">10/12</div>
+            <div class="contenu-rem">Beat</div>
+            <div class="contenu1-rem">5,99$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            <div class="contenu-rem">67</div>
+            <div class="contenu-rem">22/07</div>
+            <div class="contenu-rem">Abonnement</div>
+            <div class="contenu1-rem">9,99$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">99</div>
+            <div class="contenu-rem">13/06</div>
+            <div class="contenu-rem">Retrait</div>
+            <div class="contenu1-rem">20$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">55</div>
+            <div class="contenu-rem">31/05</div>
+            <div class="contenu-rem">Dépot</div>
+            <div class="contenu1-rem">20$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">40</div>
+            <div class="contenu-rem">19/09</div>
+            <div class="contenu-rem">Beat</div>
+            <div class="contenu1-rem">10$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">38</div>
+            <div class="contenu-rem">10/12</div>
+            <div class="contenu-rem">Beat</div>
+            <div class="contenu1-rem">5,99$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            <div class="contenu-rem">67</div>
+            <div class="contenu-rem">22/07</div>
+            <div class="contenu-rem">Abonnement</div>
+            <div class="contenu1-rem">9,99$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">99</div>
+            <div class="contenu-rem">13/06</div>
+            <div class="contenu-rem">Retrait</div>
+            <div class="contenu1-rem">20$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">55</div>
+            <div class="contenu-rem">31/05</div>
+            <div class="contenu-rem">Dépot</div>
+            <div class="contenu1-rem">20$</div>
+            
+        </div>
+        <div class="ligne-rem">
+            
+            <div class="contenu-rem">40</div>
+            <div class="contenu-rem">19/09</div>
+            <div class="contenu-rem">Beat</div>
+            <div class="contenu1-rem">10$</div>
+            
+        </div>
+    </div>
+    <div class="box2-rem">
+        <div class="box3">Demande de Remboursement  
+        <label class="description1">Quel est le problème ?</label>
+        <input type ="text-rem" placeholder= "Décrivez votre problème"class="description">
+        
+        <select placeholder="Choisir"class ="justification">
+            <option >Choisir</option>
+            <option >Mauvaise manipulation</option>
+            <option >Mauvais compte</option>
+            <option >Incapacité de paiement</option>
+            <option >autre</option>
+        </select>
+        <select type="" class="compte-rem">
+            <option >Choisir</option>
+            <option >Compte-1</option>
+            <option >Compte-2</option>
+            
+            
+        </select>
+
+        <button class="valid" onclick="navigate('message-remboursement')">Valider</button>
+    </div>
+    </div>
+    </div>
+</div>
+{% endblock content %}

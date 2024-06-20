@@ -1,0 +1,534 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+    <div class="onglet-fav">
+    
+        <div class="card-fav1" onclick="navigate('activite')">
+            <div class="icon-card1">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="38px" width="38px" version="1.1" id="heart" viewBox="0 0 471.701 471.701" xml:space="preserve">
+                    <linearGradient id="gradientColor-card">
+                      <stop offset="5%" stop-color="#7eaaff"></stop>
+                      <stop offset="95%" stop-color="#ff48fb"></stop>
+                    </linearGradient>
+                    <g>
+                      <path d="M433.601,67.001c-24.7-24.7-57.4-38.2-92.3-38.2s-67.7,13.6-92.4,38.3l-12.9,12.9l-13.1-13.1   c-24.7-24.7-57.6-38.4-92.5-38.4c-34.8,0-67.6,13.6-92.2,38.2c-24.7,24.7-38.3,57.5-38.2,92.4c0,34.9,13.7,67.6,38.4,92.3   l187.8,187.8c2.6,2.6,6.1,4,9.5,4c3.4,0,6.9-1.3,9.5-3.9l188.2-187.5c24.7-24.7,38.3-57.5,38.3-92.4   C471.801,124.501,458.301,91.701,433.601,67.001z M414.401,232.701l-178.7,178l-178.3-178.3c-19.6-19.6-30.4-45.6-30.4-73.3   s10.7-53.7,30.3-73.2c19.5-19.5,45.5-30.3,73.1-30.3c27.7,0,53.8,10.8,73.4,30.4l22.6,22.6c5.3,5.3,13.8,5.3,19.1,0l22.4-22.4   c19.6-19.6,45.7-30.4,73.3-30.4c27.6,0,53.6,10.8,73.2,30.3c19.6,19.6,30.3,45.6,30.3,73.3   C444.801,187.101,434.001,213.101,414.401,232.701z"></path>
+                    </g>
+                  </svg>
+            </div>
+            <p class="title-card1">Likes</p>
+            <p class="text-card1">Check all your likes in one place.</p>
+        </div>
+        <div class="card-fav2" onclick="navigate('parametre-activite-fav')">
+            <div class="icon-card2">
+                <svg
+                width="6.8501029mm"
+                height="9.687809mm"
+                viewBox="0 0 6.8501029 9.6878087"
+                version="1.1"
+                id="svg1"
+                xml:space="preserve"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:svg="http://www.w3.org/2000/svg"><defs
+                  id="defs1" /><g
+                  id="layer1"
+                  transform="translate(192.58449,-39.014418)"><path
+                    style="fill:#ffffff;stroke-width:0.0778915;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+                    d="m -192.36104,48.666952 c -0.0661,-0.02469 -0.12275,-0.09858 -0.15735,-0.158014 l -0.0661,-0.113676 v -4.6245 -4.624484 l 0.0661,-0.06593 c 0.0661,-0.06593 0.0956,-0.06593 3.36135,-0.06593 h 3.29039 l 0.0661,0.08492 0.0661,0.08492 v 4.569133 c 0,4.959991 0.009,4.70645 -0.18884,4.854603 -0.15735,0.123239 -0.44266,0.125952 -0.58773,5.37e-4 -0.0247,-0.03131 -0.74188,-0.54388 -1.09685,-0.794716 -0.25301,-0.18967 -0.98306,-0.705693 -1.31442,-0.947371 -0.15736,-0.113676 -0.25302,-0.173749 -0.28449,-0.158013 -0.0247,0.02469 -2.49947,1.784817 -2.67653,1.915643 -0.12379,0.08241 -0.34127,0.104044 -0.47068,0.04369 z m 0.60669,-0.6639 c 0.65451,-0.472823 1.11183,-0.803288 1.30489,-0.94011 0.12276,-0.08241 0.38905,-0.278134 0.60422,-0.43581 0.44513,-0.324532 0.60915,-0.430044 0.66931,-0.430044 0.0247,0 0.12276,0.0536 0.22186,0.120527 1.21727,0.877265 2.72408,1.948835 2.75559,1.961159 0.0247,0.01235 0.0247,-0.872196 0.0247,-4.405103 l -0.009,-4.420896 -2.9957,-0.0083 -2.99587,-0.0083 v 4.429412 4.429426 l 0.0956,-0.05771 c 0.0661,-0.03131 0.18884,-0.135515 0.3355,-0.233856 z"
+                    id="path4" /></g></svg>
+            </div>
+            <p class="title-card2">Favourites</p>
+            <p class="text-card2">Check all your favourites in one place.</p>
+        </div>
+        <div class="card-fav3" onclick="navigate('parametre-activite-com')">
+            <div class="card-fav3" onclick="navigate('parametre-activite-com')">
+                <div class="icon-card3">
+                    <svg
+width="10.43872mm"
+height="6.891767mm"
+viewBox="0 0 10.43872 6.891767"
+version="1.1"
+id="svg1"
+xml:space="preserve"
+xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+xmlns="http://www.w3.org/2000/svg"
+xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
+ id="namedview1"
+ pagecolor="#ffffff"
+ bordercolor="#000000"
+ borderopacity="0.25"
+ inkscape:showpageshadow="2"
+ inkscape:pageopacity="0.0"
+ inkscape:pagecheckerboard="0"
+ inkscape:deskcolor="#d1d1d1"
+ inkscape:document-units="mm"
+ inkscape:zoom="8.0126864"
+ inkscape:cx="-656.83339"
+ inkscape:cy="184.89429"
+ inkscape:window-width="1920"
+ inkscape:window-height="991"
+ inkscape:window-x="-9"
+ inkscape:window-y="-9"
+ inkscape:window-maximized="1"
+ inkscape:current-layer="layer1" /><defs
+ id="defs1" /><g
+ inkscape:label="Calque 1"
+ inkscape:groupmode="layer"
+ id="layer1"
+ transform="translate(181.84203,-41.942096)"><g
+   id="g5"
+   transform="matrix(0.07754145,0,0,0.06744979,-183.59898,37.532456)"
+   inkscape:export-filename="icone-fav5.svg"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96"><path
+     style="fill:#ffffff;stroke-width:3.36739;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+     d="m 85.75233,498.77997 c 0.3961,-134.29535 0.401255,-134.50696 3.552113,-145.78636 3.92336,-14.04479 9.328453,-27.10103 15.782497,-38.12331 2.72836,-4.65951 5.30141,-8.78954 5.71788,-9.17783 0.41647,-0.3883 2.64643,-3.24754 4.95546,-6.35389 13.76678,-18.52047 39.51841,-36.88039 62.89747,-44.84347 22.82904,-7.77573 14.6128,-7.39958 161.62809,-7.39958 147.01529,0 138.79905,-0.37615 161.6281,7.39958 23.37904,7.96308 49.13069,26.323 62.89746,44.84347 2.30903,3.10635 4.56151,5.96559 5.00549,6.35389 1.70582,1.49182 10.67543,18.04029 14.25094,26.29224 2.0605,4.75542 5.23744,14.28706 7.05988,21.18144 3.11238,11.77429 3.31353,15.02089 3.31353,53.48249 0,38.27185 -0.21734,41.82369 -3.32641,54.36102 -6.24867,25.19766 -18.68318,47.04898 -37.45593,65.82173 -16.25821,16.25819 -33.08239,26.80599 -53.90694,33.79657 -22.68159,7.61395 -24.15246,7.68774 -153.30493,7.68982 l -119.50454,0.002 -13.92704,6.49081 c -7.65988,3.56994 -19.15628,8.97074 -25.54755,12.00178 -6.39128,3.03104 -11.91089,5.51098 -12.26581,5.51098 -0.35493,0 -8.46886,3.71643 -18.03097,8.25874 -9.56211,4.54231 -20.90998,9.90062 -25.2175,11.90738 -4.30751,2.00674 -13.52064,6.30635 -20.47362,9.5547 -14.599744,6.82081 -24.607196,11.22644 -25.501019,11.22644 -0.34283,0 -0.444823,-60.52076 -0.226651,-134.49057 z m 45.87678,82.31775 c 2.56308,-1.44327 23.69556,-11.3324 36.39585,-17.03176 3.88293,-1.74249 12.77837,-5.87036 19.76764,-9.17301 6.98927,-3.30266 17.72151,-8.3043 23.84942,-11.11476 l 11.14166,-5.10994 124.40789,-0.0503 c 99.48816,-0.0402 125.96345,-0.43187 132.17375,-1.95523 10.65002,-2.6124 23.65614,-7.65798 29.97641,-11.629 2.89676,-1.82005 5.69056,-3.30917 6.20846,-3.30917 2.9404,0 18.96077,-14.91329 28.06065,-26.12153 4.58361,-5.64558 13.58061,-21.4984 15.22553,-26.82751 6.59075,-21.35243 6.57657,-21.22038 6.59408,-61.42089 0.0189,-43.2687 -1.06436,-50.79577 -9.93827,-69.05937 -11.48801,-23.64372 -28.45179,-40.65961 -51.4173,-51.5752 -25.36618,-12.05664 -25.83199,-12.09103 -163.78904,-12.09103 -137.95705,0 -138.42285,0.0344 -163.78903,12.09103 -29.14579,13.8531 -50.45757,39.77468 -58.65551,71.34284 -2.5672,9.88565 -2.71832,16.5134 -2.74118,120.22284 l -0.0242,109.76042 7.02237,-2.76797 c 3.8623,-1.52238 8.15117,-3.40359 9.53082,-4.18047 z"
+     id="path1"
+     transform="scale(0.26458333)" /><path
+     style="fill:#ffffff;stroke-width:3.36739;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+     d="m 222.38598,438.06787 c -19.58331,-10.46849 -20.76098,-36.1852 -2.2309,-48.71592 18.55781,-12.54946 43.17815,1.14229 43.17815,24.01203 0,20.3543 -23.05922,34.26616 -40.94725,24.70389 z"
+     id="path2"
+     transform="scale(0.26458333)" /><path
+     style="fill:#ffffff;stroke-width:3.36739;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+     d="m 329.37604,439.30516 c -9.52657,-4.22517 -17.97365,-16.58662 -17.97365,-26.30263 0,-9.91285 9.29809,-23.18172 18.73856,-26.74092 5.10016,-1.92283 15.18962,-1.92283 20.28979,0 9.28469,3.50047 18.70489,16.76698 18.76957,26.43327 0.0668,9.98658 -8.45757,22.45527 -18.1441,26.53954 -5.69659,2.40193 -16.34563,2.43668 -21.68017,0.0707 z"
+     id="path3"
+     transform="scale(0.26458333)" /><path
+     style="fill:#ffffff;stroke-width:3.36739;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"
+     d="m 435.63631,439.67107 c -10.85232,-4.33113 -18.30875,-15.03292 -18.36685,-26.3609 -0.0837,-16.31733 12.21102,-28.54713 28.69864,-28.54713 6.3116,0 8.85893,0.80904 14.4485,4.58891 18.5298,12.53052 17.33334,38.57731 -2.23089,48.56636 -6.75561,3.44926 -16.41687,4.20023 -22.5494,1.75276 z"
+     id="path5"
+     transform="scale(0.26458333)" /></g></g></svg>
+                 
+                
+                 
+                </div>
+                <p class="title-card3">Commentaires</p>
+                <p class="text-card3">Check all your comments in one place.</p>
+            </div>
+        </div>
+    </div>
+    
+    
+        <div class="second-part">
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="lign-content">
+                
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="content-bea">
+                    <img class="logo-bea" src="/static/images/parametre/c1.png"></img>
+                    <div class="description-bea">
+                        <div class="part1">
+                            <div class="titre-description">Le feu de dieu</div>
+                            <div class="categorie-bea"> RAP - 110 Bpm</div>
+                        </div>
+                        <div class="part2">
+                            <div class="name-bea">Franck</div>
+                            <button class="prix-bea">35$</button>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+
+            
+          </div>
+        
+    
+    
+</div>
+{% endblock content %}

@@ -1,9 +1,32 @@
 {% extends 'layout/layout.html' %}
+
 {% block content %}
-<h2>Login</h2>
-<form method="post">
+<form method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
+    <h1>Login</h1>
+    <label for="id_username_email">Username or Email</label>
+      <input
+        type="text"
+        name="username"
+        id="id_username_email"
+        placeholder="Type your username or email"
+        required
+      />
+
+    <label for="id_password">Password</label>
+
+      <input
+        type="password"
+        name="password"
+        id="id_password"
+        placeholder="Type your password"
+        required
+      />
+
+
+
+
+    <button type="submit">Connexion</button>
+    <p>{{ error_message }}
 </form>
 {% endblock %}

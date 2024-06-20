@@ -1,0 +1,111 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class = "onglet-parametre-default">
+    <div class="onglet-int" >
+    
+        <div class="gauche">
+            <div class="titre-int">Affichage</div>
+            <div class="entier">
+                <div class="titre2-int">Thême </div>
+                <div class="icone-int">
+                    <label class="ui-switch">
+                        <input type="checkbox" class="checkbox-int">
+                        <div class="slider-int">
+                        <div class="circle-int"></div>
+                        </div>
+                    </label>
+                    
+                </div>
+            </div>
+            <div class="entier2">
+                <div class="titre3-int">Charger les médias en faible résolution</div>
+                <div class="icone-int">
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="input-int">
+                        <div class="toggle-switch-background">
+                        <div class="toggle-switch-handle"></div>
+                        </div>
+                    </label>
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="middle"></div>
+        <div class="droite">
+                <div class="titre-int">Langue</div>
+            <div>
+                <label for="language" class="label-int">Sélectionnez :</label>
+                <select class="select-int">
+                    <option value="default">Par default</option>
+                    <option value="sq">Albanien</option>
+                    <option value="am">Arménien</option>
+                    <option value="at">Allemand</option>
+                    <option value="az">Azerbaïdjanais</option>
+                    <option value="bs">Bosnien</option>
+                    <option value="bg">Bulgare</option>
+                    <option value="ca">Catalan</option>
+                    <option value="hr">Croate</option>
+                    <option value="cs">Tchèque</option>
+                    <option value="da">Danois</option>
+                    <option value="nl">Néerlandais</option>
+                    <option value="en">Anglais</option>
+                    <option value="et">Estonien</option>
+                    <option value="fi">Finlandais</option>
+                    <option value="fr">Français</option>
+                    <option value="gl">Galicien</option>
+                    <option value="ge">Géorgien</option>
+                    <option value="de">Allemand</option>
+                    <option value="el">Grec</option>
+                    <option value="hu">Hongrois</option>
+                    <option value="is">Islandais</option>
+                    <option value="it">Italien</option>
+                    <option value="kk">Kazakh</option>
+                    <option value="kv">Komi</option>
+                    <option value="ky">Kirghiz</option>
+                    <option value="lv">Letton</option>
+                    <option value="lt">Lituanien</option>
+                    <option value="lb">Luxembourgeois</option>
+                    <option value="mk">Macédonien</option>
+                    <option value="mt">Maltais</option>
+                    <option value="md">Moldave</option>
+                    <option value="ms">Malais</option>
+                    <option value="mn">Mongol</option>
+                    <option value="me">Monténégrin</option>
+                    <option value="no">Norvégien</option>
+                    <option value="pl">Polonais</option>
+                    <option value="pt">Portugais</option>
+                    <option value="ro">Roumain</option>
+                    <option value="ru">Russe</option>
+                    <option value="sk">Slovaque</option>
+                    <option value="sl">Slovène</option>
+                    <option value="es">Espagnol</option>
+                    <option value="sr">Serbe</option>
+                    <option value="sv">Suédois</option>
+                    <option value="tj">Tadjik</option>
+                    <option value="tr">Turc</option>
+                    <option value="uk">Ukrainien</option>
+                </select>
+                
+            </div>
+            <div class="access">Accesibilité
+                <div class="row">
+                    <div class="fonction">Fonctionnalité cool</div>
+                    
+                    <label class="toggle-switch">
+                        <input type="checkbox" class="input-int">
+                        <div class="toggle-switch-background">
+                        <div class="toggle-switch-handle"></div>
+                        </div>
+                    </label>
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+    
+    </div>
+</div>
+{% endblock content %}
