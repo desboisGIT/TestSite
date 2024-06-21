@@ -11,16 +11,3 @@ class CustomUser(AbstractUser):
     tel= models.CharField(max_length=20, null=False ,blank=False, default='none')
     mail_pro = models.EmailField(max_length=30,blank=True)
 
-
-class Beats(models.Model):
-    title = models.CharField(max_length=100)
-    artist = models.ForeignKey('accounts.CustomUser', on_delete=models.CASCADE)
-    genre = models.CharField(max_length=50)
-    duration = models.DurationField()
-    release_date = models.DateField()
-    price = models.DecimalField(max_digits=8, decimal_places=2)
-    cover_image = models.ImageField(upload_to='beats/images/')
-    audio_file = models.FileField(upload_to='beats/audio/')
-
-    def __str__(self):
-        return self.title

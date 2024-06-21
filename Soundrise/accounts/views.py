@@ -94,6 +94,8 @@ def parametre_confidentiality(request):
 def recherche(request):
     return render(request,'pages/recherche.html')
 
+
+@login_required
 def parametre(request):
     if request.method == 'POST':
         form = ParametreForm(request.POST,instance=request.user)
@@ -110,4 +112,10 @@ def parametre(request):
 
 def parametre_onglet(request, page):
     print('page URLis: pages/parametre/'+page+'.html')
-    return render(request, 'pages/parametre/'+page+'.html')
+    if page == 'tableau':
+        user = request.user 
+        uploaded_beats = Beats.objects.filter(artist=user)
+        context = {'uploaded_beats':uploaded_beats}
+    else:
+        context = {}
+    return render(request, 'pages/parametre/'+page+'.html', context)

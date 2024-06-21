@@ -3140,7 +3140,7 @@ margin-top: 15%;
 }
 .graph2{
   height: 91%;
-  width: 96.5%;
+  width: 50px;
   background-color:#1e1e28;
   border-radius: 10px;
   transition: all 0.25s cubic-bezier(0, 0, 0, 1);
