@@ -1,16 +1,15 @@
 {% block bottombar %}
-<nav class="navbar navbar-light bg-dark fixed-bottom">
-  <div class="bottom">
-      <div class="navbar">
-          <a href="{% url 'accounts:parametre_onglet' 'default' %}" class="nav-item nav-link">Parametre</a>
-          <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link text-center">About</a>
-          <a href="{% url 'accounts:parametre_onglet' 'confidentiality' %}" class="nav-item nav-link text-center">Confidentiality</a>
-          <a href="{% url 'accounts:parametre_onglet' 'cookie' %}" class="nav-item nav-link text-center">Cookie</a>
+<nav class="navbar fixed-bottom" style="background-color: rgb(29, 29, 29); border-top: 1px solid #464646; padding: 5px 0;">
+  <div class="bottom d-flex justify-content-around align-items-center w-100">
+      <div class="text-center">
+          <a href="{% url 'accounts:parametre_onglet' 'default' %}" class="nav-item nav-link d-inline-block" style="font-size: 14px;">Parametre</a>
+          <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link d-inline-block" style="font-size: 14px;">About</a>
+          <a href="{% url 'accounts:parametre_onglet' 'confidentiality' %}" class="nav-item nav-link d-inline-block" style="font-size: 14px;">Confidentiality</a>
+          <a href="{% url 'accounts:parametre_onglet' 'cookie' %}" class="nav-item nav-link d-inline-block" style="font-size: 14px;">Cookie</a>
       </div>
-      <p class="text-center">Soundrise copyright © all rights reserved</p>
+      <div class="text-center">
+          <p class="m-0" style="font-size: 12px;">Soundrise copyright © all rights reserved</p>
+      </div>
   </div>
 </nav>
-
-    
-  
 {% endblock bottombar %}

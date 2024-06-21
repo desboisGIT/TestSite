@@ -15,7 +15,9 @@ urlpatterns = [
     path('parametre/', views.parametre, name='parametre'),
     path('recherhche/', views.recherche, name='recherhce'),
     path('parametre/page/<str:page>/', views.parametre_onglet, name='parametre_onglet'),
-    path('explore/',views.explore,name='explore')
+    path('explore/',views.explore,name='explore'),
+    path('search_beatmakers/',views.search_beatmakers,name='search_beatmakers')
+    
     
     
 

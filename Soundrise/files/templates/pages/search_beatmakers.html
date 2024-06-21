@@ -1,0 +1,30 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+      <a href="{% url 'accounts:explore'  %}" >Search Beats</a>
+      <form method="GET" class="w-100">
+        {% csrf_token %}
+        <div class="input-group">
+          <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}">
+          <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+      </form>
+    </div>
+    {% if error %}
+    <div class="alert alert-warning" role="alert">
+      {{ error }}
+    </div>
+    {% endif %}
+    {% for beatmaker in beatmakers %}
+    <div class="card mb-3">
+        <div class="card-body">
+            <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{beatmaker.profile_picture}}" alt="profile_picture">
+            <h3 class="card-title">{{ beatmaker.username }} <h6 class="card-title">{{ beatmaker.profile_free_text }}</h6> </h5>
+            
+            
+        </div>
+    </div>
+{% endfor %}
+{% endblock content %}

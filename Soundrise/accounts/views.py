@@ -10,7 +10,7 @@ from accounts.models import CustomUser
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from beats.models import Beats
-
+from django.db.models import Q
 
 
 
@@ -123,10 +123,58 @@ def parametre_onglet(request, page):
         context = {}
     return render(request, 'pages/parametre/'+page+'.html', context)
     
-def explore(request):
-    
-    beats = Beats.objects.all()
-    context = {
-    'beats': beats,}
-    return render(request, 'pages/explore.html', context)
 
+
+
+
+
+
+def explore(request):
+  
+  search_term = request.GET.get('search')
+  error = None
+  if search_term:
+    # Filter the model list using the search term
+
+    filtered_models = Beats.objects.filter(title__icontains=search_term)
+    filtered_models.order_by('price')
+    
+   
+    if not filtered_models.exists():
+        error="no beats corresponding to: " + str(search_term)
+  else:
+    # Retrieve all models if no search term is provided
+    filtered_models = Beats.objects.all()
+
+  for beat in filtered_models:
+        beat.audio_file_url = get_audio_file(beat)
+  context = {
+    'beats': filtered_models,
+    'search_term': search_term,
+    'error': error,
+  }
+  return render(request, 'pages/explore.html', context)
+
+
+
+
+def search_beatmakers(request):
+    search_term = request.GET.get('search')
+    error = None
+    filtered_models = CustomUser.objects.all()  # Default queryset with all beatmakers
+    
+    if search_term:
+        # Filter the model list using the search term
+        filtered_models = CustomUser.objects.filter(
+            Q(username__icontains=search_term) 
+        )
+        
+        if not filtered_models.exists():
+            error = f"No beatmakers corresponding to: {search_term}"
+    
+    context = {
+        'beatmakers': filtered_models,
+        'search_term': search_term,
+        'error': error,
+    }
+    return render(request, 'pages/search_beatmakers.html', context)

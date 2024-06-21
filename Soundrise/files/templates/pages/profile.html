@@ -18,12 +18,12 @@
         </div>
         <div class="col-md-8">
             <h2 class="mb-4">Uploaded Beats</h2>
-            <div class="beats-list-container" style="max-height: 400px; overflow-y: auto;">
+            <div class="beats-list-container" style="max-height: 70%; overflow-y: auto;">
                 {% if uploaded_beats %}
                     <div class="list-group">
                         {% for beat in uploaded_beats %}
                             <div class="list-group-item list-group-item-action mb-3">
-                                <div class="row">
+                                <div class="row" style="margin-top: 0px;">
                                     <div class="col-md-3">
                                         <img src="{{ beat.cover_image.url }}" class="rounded square-image-small" alt="{{ beat.title }} Cover">
                                     </div>
