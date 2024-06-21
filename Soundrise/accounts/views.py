@@ -93,3 +93,6 @@ def parametre(request):
             form2.save()
 
     return render(request, 'pages/parametre.html')
+
+def parametre_abonnement(request):
+    return render(request,'pages/parametre/abonnement.html')

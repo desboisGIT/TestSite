@@ -9,6 +9,3 @@ app_name = 'beats'
 urlpatterns = [
     path('upload/', views.upload_beat, name='upload_beat'),
 ]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

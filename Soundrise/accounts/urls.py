@@ -13,13 +13,15 @@ urlpatterns = [
     path('profile/<str:username>/', views.profile, name='other_profile'),
     path('success/', views.success, name='success'),
     path('parametre/', views.parametre, name='parametre'),
+    path('recherhche/', views.recherche, name='recherhce'),
+
     path('parametre/about/', views.parametre_about, name='parametre_about'),
     path('parametre/cookie/', views.parametre_cookie, name='parametre_cookie'),
     path('parametre/confidentiality/', views.parametre_confidentiality, name='parametre_confidentiality'),
-    path('recherhche/', views.recherche, name='recherhce'),
+    path('parametre/abonnement/', views.parametre_abonnement, name='parametre_abonnement'),
+    
 
    
 ]
 
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

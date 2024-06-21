@@ -32,7 +32,7 @@
                    
                 </div>
                 <div class="jsp" ><a></a >
-                    <button class="item-abo" type="button" onclick="navigate('abonnement')" >Option d'abonnement</button>
+                    <button class="item-abo" type="button"  ><a href="{% url 'accounts:parametre_abonnement' %}">Option d'abonnement</a></button>
                     
                 </div>
                 <div class="jsp" ><a></a >
@@ -48,7 +48,7 @@
                     
                 </div>
                 <div class="jsp" ><a></a>
-                    <button class="item-conf" type="button" onclick="navigate('confidentialite')" >Confidentialité</button>
+                    <button class="item-conf" type="button" ><a href="{% url 'accounts:parametre_confidentiality' %}">Confidenciality</a></button>
                     
                 </div>
                 <div class="jsp" ><a ></a>
@@ -62,6 +62,10 @@
             <div class="rightSidePage" style="width: 100%; overflow: auto; margin-bottom: 30px;">
             
                 <div class = "onglet-parametre-default">
+                    
+                    {% block content2 %}
+                    
+                    {% endblock content2  %}
                     <div class="onglet-def">
                     <div class="profil-def" >
                         <div class="profil2-def">
@@ -236,7 +240,7 @@
                xml:space="preserve"
                transform="matrix(0.26458333,0,0,0.26458333,3.4051743,-1.8858133)"
                id="text31"
-               style="font-size:13.7599px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';white-space:pre;shape-inside:url(#rect31);display:inline;fill:url(#linearGradient34);fill-opacity:1;stroke:none;stroke-width:2.38488;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"><tspan
+               style="font-size:13.7599px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';white-space:pre;display:inline;fill:url(#linearGradient34);fill-opacity:1;stroke:none;stroke-width:2.38488;stroke-linecap:round;stroke-linejoin:round;paint-order:stroke markers fill"><tspan
                  x="-35.089844"
                  y="-2.649551"
                  id="tspan1">!</tspan></text></g></g></g></g></g></svg>
