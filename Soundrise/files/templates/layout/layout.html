@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" id="page" class="light">
   <head>
     {% load static %}
     <meta charset="UTF-8" />
@@ -7,8 +7,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{% static "css/style.css" %}">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
   </head>
-
+  {% if user.is_authenticated %}
+      {% if user.darkTheme %}
+          {% block extrahead %}
+            <link rel="stylesheet" href="{% static "css/darkDetails.css" %}">
+            <link href="/static/admin/css/dark.css" type="text/css" rel="stylesheet">
+          {% endblock %}
+      {% endif %}
+  {% endif %}
 
   {% block topbar %}
     {% include "blocks/topbar.html" %}

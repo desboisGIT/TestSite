@@ -11,6 +11,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from beats.models import Beats
 
+
+
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 def login_view(request):
@@ -109,7 +112,7 @@ def parametre(request):
     return render(request, 'pages/parametre.html')
 
 
-
+@login_required
 def parametre_onglet(request, page):
     print('page URLis: pages/parametre/'+page+'.html')
     if page == 'tableau':
@@ -119,3 +122,11 @@ def parametre_onglet(request, page):
     else:
         context = {}
     return render(request, 'pages/parametre/'+page+'.html', context)
+    
+def explore(request):
+    
+    beats = Beats.objects.all()
+    context = {
+    'beats': beats,}
+    return render(request, 'pages/explore.html', context)
+

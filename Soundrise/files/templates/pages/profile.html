@@ -2,11 +2,14 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="row">
+    <div class="row" style="margin-right: 0px; margin-left: 0px; margin-top: 0px;">
         <div class="col-md-4 text-center">
-            <img src="{{ user_profile.profile_picture }}" class="img-fluid rounded-circle mb-3" alt="Profile Picture">
+            <img src="{{ user_profile.profile_picture }}" class="img-fluid rounded-circle mb-3 square-image-big" alt="Profile Picture">
+            {% if user.is_staff %}
+            <p style="color: red;">Admin</p>
+            {% endif %}
             <h2>{{ user_profile.username }}</h2>
-            <p class="text-muted">{{ user_profile.full_name }}</p>
+            <h4 class="text-muted">{{ user_profile.full_name }}</h4>
             <p><strong>Email:</strong> {{ user_profile.email }}</p>
             <p><strong>Country:</strong> {{ user_profile.country }}</p>
             <p><strong>Profile Description:</strong> {{ user_profile.profile_free_text }}</p>
@@ -15,35 +18,38 @@
         </div>
         <div class="col-md-8">
             <h2 class="mb-4">Uploaded Beats</h2>
-            {% if uploaded_beats %}
-                <div class="list-group">
-                    {% for beat in uploaded_beats %}
-                        <div class="list-group-item list-group-item-action mb-3">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <img src="{{ beat.cover_image.url }}" class="img-fluid rounded" alt="{{ beat.title }} Cover">
-                                </div>
-                                <div class="col-md-9">
-                                    <h5 class="mb-1">{{ beat.title }}</h5>
-                                    <p class="mb-1">{{ beat.genre }} - {{ beat.release_date }}</p>
-                                    <p class="mb-1">{{ beat.description }}</p>
-                                    {% if beat.audio_file_url %}
-                                        <audio controls class="w-100">
-                                            <source src="{{ beat.audio_file_url }}" type="audio/mpeg">
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                    {% else %}
-                                        <p class="text-muted">Audio file not found.</p>
-                                    {% endif %}
+            <div class="beats-list-container" style="max-height: 400px; overflow-y: auto;">
+                {% if uploaded_beats %}
+                    <div class="list-group">
+                        {% for beat in uploaded_beats %}
+                            <div class="list-group-item list-group-item-action mb-3">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <img src="{{ beat.cover_image.url }}" class="rounded square-image-small" alt="{{ beat.title }} Cover">
+                                    </div>
+                                    <div class="col-md-9">
+                                        <h5 class="mb-1">{{ beat.title }}</h5>
+                                        <p class="mb-1">{{ beat.genre }} - {{ beat.release_date }}</p>
+                                        <p class="mb-1">{{ beat.description }}</p>
+                                        {% if beat.audio_file_url %}
+                                            <audio controls class="w-100">
+                                                <source src="{{ beat.audio_file_url }}" type="audio/mp3">
+                                                Your browser does not support the audio element.
+                                            </audio>
+                                        {% else %}
+                                            <p class="text-muted">Audio file not found.</p>
+                                        {% endif %}
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    {% endfor %}
-                </div>
-            {% else %}
-                <p class="text-muted">No beats uploaded yet.</p>
-            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="text-muted">No beats uploaded yet.</p>
+                {% endif %}
+            </div>
             <a href="{% url 'accounts:parametre' %}" class="btn btn-primary mt-3">Parametre</a>
+            <a href="{% url 'beats:upload_beat' %}" class="btn btn-primary mt-3">Upload</a>
         </div>
     </div>
 </div>

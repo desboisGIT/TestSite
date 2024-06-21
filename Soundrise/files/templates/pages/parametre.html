@@ -55,7 +55,7 @@
                     <button class="item-aid" type="button" ><a href="{% url 'accounts:parametre_onglet' 'aide' %}">Aide</a></button>
                     
                 </div>
-                <div class="item-2" ><a>Déconnexion</a href = "deconnexion.html"></div>
+                <button class="item-aid" type="button" ><a href="{% url 'accounts:logout'  %}">se deconnecter</a></button>
                 <div style="margin-top: 400px;"></div>
 
             </span>
@@ -67,7 +67,7 @@
                     
                     {% endblock content2  %}
                     
-                <p>Sélectionner une catégorie</p>
+                
             
 
            {% if page == "suppr" %}

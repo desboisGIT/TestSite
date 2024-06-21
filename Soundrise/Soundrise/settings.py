@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'beatmakers',
     'accounts',
     'content',
+    'dark',
 ]
 
 MIDDLEWARE = [

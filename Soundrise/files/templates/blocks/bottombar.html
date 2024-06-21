@@ -1,15 +1,16 @@
 {% block bottombar %}
 <nav class="navbar navbar-light bg-dark fixed-bottom">
-    <div class="container">
-        <a href="{% url 'beatmakers:sell' %}" class="nav-item nav-link">Sell</a>
+  <div class="bottom">
       <div class="navbar">
-        <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link">About</a>
-        <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link">Confidenciality</a>
-        <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link">Cookie</a>
-        <p>Soundrise  copyright © all rights reserved</p>
-    </div>
-    </div>
-  </nav>    
+          <a href="{% url 'accounts:parametre_onglet' 'default' %}" class="nav-item nav-link">Parametre</a>
+          <a href="{% url 'accounts:parametre_onglet' 'about' %}" class="nav-item nav-link text-center">About</a>
+          <a href="{% url 'accounts:parametre_onglet' 'confidentiality' %}" class="nav-item nav-link text-center">Confidentiality</a>
+          <a href="{% url 'accounts:parametre_onglet' 'cookie' %}" class="nav-item nav-link text-center">Cookie</a>
+      </div>
+      <p class="text-center">Soundrise copyright © all rights reserved</p>
+  </div>
+</nav>
+
     
   
 {% endblock bottombar %}

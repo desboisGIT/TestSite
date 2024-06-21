@@ -1,0 +1,25 @@
+{% extends 'layout/layout.html' %}
+{% block content %}
+<form method="get">
+    <input type="hidden" name="search">
+    {% csrf_token %}
+    {{ form.as_p }}
+  
+<div class="search-container">
+    <input type="text" class="search-box" placeholder="Search here...">
+    <button  type="submit" class="search-button">Search</button>
+  </div>
+
+ 
+    
+  </form>
+  {% for beat in beats %}
+    <li>
+        <b>{{ beat.title }}</b> by <p>{{ beat.artist.username }}</p> 
+        <img class="rounded square-image-small" src="{{beat.cover_image.url}}" alt="">
+        <br>Genre: {{ beat.genre }} 
+        <br> Duration: {{ beat.duration }}
+        <br>Price: ${{ beat.price }}
+    </li>
+    {% endfor %}
+{% endblock content %}

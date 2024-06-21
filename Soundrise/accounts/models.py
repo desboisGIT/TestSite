@@ -10,4 +10,9 @@ class CustomUser(AbstractUser):
     profile_free_text = models.CharField(max_length=500, default="Welcome to my profile")
     tel= models.CharField(max_length=20, null=False ,blank=False, default='none')
     mail_pro = models.EmailField(max_length=30,blank=True)
+    darkTheme = models.BooleanField(default=True)
+
+
+
+
 

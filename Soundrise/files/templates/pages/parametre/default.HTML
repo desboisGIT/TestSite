@@ -3,22 +3,22 @@
 <div class="onglet-def">
     <div class="profil-def" >
         <div class="profil2-def">
-            <div >Profil</div>
-        <img class ="logo-def" src="/static/images/parametre/c1.png"></img>
-        <div class ="nom"><a>Mr Meddy</a></div>
-        <div class ="bio-def"><a>Je suis le meilleur beatmaker de la planète</a></div>
+            <a href="{% url 'accounts:profile' %}">Profil</a>
+        <img  src="{{ user.profile_picture }}" class="logo-def" alt="Profile Picture"></img>
+        <div class ="nom"><a>{{user.username}}</a></div>
+        <div class ="bio-def"><a>{{user.profile_free_text}}</a></div>
         <div class ="abonnement-def"><a>Abonnement premium</a></div>
-        <div class ="vente-def"><a>36 beats Vendus</a></div>
+        <div class ="vente-def"><a>beats Vendus</a></div>
         <div class ="ecoute-def"><a>34k écoutes</a></div>
         <div class ="abonne-def"><a>103k abonnés</a></div>
         </div>
     </div>
     <div class ="compte-reste"><a></a>
         <div class = "bio2-def">Bio</div>
-        <input type = "text" class = "espace-def" placeholder="Qui êtes vous ?" class="exemple"></a>
+        <input type = "text" class = "espace-def" placeholder="Qui êtes vous ?" value={{user.profile_free_text}}></a>
             <div class ="question-def">Qui êtes vous ?</div>
         </input>
-            
+                    
         <div class = "formulaire-def">
             <div class = form1-def>
                 <h1 class = "perso">Informations personnelles</h1> 

@@ -1,15 +1,14 @@
-<!-- upload_beat.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Upload Beat</title>
-</head>
-<body>
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+
+
     <h2>Upload Beat</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Upload</button>
     </form>
-</body>
-</html>
+
+
+{% endblock content %}

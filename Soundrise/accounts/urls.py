@@ -14,9 +14,8 @@ urlpatterns = [
     path('success/', views.success, name='success'),
     path('parametre/', views.parametre, name='parametre'),
     path('recherhche/', views.recherche, name='recherhce'),
-
-    
     path('parametre/page/<str:page>/', views.parametre_onglet, name='parametre_onglet'),
+    path('explore/',views.explore,name='explore')
     
     
 
