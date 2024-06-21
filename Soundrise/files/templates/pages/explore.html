@@ -1,7 +1,9 @@
 {% extends 'layout/layout.html' %}
+
 {% block content %}
-<div class="container-fluid">
-  <div class="row" style="margin-top:0px;">
+<div class="container-fluid" style="height: 100%;">
+  <div class="row" style="height: 100%;margin-top: 0px;">
+    <!-- Sidebar -->
     <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29);">
       <div class="position-sticky pt-3">
         <h5 class="text-center">Side Menu</h5>
@@ -11,7 +13,7 @@
               {% csrf_token %}
               <div class="mb-3">
                 <label for="filter" class="form-label" id="price_label">Price:</label>
-                <input type="number" min="gratuit" min="0" max="2000" id="cursor_price" step="0.01"></input>
+                <input type="number" min="0" max="2000" id="cursor_price" step="0.01" class="form-control">
               </div>
           </li>
         </ul>
@@ -32,7 +34,8 @@
         </form>
       </div>
     </nav>
-
+    
+    <!-- Main Content -->
     <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4">
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <a href="{% url 'accounts:search_beatmakers' %}">Search Beatmakers</a>
@@ -44,17 +47,13 @@
           </div>
         </form>
       </div>
-      {% if error %}
-      <div class="alert alert-warning" role="alert">
-        {{ error }}
-      </div>
-      {% endif %}
-
-      <div class="row" style="margin-top:0px;">
-        {% for beat in beats %}
+      
+      <!-- Content Area with Beats -->
+      <div class="row" style="height: calc(100% - 56px); overflow-y: auto;">
         <div class="col-12 mb-3">
+          {% for beat in beats %}
           <div class="card bg-dark text-white">
-            <div class="row no-gutters" style="margin-top: 20px; margin-left: 20px;">
+            <div class="row no-gutters" style="margin-top: 20px; margin-left: 20px; margin-bottom: 20px;">
               <div class="col-md-3">
                 <img src="{{ beat.cover_image.url }}" class="rounded square-image-big" alt="Cover Image">
               </div>
@@ -73,7 +72,6 @@
                       <source src="{{ beat.audio_file_url }}" type="audio/mp3">
                       Your browser does not support the audio element.
                     </audio>
-                    <a href="#" class="btn btn-primary">Next</a>
                     {% else %}
                     <p class="text-muted">Audio file not found.</p>
                     {% endif %}
@@ -82,9 +80,17 @@
               </div>
             </div>
           </div>
+          {% endfor %}
         </div>
-        {% endfor %}
       </div>
+      
+      <!-- Optional: Display Error Message -->
+      {% if error %}
+      <div class="alert alert-warning" role="alert">
+        {{ error }}
+      </div>
+      {% endif %}
+      
     </main>
   </div>
 </div>

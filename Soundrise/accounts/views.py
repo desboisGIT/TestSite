@@ -142,9 +142,11 @@ def explore(request):
    
     if not filtered_models.exists():
         error="no beats corresponding to: " + str(search_term)
+        
   else:
     # Retrieve all models if no search term is provided
     filtered_models = Beats.objects.all()
+    search_term=""
 
   for beat in filtered_models:
         beat.audio_file_url = get_audio_file(beat)
@@ -177,4 +179,5 @@ def search_beatmakers(request):
         'search_term': search_term,
         'error': error,
     }
+    
     return render(request, 'pages/search_beatmakers.html', context)
