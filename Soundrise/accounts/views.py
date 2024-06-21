@@ -1,6 +1,7 @@
-import os
+import os, glob
 from pathlib import Path
 from pyexpat.errors import messages
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -44,18 +45,29 @@ def logout_view(request):
     return redirect('accounts:login')
 
 
+def get_audio_file(beat):
+    media_root = settings.MEDIA_ROOT
+    beat_directory = os.path.join(media_root, 'audio', 'beats')
+    audio_files = glob.glob(os.path.join(beat_directory, '*.mp3'))
+    
+    for file_path in audio_files:
+        if os.path.basename(file_path) == os.path.basename(beat.audio_file.name):
+            relative_path = os.path.relpath(file_path, media_root)
+            return os.path.join(settings.MEDIA_URL, relative_path)
+    
+    return None
+
 @login_required
 def profile(request, username=None):
     if username is None:
         user = request.user  # Logged-in user's profile
     else:
         user = get_object_or_404(CustomUser, username=username)  # Profile of the user with given username
-
-    print(f"Logged-in User: {request.user}")  # Debug print
-    print(f"Profile User: {user}")  # Debug print
-
+    
     uploaded_beats = Beats.objects.filter(artist=user)
-    print(f"Uploaded Beats: {uploaded_beats}")  # Debug print
+    
+    for beat in uploaded_beats:
+        beat.audio_file_url = get_audio_file(beat)
     
     context = {
         'user_profile': user,
@@ -94,5 +106,8 @@ def parametre(request):
 
     return render(request, 'pages/parametre.html')
 
-def parametre_abonnement(request):
-    return render(request,'pages/parametre/abonnement.html')
+
+
+def parametre_onglet(request, page):
+    print('page URLis: pages/parametre/'+page+'.html')
+    return render(request, 'pages/parametre/'+page+'.html')

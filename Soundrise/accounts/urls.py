@@ -15,10 +15,9 @@ urlpatterns = [
     path('parametre/', views.parametre, name='parametre'),
     path('recherhche/', views.recherche, name='recherhce'),
 
-    path('parametre/about/', views.parametre_about, name='parametre_about'),
-    path('parametre/cookie/', views.parametre_cookie, name='parametre_cookie'),
-    path('parametre/confidentiality/', views.parametre_confidentiality, name='parametre_confidentiality'),
-    path('parametre/abonnement/', views.parametre_abonnement, name='parametre_abonnement'),
+    
+    path('parametre/page/<str:page>/', views.parametre_onglet, name='parametre_onglet'),
+    
     
 
    

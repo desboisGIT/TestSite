@@ -27,11 +27,14 @@
                                     <h5 class="mb-1">{{ beat.title }}</h5>
                                     <p class="mb-1">{{ beat.genre }} - {{ beat.release_date }}</p>
                                     <p class="mb-1">{{ beat.description }}</p>
-                                    <audio controls class="w-100">
-                                        <source src="{{ beat.audio_file.url }}" type="audio/mpeg">
-                                        Your browser does not support the audio element.
-                                    </audio>
-                                    <p>{{ BASE_DIR }}{{ beat.audio_file.url }}</p>
+                                    {% if beat.audio_file_url %}
+                                        <audio controls class="w-100">
+                                            <source src="{{ beat.audio_file_url }}" type="audio/mpeg">
+                                            Your browser does not support the audio element.
+                                        </audio>
+                                    {% else %}
+                                        <p class="text-muted">Audio file not found.</p>
+                                    {% endif %}
                                 </div>
                             </div>
                         </div>

@@ -1,2 +1,112 @@
-{% extends 'layout/layout.html' %}
-{% block content2 %}{% endblock content2 %}
+{% extends 'pages/parametre.html' %}
+{% block content2 %}
+<div class="onglet-def">
+    <div class="profil-def" >
+        <div class="profil2-def">
+            <div >Profil</div>
+        <img class ="logo-def" src="/static/images/parametre/c1.png"></img>
+        <div class ="nom"><a>Mr Meddy</a></div>
+        <div class ="bio-def"><a>Je suis le meilleur beatmaker de la planète</a></div>
+        <div class ="abonnement-def"><a>Abonnement premium</a></div>
+        <div class ="vente-def"><a>36 beats Vendus</a></div>
+        <div class ="ecoute-def"><a>34k écoutes</a></div>
+        <div class ="abonne-def"><a>103k abonnés</a></div>
+        </div>
+    </div>
+    <div class ="compte-reste"><a></a>
+        <div class = "bio2-def">Bio</div>
+        <input type = "text" class = "espace-def" placeholder="Qui êtes vous ?" class="exemple"></a>
+            <div class ="question-def">Qui êtes vous ?</div>
+        </input>
+            
+        <div class = "formulaire-def">
+            <div class = form1-def>
+                <h1 class = "perso">Informations personnelles</h1> 
+                <form class = "form-def" method="post" > 
+                    {%csrf_token%} 
+                    <label for="nom-input">Full name</label>
+                    <input type="text" name="full_name" id="id_full_name" value="{{user.full_name}}" class = "exemple" placeholder ="Nom" ></input>
+
+                    <label for="nom-input">Username</label>
+                    <input type="text" name="username" id="id_username" value="{{user.username}}" class = "exemple" placeholder ="Nom" ></input>
+
+                    <label for="nom-input">Phone number</label>
+                    <input type="tel" name="tel" id="id_tel" class = "exemple" value="{{user.tel}}" placeholder ="06 11 22 33 44"></input>
+
+                    <label for="nom-input">Mail</label>
+                    <input type="email" name="email" id="id_email" value="{{user.email}}"  class = "exemple"  placeholder ="nom.prenom@gmail.com"></input>
+
+                    <label for="nom-input">Password</label>
+                    <div class ="exemple2">********</div> 
+
+                    <label for="nom-input">Country</label>
+                    <select type="text" name="country" id="id_country"   class = "select-def"  placeholder ="Choisisez un pays">
+                    <option >{{user.country}}</option>
+                    <option value="Albanie">Albanien</option>
+                    <option value="Arménie">Arménien</option>
+                    <option value="Allemagne">Allemand</option>
+                    <option value="Azerbaïdjan">Azerbaïdjanais</option>
+                    <option value="Bosnie-Herzégovine">Bosnien</option>
+                    <option value="Bulgarie">Bulgare</option>
+                    <option value="Catalogne">Catalan</option>
+                    <option value="Croatie">Croate</option>
+                    <option value="République tchèque">Tchèque</option>
+                    <option value="Danemark">Danois</option>
+                    <option value="Pays-Bas">Néerlandais</option>
+                    <option value="Angleterre">Anglais</option>
+                    <option value="Estonie">Estonien</option>
+                    <option value="Finlande">Finlandais</option>
+                    <option value="France">Français</option>
+                    <option value="Galice">Galicien</option>
+                    <option value="Géorgie">Géorgien</option>
+                    <option value="Allemagne">Allemand</option>  
+                    <option value="Grèce">Grec</option>
+                    <option value="Hongrie">Hongrois</option>
+                    <option value="Islande">Islandais</option>
+                    <option value="Italie">Italien</option>
+                    <option value="Kazakhstan">Kazakh</option>
+                    <option value="Komi">Komi</option>
+                    <option value="Kirghizistan">Kirghiz</option>
+                    <option value="Lettonie">Letton</option>
+                    <option value="Lituanie">Lituanien</option>
+                    <option value="Luxembourg">Luxembourgeois</option>
+                    <option value="Macédoine du Nord">Macédonien</option>
+                    <option value="Malte">Maltais</option>
+                    <option value="Moldavie">Moldave</option>
+                    <option value="Malaisie">Malais</option>
+                    <option value="Mongolie">Mongol</option>
+                    <option value="Monténégro">Monténégrin</option>
+                    <option value="Norvège">Norvégien</option>
+                    <option value="Pologne">Polonais</option>
+                    <option value="Portugal">Portugais</option>
+                    <option value="Roumanie">Roumain</option>
+                    <option value="Russie">Russe</option>
+                    <option value="Slovaquie">Slovaque</option>
+                    <option value="Slovénie">Slovène</option>
+                    <option value="Espagne">Espagnol</option>
+                    <option value="Serbie">Serbe</option>
+                    <option value="Suède">Suédois</option>
+                    <option value="Tadjikistan">Tadjik</option>
+                    <option value="Turquie">Turc</option>
+                    <option value="Ukraine">Ukrainien</option>
+                </select>
+                <input type="submit" class="send-def">
+                </form>
+            </div>
+            <div class = "form2-def">
+                <h1 class = "perso2">Informations professionelles</h1> 
+                <form class = "forme-def" method="post" >
+                    {%csrf_token%}
+                    <label for="nom-input" >Mail pro</label>
+                    <input type="email" name="mail_pro" id="id_mail_pro" class = "exemple" value="{{accounts.mail_pro}}"  class = "exemple"  placeholder ="nom.pro@gmail.com"></input>
+                    
+                    <input type="submit" class="send-def">
+                </form>
+                <button class="suppr" onclick="navigate('suppr')">Supprimer le comtpe</button>
+            </div> 
+        </div>
+    </div> 
+    </div>
+    
+</div>
+{% endblock content2 %}
