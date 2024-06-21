@@ -125,37 +125,35 @@ def parametre_onglet(request, page):
     
 
 
-
-
-
-
 def explore(request):
-  
-  search_term = request.GET.get('search')
-  error = None
-  if search_term:
-    # Filter the model list using the search term
-
-    filtered_models = Beats.objects.filter(title__icontains=search_term)
-    filtered_models.order_by('price')
-    
-   
-    if not filtered_models.exists():
-        error="no beats corresponding to: " + str(search_term)
-        
-  else:
-    # Retrieve all models if no search term is provided
+    search_term = request.GET.get('search')
+    error = None
     filtered_models = Beats.objects.all()
-    search_term=""
-
-  for beat in filtered_models:
+    
+    if search_term:
+        filtered_models = Beats.objects.filter(title__icontains=search_term).order_by('price')
+        if not filtered_models.exists():
+            error = f"No beats corresponding to: {search_term}"
+    
+    # Get all unique artist names from the filtered beats
+    artist_names = filtered_models.values_list('artist', flat=True).distinct()
+    
+    # Get user data for all these artists
+    users = CustomUser.objects.filter(username__in=artist_names)
+    user_dict = {user.username: {'user': user, 'rank': user.rank} for user in users}
+    
+    for beat in filtered_models:
         beat.audio_file_url = get_audio_file(beat)
-  context = {
-    'beats': filtered_models,
-    'search_term': search_term,
-    'error': error,
-  }
-  return render(request, 'pages/explore.html', context)
+    
+    context = {
+        'beats': filtered_models,
+        'search_term': search_term,
+        'error': error,
+        'user_dict': user_dict,
+    }
+    return render(request, 'pages/explore.html', context)
+
+
 
 
 

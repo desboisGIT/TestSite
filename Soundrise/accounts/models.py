@@ -11,6 +11,7 @@ class CustomUser(AbstractUser):
     tel= models.CharField(max_length=20, null=False ,blank=False, default='none')
     mail_pro = models.EmailField(max_length=30,blank=True)
     darkTheme = models.BooleanField(default=True)
+    rank = models.CharField(default='basic', max_length=30)
 
 
 
