@@ -77,6 +77,10 @@
                       <p style="position: absolute; color: red;">
                           <strong>{{ beat.artist|get_artist_rank }}</strong>
                       </p>
+                      {% elif beat.artist|get_artist_rank == 'diamond' %}
+                      <p style="position: absolute; color: rgb(50, 110, 187);">
+                        <strong>{{ beat.artist|get_artist_rank }}</strong>
+                      </p>
                       {% else %}
                       <p style="position: absolute;">
                           <strong>{{ beat.artist|get_artist_rank }}</strong>
