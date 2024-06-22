@@ -61,10 +61,6 @@
       <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
           <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
               <div style="position: relative;">
-                  <button class="play-btn" onclick="togglePlayPause({{ beat.id }})">
-                      <i id="play_icon_{{ beat.id }}" class="fas fa-play"></i>
-                      <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
-                  </button>
                   <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}"
                       alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
                   {% if beat.title|upper|length > 9 %}
@@ -121,7 +117,7 @@
                       <button onclick="togglePlayPause({{ beat.id }})" style="position: absolute;top: 60px;left: 623px;">
                         <!-- eslint-enable-next-line -->
                           <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
-
+                          <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
                       </button>
                       <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' 
                       class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
@@ -218,6 +214,8 @@
     }
     .audio-controls button{
       background-color: #ffffff00;
+      height:34px;
+      width: 34px;
     }
     .audio-controls:hover button:hover{
       background-color: #ffffff31;
@@ -226,56 +224,55 @@
 </style>
 
 <script>
-function togglePlayPause(beatId) {
-    var audio = document.getElementById('audio_' + beatId);
-    var playIcons = document.querySelectorAll('.play-icon');
-
-    if (audio.paused) {
-        audio.play();
-        console.log("icon switched")
-        playIcons.forEach(function(icon) {
-            icon.classList.remove('fa-pause');
-            icon.classList.add('fa-play');
-        });
-        // Update pause icons
-        pauseIcons.forEach(function(icon) {
-            icon.classList.remove('fa-play');
-            icon.classList.add('fa-pause');
-        });
-    } else {
-        audio.pause();
-        // Update play icons
-        playIcons.forEach(function(icon) {
-            icon.classList.remove('fa-play');
-            icon.classList.add('fa-pause');
-        });
-        // Update pause icons
-        pauseIcons.forEach(function(icon) {
-            icon.classList.remove('fa-pause');
-            icon.classList.add('fa-play');
-        });
-    }
-}
-
+  function togglePlayPause(beatId) {
+      var audio = document.getElementById('audio_' + beatId);
+      var playIcon = document.getElementById('play_icon_' + beatId);
+      var pauseIcon = document.getElementById('pause_icon_' + beatId);
+      var allAudios = document.querySelectorAll('audio');
+  
+      // Pause all other audios
+      allAudios.forEach(function(aud) {
+          if (aud.id !== 'audio_' + beatId) {
+              aud.pause();
+              var otherBeatId = aud.id.split('_')[1];
+              var otherPlayIcon = document.getElementById('play_icon_' + otherBeatId);
+              var otherPauseIcon = document.getElementById('pause_icon_' + otherBeatId);
+              otherPlayIcon.style.display = 'inline-block';
+              otherPauseIcon.style.display = 'none';
+          }
+      });
+  
+      // Toggle play/pause for the selected beat
+      if (audio.paused) {
+          audio.play();
+          playIcon.style.display = 'none';
+          pauseIcon.style.display = 'inline-block';
+      } else {
+          audio.pause();
+          playIcon.style.display = 'inline-block';
+          pauseIcon.style.display = 'none';
+      }
+  }
+  
   function seekAudio(beatId) {
       var audio = document.getElementById('audio_' + beatId);
       var seekbar = document.getElementById('seekbar_' + beatId);
       var value = seekbar.value;
       audio.currentTime = value;
   }
-
+  
   function updateProgressBar(beatId) {
       var audio = document.getElementById('audio_' + beatId);
       var progressBar = document.getElementById('progress_' + beatId);
       var seekbar = document.getElementById('seekbar_' + beatId);
-
+  
       var value = (audio.currentTime / audio.duration) * 100;
       progressBar.value = value;
       seekbar.value = audio.currentTime;
-
+  
       updateSeekbarTooltip(seekbar);
   }
-
+  
   function updateSeekbarTooltip(seekbar) {
       var tooltip = seekbar.nextElementSibling;
       var value = seekbar.value;
@@ -285,6 +282,6 @@ function togglePlayPause(beatId) {
       tooltip.innerHTML = time;
       tooltip.style.left = (value / seekbar.max) * 100 + '%';
   }
-</script>
+  </script>
 
 {% endblock content %}
