@@ -1,6 +1,8 @@
 {% extends 'layout/layout.html' %}
 
 {% block content %}
+
+
 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 90%; align-self: center;">
   <a href="{% url 'accounts:explore'  %}" >Search Beats</a>
   <form method="GET" class="w-100">
@@ -22,23 +24,71 @@
       {{ error }}
     </div>
     {% endif %}
-    {% for beatmaker in beatmakers %}
+    {% for model in annotated_models %}
     <div class="card mb-3">
         <div class="card bg-dark" style="display: flex;flex-direction: row;">
-            <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{beatmaker.profile_picture}}" alt="profile_picture" style="height: 200px;width: 200px;">
-            <h3 class="card-title">{{ beatmaker.username }} <h6 class="card-title">{{ beatmaker.profile_free_text }}</h6> </h5>
-                <div class="card-apercu-beatmakers">
-                    
-                </div>
+          
+              
             
+              <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{ model.beatmaker.profile_picture }}" alt="profile_picture" style="height: 100px;width: 100px; margin: 20px;" >
+                <div style="display: flex;flex-direction: column; margin: 20px; width:300px ;" class="card-apercu-beatmakers">
+                  <h3 class="card-title" >{{ model.beatmaker.username }}  </h3>
+                  <h6 class="card-title">{{ model.beatmaker.profile_free_text }}</h6>
+                  <div class="tooltip-container" style="height: 20px;width: 125px; align-self: center;margin-top: 40px;margin-left: -480px;">
+                    <span class="tooltip">45k</span>
+                    <span class="text" style="color: black;">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 95 114"
+                        class="svgIcon"
+                      >
+                        <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
+                        <path
+                          fill="black"
+                          d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
+                        ></path>
+                      </svg>
+                      Follow</span
+                    >
+                  </div> 
+                </div>
+                <div style="max-width:700px ;height: 220px;width: 400px; align-self: end;overflow-x: scroll; display: flex ;flex-direction: row;">
+                    {% for beat in model.beats %}
+                      
+                      <div style="display: flex;flex-direction: column; margin-top: 0px; margin-left:  25px;">
+                         <div style="display: flex;flex-direction: column;">
+                          <div>
+                            <h6 style="height: 35px;margin-bottom: 5px;margin-top: 5px; ">{{ beat.title }}</h4>
+                          </div>
+                        </div>
+                        <img style="height: 100px;width: 100px;" src="{{ beat.cover_image.url }}" class="square-image-small coverimage"></img>
+                        <h6 style="height: 20px;font-size: 13px; margin-top: 10px;">{{ beat.genre }}</h6>
+                        <hr>
+        
+                      </div>
+                      <div style="height: 100%;width: 100px ;">
+
+                      </div>
+                      
+                  {% endfor %}
+                  
+                    </div>
+                     
+
+                    
+                  
+             
+                
+                
             
         </div>
     </div>
   
-  
 
-{% endfor %}
+  {% endfor %}
 </div>
 
 </div>
+
 {% endblock content %}

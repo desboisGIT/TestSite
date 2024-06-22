@@ -2,22 +2,89 @@
 
 {% block content %}
 <div class="mainDiv-detail_beat">
-    <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" style="position: absolute; width: 100%; border-radius: 1px; filter: blur(20px); opacity: 20%;">
-    <div id="menu-detail_beat"></div>
+    <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" class='background-image-beat_detail'>
+    
+    <div id="menu-detail_beat-left">
+        <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" class='square-image-x-fill beat-icon-beat_detail'>
+    </div>
+    
+    <div id="menu-detail_beat-middle">
+
+    </div>
+    
+    <div id="menu-detail_beat-right">
+        <img src="{{ user.profile_picture }}" class="img-fluid rounded-circle mb-3 square-image-x-fill" alt="Profile Picture">
+    </div>
 </div>
 
 <style>
-#menu-detail_beat {
+.mainDiv-detail_beat {
+    position: relative; 
+    height: 100vh; 
+    display: flex; 
+    align-items: center;
+}
+
+.background-image-beat_detail {
+    position: absolute;
+    width: 100%;
+    border-radius: 50px;
+    filter: blur(20px);
+    opacity: 0.2; /* Changed to decimal value for opacity */
+    z-index: -1; /* Pushed behind #menu-detail_beat */
+}
+
+#menu-detail_beat-left,
+#menu-detail_beat-right {
     height: 80%;
-    width: 25%;
-    background-color: rgb(41, 41, 41);
+    width: 316px;
+    background: rgb(30,30,30);
     position: relative;
-    margin-bottom: 48px;
-    margin-left: 48px;
-    border-radius: 15px;
+    border-radius: 10px;
+    margin-bottom: 45px;
+    padding-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
-.mainDiv-detail_beat{
-    position: relative; height: 100vh; display: flex; align-items: center;
+
+#menu-detail_beat-left {
+    margin-right: 10px; /* Adjust the spacing between middle and left */
+    margin-left: 250px;
+    background: linear-gradient(166deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
 }
+
+#menu-detail_beat-right {
+    margin-left: 10px; /* Adjust the spacing between middle and right */
+    margin-right: 250px;
+    background: linear-gradient(194deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
+}
+
+#menu-detail_beat-middle {
+    flex: 1; /* Fill the remaining space */
+    height: 80%;
+    background: rgb(30,30,30);
+    background: linear-gradient(180deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
+    border-radius: 10px;
+    margin-bottom: 45px;
+    padding-top: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.square-image-x-fill::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color and opacity as desired */
+    border-radius: 50%;
+    z-index: -1;
+}
+
 </style>
+
 {% endblock content %}

@@ -97,6 +97,7 @@
                             <source src="{{ beat.audio_file_url }}" type="audio/mp3">
                             Your browser does not support the audio element.
                         </audio>
+                        
                         <div class="audio-controls">
                             <!-- @ts-ignore -->
                             <!-- eslint-disable-next-line  -->
@@ -110,7 +111,14 @@
                         </div>
                         <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
                         <div style="min-height: 54px; min-width: 815.22;">
-                            <h3><strong>{{ beat.price }} €</strong></h3>
+                            <h3><strong>{{ beat.price }} €</strong>
+                                <div style="margin-left: 200px;height: 10px;  display: flex;justify-content: space-around;width: 200px;">
+                                    <i class="fa-solid fa-heart fa-sm" style="color: #ff0000;"></i>
+                                    <i class="fa-solid fa-bookmark fa-sm" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-comment fa-sm" style="color: #ffffff;"></i>
+                                    <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
+                                </div>
+                            </h3>
                         </div>
                         
                     </div>
@@ -120,9 +128,11 @@
                     {% endif %}
                     
                 </div>
-                <div style="height: 100%;width: 10%; display: flex;justify-content:space-around ;">
+                <div style="height: 196px;width: 10%; display: flex;flex-direction: column  ;justify-content:space-around ;align-items: center;">
                     <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
                     <i class="fa-solid fa-bookmark" style="color: #ffffff;"></i>
+                    <i class="fa-solid fa-comment" style="color: #ffffff;"></i>
+                    <i class="fa-solid fa-share" style="color: #ffffff;"></i>
                 </div>
             </div>
         </div>
@@ -272,6 +282,9 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Edge, Opera and Firefox */
 }
+.pointerCursor{
+    cursor: pointer;
+}
 
 </style>
 
@@ -305,7 +318,36 @@
           pauseIcon.style.display = 'none';
       }
   }
-  
+  function copyLink(copyText) {
+    copyText = 'http://192.168.1.26:8000' + copyText;
+    if (!navigator.clipboard) {
+        // Fallback for browsers that do not support navigator.clipboard
+        var textArea = document.createElement("textarea");
+        textArea.value = copyText;
+        textArea.style.position = "fixed";  // Make it invisible but selectable
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+            console.log('Fallback: Copying text command was ' + msg);
+        } catch (err) {
+            console.error('Fallback: Oops, unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+        return;
+    }
+    
+    // Modern browsers with navigator.clipboard support
+    navigator.clipboard.writeText(`hello`)
+        .then(() => {
+            alert("Copied the link to clipboard: " + copyText);
+        })
+        .catch(err => {
+            console.error('Unable to copy: ', err);
+        });
+}
   function seekAudio(beatId) {
       var audio = document.getElementById('audio_' + beatId);
       var seekbar = document.getElementById('seekbar_' + beatId);

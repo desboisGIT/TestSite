@@ -197,36 +197,53 @@ def explore(request):
 
 
 
+
+
 def search_beatmakers(request):
     search_term = request.GET.get('search')
     error = None
     filtered_models = CustomUser.objects.all()  # Default queryset with all beatmakers
-    
+
     if search_term:
         # Filter the model list using the search term
         filtered_models = CustomUser.objects.filter(
-            Q(username__icontains=search_term) 
+            Q(username__icontains=search_term)
         )
-        
+
         if not filtered_models.exists():
             error = f"No beatmakers corresponding to: {search_term}"
-            search_term =""
+            search_term = ""
     else:
-        search_term ="" 
+        search_term = ""
+
+    # Add logic to fetch beats for each beatmaker
+    annotated_models = []
     
+    for beatmaker in filtered_models:
+        # Use related_name 'uploaded_beats' defined in Beats model
+        beats = beatmaker.uploaded_beats.all()
+        annotated_models.append({
+            'beatmaker': beatmaker,
+            'beats': beats,
+            
+        })
+
     context = {
-        'beatmakers': filtered_models,
+        'annotated_models': annotated_models,  # Use annotated_models instead of beatmakers
         'search_term': search_term,
         'error': error,
+        'beatmakers': filtered_models,
     }
-    
+
     return render(request, 'pages/search_beatmakers.html', context)
 
 def detail_beat(request, beat_id):
     beat = get_object_or_404(Beats, id=beat_id)
-
+    user = beat.artist
     context = {
         'beat': beat,
+        'user': user,
     }
 
     return render(request, 'pages/detail_beat.html', context)
+
