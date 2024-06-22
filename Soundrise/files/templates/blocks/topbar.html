@@ -1,17 +1,28 @@
-
- {% block topbar %}
+{% block topbar %}
     <nav class="navbar" style="background-color: rgb(29, 29, 29); border-bottom: 1px solid #464646;">
-        <a href="{% url 'content:index' %}" id='logo_home' class="navbar-brand"><strong>Soundrise</strong></a>
-        <div class="navbar">
-            <a href="{% url 'admin:index' %}" class="nav-item nav-link" style="color: rgb(81, 157, 228)">Admin</a>
-            <a href="{% url 'accounts:explore' %}" class="nav-item nav-link" style="color: rgb(81, 157, 228)">Explore</a>
-            <a href="{% url 'beats:upload_beat' %}" class="nav-item nav-link text-center"  style="color: rgb(81, 157, 228)">Sell</a>
-            <a href="{% url 'accounts:login' %}" class="nav-item nav-link"  style="color: rgb(81, 157, 228)">login</a>
-            <a href="{% url 'accounts:register' %}" class="nav-item nav-link"  style="color: rgb(81, 157, 228)">Register</a>
-            <a href="{% url 'accounts:logout' %}" class="nav-item nav-link"  style="color: rgb(81, 157, 228)">logout</a>
-            <a href="{% url 'accounts:profile' %}" class="nav-item nav-link"  style="color: rgb(81, 157, 228)">profile</a>
+        <div id="left"></div>
+        <div id="center">
+            <a href="{% url 'content:index' %}" id='logo_home' class="navbar-top-item"><strong>Soundrise</strong></a>
+            {% if user.is_staff %}
+                <a href="{% url 'admin:index' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Admin</a>
+            {% endif %}
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Explore</a>
+                <a href="{% url 'beats:upload_beat' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Sell</a>
+                <a href="{% url 'accounts:profile' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Profile</a>
+            {% else %}
+                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Explore</a>
+            {% endif %}
+        </div>
+        <div id="right">
+            {% if user.is_authenticated %}
+            <a href="{% url 'accounts:logout' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Logout</a>
+        {% else %}
+            <a href="{% url 'accounts:login' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Login</a>
+            <a href="{% url 'accounts:register' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Register</a>
+        {% endif %}
+
         </div>
     </nav>
-
-
 {% endblock topbar %}

@@ -15,6 +15,15 @@
             <p><strong>Profile Description:</strong> {{ user_profile.profile_free_text }}</p>
             <p><strong>Telephone:</strong> {{ user_profile.tel }}</p>
             <p><strong>Professional Mail:</strong> {{ user_profile.mail_pro }}</p>
+            <p>followers: {{ follower_count }}</p>
+            <p>followed acounts: {{ following_count }}</p>
+            {% if request.user != user_profile %}
+                {% if request.user in user_profile.followers.all %}
+                    <a href="{% url 'accounts:toggle_follow' user_profile.id %}" class="btn btn-danger">Unfollow</a>
+                {% else %}
+                    <a href="{% url 'accounts:toggle_follow' user_profile.id %}" class="btn btn-primary">Follow</a>
+                {% endif %}
+            {% endif %}
         </div>
         <div class="col-md-8">
             <h2 class="mb-4">Uploaded Beats</h2>

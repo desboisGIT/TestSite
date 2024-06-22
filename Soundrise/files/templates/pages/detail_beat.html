@@ -4,20 +4,51 @@
 <div class="mainDiv-detail_beat">
     <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" class='background-image-beat_detail'>
     
-    <div id="menu-detail_beat-left">
+    <div id="menu-detail_beat-left" style="overflow-wrap: break-word;">
         <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" class='square-image-x-fill beat-icon-beat_detail'>
+        <h1 style="overflow-wrap: break-word; max-width: 70%; margin-bottom: 10px;"> <strong>{{ beat.title.upper }}</strong></h1>
+        <p style="margin-bottom: 2px;">-</p>
+        <h3 style="overflow-wrap: break-word; max-width: 70%; color: #555555; font-size: small;">{{ beat.artist.username }}</h3>
+        <div id="info-div">
+            <h3 style="color: #555555; font-size: small;">information</h3>
+            <div style="text-align: start; color: #868686">
+                <p><strong>Release Date:</strong> <span class="info-value">{{ beat.release_date }}</span></p>
+                <p><strong>BPM:</strong> <span class="info-value">{{ beat.BPM }}</span></p>
+                <p><strong>Key:</strong> <span class="info-value">{{ beat.key }}</span></p>
+                <p><strong>Genre:</strong> <span class="info-value">{{ beat.genre }}</span></p>
+            </div>
+        </div>
+        <div id="description-beat_detail">
+            <p>{{ beat.description }}</p>
+        </div>
     </div>
     
-    <div id="menu-detail_beat-middle">
-
-    </div>
+    <div id="menu-detail_beat-middle"></div>
     
     <div id="menu-detail_beat-right">
         <img src="{{ user.profile_picture }}" class="img-fluid rounded-circle mb-3 square-image-x-fill" alt="Profile Picture">
+        <h1 style="overflow-wrap: break-word; max-width: 70%; margin-bottom: 10px;"> <strong>{{ beat.artist.username.upper }}</strong></h1>
+        <p style="margin-bottom: 2px;">-</p>
+        <h3 style="overflow-wrap: break-word; max-width: 70%; color: #555555; font-size: small;"></h3>
+        <p>followers: {{ follower_count }}</p>
+        <p>followed acounts: {{ following_count }}</p>
+        <div id="info-div">
+            <h3 style="color: #555555; font-size: small;">information</h3>
+            <div style="text-align: start; color: #868686">
+                <p><strong>Email:</strong> <span class="info-value">{{ beat.artist.mail_pro }}</span></p>
+                <p><strong>From:</strong> <span class="info-value">{{ beat.artist.country }}</span></p>
+                <p><strong>Phone:</strong> <span class="info-value">{{ beat.artist.num }}</span></p>
+            </div>
+        </div>
+        <div id="description-beat_detail">
+            <p>{{ beat.artist.profile_free_text  }}</p>
+        </div>
+    </div>
     </div>
 </div>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200..1000;1,200..1000&display=swap');
 .mainDiv-detail_beat {
     position: relative; 
     height: 100vh; 
@@ -30,43 +61,67 @@
     width: 100%;
     border-radius: 50px;
     filter: blur(20px);
-    opacity: 0.2; /* Changed to decimal value for opacity */
-    z-index: -1; /* Pushed behind #menu-detail_beat */
+    opacity: 0.2;
+    z-index: -1;
+}
+
+#info-div {
+    border-top: solid 1px #555555;
+    border-bottom: solid 1px #555555;
+    width: 80%;
+    text-align: center;
+    padding: 10px 0;
+    font-family: "Mulish", sans-serif;
+    margin-bottom: 10px;
+}
+
+#description-beat_detail {
+    border-top: solid 1px #555555;
+    border-bottom: solid 1px #555555;
+    width: 80%;
+    padding: 10px 0;
+    font-family: "Mulish", sans-serif;
+    text-align: start;
+    color: #868686;
 }
 
 #menu-detail_beat-left,
 #menu-detail_beat-right {
-    height: 80%;
+    height: 76%;
     width: 316px;
     background: rgb(30,30,30);
     position: relative;
     border-radius: 10px;
-    margin-bottom: 45px;
+    margin-bottom: 100px;
     padding-top: 36px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    max-height: 80%; /* Set max height for scrollable div */
+    overflow-y: auto; /* Enable vertical scrolling */
+    scrollbar-width: none; /* Firefox */
 }
 
 #menu-detail_beat-left {
-    margin-right: 10px; /* Adjust the spacing between middle and left */
+    margin-right: 10px;
     margin-left: 250px;
     background: linear-gradient(166deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
 }
 
 #menu-detail_beat-right {
-    margin-left: 10px; /* Adjust the spacing between middle and right */
+    margin-left: 10px;
     margin-right: 250px;
     background: linear-gradient(194deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
 }
 
 #menu-detail_beat-middle {
-    flex: 1; /* Fill the remaining space */
-    height: 80%;
+    min-width: 400px;
+    flex: 1;
+    height: 76%;
     background: rgb(30,30,30);
     background: linear-gradient(180deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
     border-radius: 10px;
-    margin-bottom: 45px;
+    margin-bottom: 100px;
     padding-top: 36px;
     display: flex;
     flex-direction: column;
@@ -80,11 +135,33 @@
     left: -50%;
     width: 200%;
     height: 200%;
-    background-color: rgba(255, 255, 255, 0.5); /* Adjust the color and opacity as desired */
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 50%;
     z-index: -1;
 }
 
+.info-text p {
+    display: flex;
+    justify-content: space-between;
+    word-wrap: break-word;
+}
+
+.info-value {
+    float: right;
+    max-width: 50%;
+    text-align: right;
+}
+
+#menu-detail_beat-left::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit-based browsers */
+}
+
+#menu-detail_beat-left {
+    -ms-overflow-style: none;  /* Hide scrollbar for Internet Explorer and Edge */
+}
+.beat-icon-beat_detail {
+    margin-bottom: 16px;
+}
 </style>
 
 {% endblock content %}

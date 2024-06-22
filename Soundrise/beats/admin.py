@@ -14,7 +14,7 @@ class BeatsAdmin(admin.ModelAdmin):
     # Fields to be edited inline
     fieldsets = (
         (None, {
-            'fields': ('title', 'artist', 'genre', 'duration', 'release_date', 'price')
+            'fields': ('title', 'artist', 'genre', 'duration', 'release_date', 'price', 'BPM','description')
         }),
         ('Media', {
             'fields': ('cover_image', 'audio_file')

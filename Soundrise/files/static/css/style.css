@@ -56,7 +56,13 @@ html, body {
   height: 40px;
   cursor: pointer;  /* This makes the cursor a pointer when hovering over the image */
 }
+.navbar{
+  justify-content: space-between;
+}
 
+.navbar-top-item{
+  margin: 0px 10px;
+}
 .profile-menu {
   display: none;
   position: absolute;

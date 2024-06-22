@@ -4,7 +4,7 @@ from .models import Beats
 class BeatForm(forms.ModelForm):
     class Meta:
         model = Beats
-        fields = ['title', 'genre', 'duration', 'price', 'cover_image', 'audio_file']
+        fields = ['title', 'genre', 'duration', 'price', 'cover_image', 'audio_file','description','BPM']
 
     def clean_audio_file(self):
         audio_file = self.cleaned_data['audio_file']

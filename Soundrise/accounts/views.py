@@ -2,6 +2,7 @@ import os, glob
 from pathlib import Path
 from pyexpat.errors import messages
 from django.conf import settings
+from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -40,7 +41,7 @@ def register_view(request):
         register_form = RegisterForm(request.POST)
         if register_form.is_valid():
             register_form.save()
-            return redirect('accounts:index')  # Redirect to home page after registration
+            return redirect('content/home/', permanent=True)
     return render(request, 'pages/register.html', {'form': register_form})
 
 def logout_view(request):
@@ -71,10 +72,16 @@ def profile(request, username=None):
     
     for beat in uploaded_beats:
         beat.audio_file_url = get_audio_file(beat)
+    is_followed = user.is_followed_by_user(request.user)
+    follower_count = user.get_follower_count()
+    following_count = user.get_following_count()
     
     context = {
         'user_profile': user,
         'uploaded_beats': uploaded_beats,
+        'is_followed': is_followed,
+        'follower_count': follower_count,
+        'following_count':following_count,
     }
     
     return render(request, 'pages/profile.html', context)
@@ -194,7 +201,19 @@ def explore(request):
 
 
 
-
+@login_required
+def toggle_follow(request, user_id):
+    user_to_follow = get_object_or_404(CustomUser, id=user_id)
+    current_user = request.user
+    
+    # Logic to toggle follow/unfollow
+    if current_user in user_to_follow.followers.all():
+        user_to_follow.followers.remove(current_user)
+    else:
+        user_to_follow.followers.add(current_user)
+    
+    # Redirect back to the profile page of the user_to_follow
+    return redirect('accounts:profile', username=user_to_follow.username)
 
 
 
@@ -240,9 +259,15 @@ def search_beatmakers(request):
 def detail_beat(request, beat_id):
     beat = get_object_or_404(Beats, id=beat_id)
     user = beat.artist
+    is_followed = user.is_followed_by_user(request.user)
+    follower_count = user.get_follower_count()
+    following_count = user.get_following_count()
     context = {
         'beat': beat,
         'user': user,
+        'is_followed': is_followed,
+        'follower_count': follower_count,
+        'following_count':following_count,
     }
 
     return render(request, 'pages/detail_beat.html', context)
