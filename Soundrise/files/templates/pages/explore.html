@@ -1,7 +1,8 @@
 {% extends 'layout/layout.html' %}
 {% load custom_tags %}
-
+{% load static %}
 {% block content %}
+<link rel="stylesheet" href="{% static "css/extra.css" %}">
 <div class="bodyPage" style="display: flex;">
     <!-- Sidebar -->
     <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29);">
@@ -51,88 +52,104 @@
             </form>
         </div>
 
-        <!-- Content Area with Beats -->
-        <div style="height: calc(100vh - 220px); overflow-y: auto; margin-top: 20px; padding-top: 20px; padding-right: 20px; padding-left: 20px;">
-            {% if beats %}
-            {% for beat in beats %}
-            <div id="beat_{{ beat.id }}"
-                style="border-radius: 4px; padding: 0px; margin-bottom: 10px; position: relative;">
-                <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
-                    <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
-                        <div style="position: relative;">
-                          <button class="play-btn" onclick="playAudio({{ beat.id }})">Play</button> <!-- ERREUR NORMAL C MARCHE TKT PAS TOUCHE-->
-                            <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}"
-                                alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
-                                {% if beat.title|upper|length > 9 %} <!-- NE PAS §§§ CHANGER §§§  !!! DANGER DE MORT-->
-                                <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title|uppercase_and_slice }}...
-                                </strong></h1>
-                                {% else %}
-                                <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title.upper }}</strong></h1>
-                                {% endif %}
-                            <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
-                                <h1 style="overflow-wrap: break-word;">
-                                    <strong>{{ beat.artist }}</strong>
-                                </h1>
-                                {% if beat.artist|get_artist_rank == 'admin' %}
-                                <p style="position: absolute; color: red;">
-                                    <strong>{{ beat.artist|get_artist_rank }}</strong>
-                                </p>
-                                {% else %}
-                                <p style="position: absolute;">
-                                    <strong>{{ beat.artist|get_artist_rank }}</strong>
-                                </p>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <img class="square-image-small" src="{{ beat.cover_image.url }}"
-                            alt="{{ beat.title }} Cover Overlay" style="
-                            width: 140px;
-                            height: 140px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            transform: translate(-50%, -50%);
-                            -webkit-border-top-right-radius: 20px;
-                            -webkit-border-bottom-right-radius: 4px;
-                            -moz-border-radius-topright: 4px;
-                            -moz-border-radius-bottomright: 4px;
-                            border-top-right-radius: 4px;
-                            border-bottom-right-radius: 4px;">
-                    </div>
-                    <div style="flex: 2 0 0; margin-right: 20px; display: flex; flex-wrap: wrap; padding-bottom: 20px; padding-top: 20px;">
-                        <div style="display: flex;">
-                            <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
-                            <p style="margin-bottom: 10px;">{{ beat.description }}</p>
-                        </div>
-                        {% if beat.audio_file_url %}
-                        <div style="width: 100%; margin-top: 10px;">
-                            <audio id="audio_{{ beat.id }}" controls style="width: 100%;">
-                                <source src="{{ beat.audio_file_url }}" type="audio/mp3">
-                                Your browser does not support the audio element.
-                            </audio>
-                            <div style="min-height: 54px; min-width: 815.22;">
-                              <h3> <strong>{{ beat.price }} €</strong></h3>
-                            </div>
-                              
-                        </div>
-                        {% else %}
-                        <p style="color: #999;">Audio file not found.</p>
-                        {% endif %}
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-            {% else %}
-            <p style="color: #999;">No beats uploaded yet.</p>
-            {% endif %}
-        </div>
+<!-- Content Area with Beats -->
+<div style="height: calc(100vh - 220px); overflow-y: auto; margin-top: 20px; padding-top: 20px; padding-right: 20px; padding-left: 20px;">
+  {% if beats %}
+  {% for beat in beats %}
+  <div id="beat_{{ beat.id }}"
+      style="border-radius: 4px; padding: 0px; margin-bottom: 10px; position: relative;">
+      <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
+          <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
+              <div style="position: relative;">
+                  <button class="play-btn" onclick="togglePlayPause({{ beat.id }})">
+                      <i id="play_icon_{{ beat.id }}" class="fas fa-play"></i>
+                      <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
+                  </button>
+                  <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}"
+                      alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
+                  {% if beat.title|upper|length > 9 %}
+                  <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title|uppercase_and_slice }}...
+                  </strong></h1>
+                  {% else %}
+                  <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title.upper }}</strong></h1>
+                  {% endif %}
+                  <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
+                      <h1 style="overflow-wrap: break-word;">
+                          <strong>{{ beat.artist }}</strong>
+                      </h1>
+                      {% if beat.artist|get_artist_rank == 'admin' %}
+                      <p style="position: absolute; color: red;">
+                          <strong>{{ beat.artist|get_artist_rank }}</strong>
+                      </p>
+                      {% else %}
+                      <p style="position: absolute;">
+                          <strong>{{ beat.artist|get_artist_rank }}</strong>
+                      </p>
+                      {% endif %}
+                  </div>
+              </div>
+              <img class="square-image-small" src="{{ beat.cover_image.url }}"
+                  alt="{{ beat.title }} Cover Overlay" style="
+                  width: 140px;
+                  height: 140px;
+                  position: absolute;
+                  top: 50%;
+                  left: 50%;
+                  transform: translate(-50%, -50%);
+                  -webkit-border-top-right-radius: 20px;
+                  -webkit-border-bottom-right-radius: 4px;
+                  -moz-border-radius-topright: 4px;
+                  -moz-border-radius-bottomright: 4px;
+                  border-top-right-radius: 4px;
+                  border-bottom-right-radius: 4px;">
+          </div>
+          <div style="height: 100%; width: 2px; background-color: #007bff;"></div>
+          <div style="flex: 2 0 0; margin-right: 20px; display: flex; flex-wrap: wrap; padding-bottom: 20px; padding-top: 20px;">
+              <div style="display: flex;">
+                  <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
+                  <p style="margin-bottom: 10px;">{{ beat.description }}</p>
+              </div>
+              {% if beat.audio_file_url %}
+              <div style="width: 100%; margin-top: 10px;">
+                  <audio id="audio_{{ beat.id }}" controls style="width: 100%;" ontimeupdate="updateProgressBar({{ beat.id }})">
+                      <source src="{{ beat.audio_file_url }}" type="audio/mp3">
+                      Your browser does not support the audio element.
+                  </audio>
+                  <div class="audio-controls">
+                      <!-- @ts-ignore -->
+                      <!-- eslint-disable-next-line -->
+                      <button onclick="togglePlayPause({{ beat.id }})" style="position: absolute;top: 60px;left: 623px;">
+                        <!-- eslint-enable-next-line -->
+                          <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
 
-        <!-- Optional: Display Error Message -->
-        {% if error %}
-        <div class="alert alert-warning" role="alert">
-            {{ error }}
-        </div>
-        {% endif %}
+                      </button>
+                      <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' 
+                      class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
+                      <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip">0:00</div>
+                  </div>
+                  <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
+                  <div style="min-height: 54px; min-width: 815.22;">
+                      <h3><strong>{{ beat.price }} €</strong></h3>
+                  </div>
+              </div>
+              {% else %}
+              <p style="color: #999;">Audio file not found.</p>
+              {% endif %}
+          </div>
+      </div>
+  </div>
+  {% endfor %}
+  {% else %}
+  <p style="color: #999;">No beats uploaded yet.</p>
+  {% endif %}
+</div>
+
+<!-- Optional: Display Error Message form-->
+{% if error %}
+<div class="alert alert-warning" role="alert">
+  {{ error }}
+</div>
+{% endif %}
 
     </main>
 </div>
@@ -147,7 +164,7 @@
         top: 50px;
         left: 0;
         transform: translate(-50%, -50%);
-        -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 1)),
+        -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 1)), """oui c'est rouge mais c'est juste la couleur c juste tkt"""
             to(rgba(0, 0, 0, 0)));
         mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
     }
@@ -188,23 +205,86 @@
     }
     #THEDIV:hover{
       -webkit-box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.61); 
-      box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.61);
-      margin-bottom: 12px;
-      background-color: #2d373f79;
+      box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.31);
+      margin-bottom: 2px;
+      background-color: #2d373f5d;
+    }
+    .seekbar{
+      position: absolute;
+      width: 160px;
+      top:66px;
+      left:663px;
+      background-color: #66666600;
+    }
+    .audio-controls button{
+      background-color: #ffffff00;
+    }
+    .audio-controls:hover button:hover{
+      background-color: #ffffff31;
+      border-radius: 3px;
     }
 </style>
 
 <script>
-    // JavaScript functions to control audio playback
-    function playAudio(beatId) {
-        var audio = document.getElementById('audio_' + beatId);
-        audio.play();
-    }
+function togglePlayPause(beatId) {
+    var audio = document.getElementById('audio_' + beatId);
+    var playIcons = document.querySelectorAll('.play-icon');
 
-    function pauseAudio(beatId) {
-        var audio = document.getElementById('audio_' + beatId);
+    if (audio.paused) {
+        audio.play();
+        console.log("icon switched")
+        playIcons.forEach(function(icon) {
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-play');
+        });
+        // Update pause icons
+        pauseIcons.forEach(function(icon) {
+            icon.classList.remove('fa-play');
+            icon.classList.add('fa-pause');
+        });
+    } else {
         audio.pause();
+        // Update play icons
+        playIcons.forEach(function(icon) {
+            icon.classList.remove('fa-play');
+            icon.classList.add('fa-pause');
+        });
+        // Update pause icons
+        pauseIcons.forEach(function(icon) {
+            icon.classList.remove('fa-pause');
+            icon.classList.add('fa-play');
+        });
     }
+}
+
+  function seekAudio(beatId) {
+      var audio = document.getElementById('audio_' + beatId);
+      var seekbar = document.getElementById('seekbar_' + beatId);
+      var value = seekbar.value;
+      audio.currentTime = value;
+  }
+
+  function updateProgressBar(beatId) {
+      var audio = document.getElementById('audio_' + beatId);
+      var progressBar = document.getElementById('progress_' + beatId);
+      var seekbar = document.getElementById('seekbar_' + beatId);
+
+      var value = (audio.currentTime / audio.duration) * 100;
+      progressBar.value = value;
+      seekbar.value = audio.currentTime;
+
+      updateSeekbarTooltip(seekbar);
+  }
+
+  function updateSeekbarTooltip(seekbar) {
+      var tooltip = seekbar.nextElementSibling;
+      var value = seekbar.value;
+      var minutes = Math.floor(value / 60);
+      var seconds = Math.floor(value % 60);
+      var time = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+      tooltip.innerHTML = time;
+      tooltip.style.left = (value / seekbar.max) * 100 + '%';
+  }
 </script>
 
 {% endblock content %}
