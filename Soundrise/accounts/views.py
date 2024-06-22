@@ -130,10 +130,46 @@ def explore(request):
     error = None
     filtered_models = Beats.objects.all()
     
+    # Applying search filter
     if search_term:
-        filtered_models = Beats.objects.filter(title__icontains=search_term).order_by('price')
+        filtered_models = filtered_models.filter(title__icontains=search_term)
         if not filtered_models.exists():
             error = f"No beats corresponding to: {search_term}"
+    
+    # Applying price filter
+    cursor_price = request.GET.get('cursor_price')
+    if cursor_price:
+        filtered_models = filtered_models.filter(price__lte=cursor_price)
+    
+    # Applying genre filter
+    genre = request.GET.get('genre')
+    if genre:
+        filtered_models = filtered_models.filter(genre=genre)
+    
+    # Applying artist filter
+    artist = request.GET.get('artist')
+    if artist:
+        filtered_models = filtered_models.filter(artist__icontains=artist)
+    
+    # Applying release year filter
+    release_year = request.GET.get('release_year')
+    if release_year:
+        filtered_models = filtered_models.filter(release_year=release_year)
+    
+    # Applying sort order
+    sort_by = request.GET.get('sort_by', 'default')
+    if sort_by == 'price':
+        filtered_models = filtered_models.order_by('price')
+    elif sort_by == 'date':
+        filtered_models = filtered_models.order_by('release_date')
+    elif sort_by == 'duration':
+        filtered_models = filtered_models.order_by('duration')
+    # Add more sorting options as needed
+    
+    # Handling descending order
+    order = request.GET.get('order')
+    if order == 'desc':
+        filtered_models = filtered_models.reverse()
     
     # Get all unique artist names from the filtered beats
     artist_names = filtered_models.values_list('artist', flat=True).distinct()
@@ -142,8 +178,9 @@ def explore(request):
     users = CustomUser.objects.filter(username__in=artist_names)
     user_dict = {user.username: {'user': user, 'rank': user.rank} for user in users}
     
+    # Prepare audio file URLs
     for beat in filtered_models:
-        beat.audio_file_url = get_audio_file(beat)
+        beat.audio_file_url = get_audio_file(beat)  # Assuming get_audio_file is a function to get audio file URL
     
     context = {
         'beats': filtered_models,

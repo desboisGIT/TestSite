@@ -109,6 +109,11 @@ html, body {
   height: 150px; /* Adjust the height to match the width */
   object-fit: cover; /* Ensures the image covers the square dimensions */
 }
+.square-image-x-small {
+  width: 80px; /* Adjust the width to your desired smaller size */
+  height: 80px; /* Adjust the height to match the width */
+  object-fit: cover; /* Ensures the image covers the square dimensions */
+}
 
 .square-image-medium {
   width: 200px; /* Adjust the width to your desired smaller size */

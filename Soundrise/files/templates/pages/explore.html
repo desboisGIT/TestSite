@@ -3,155 +3,134 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static "css/extra.css" %}">
-<div class="bodyPage" style="display: flex;">
-    <!-- Sidebar -->
-    <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29);">
-        <div class="position-sticky pt-3">
-            <h5 class="text-center">Side Menu</h5>
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <form method="GET" class="mt-4">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            <label for="filter" class="form-label" id="price_label">Price:</label>
-                            <input type="number" min="0" max="2000" id="cursor_price" step="0.01"
-                                class="form-control">
-                        </div>
-                    </form>
-                </li>
-            </ul>
-            <form method="GET" class="mt-4">
-                {% csrf_token %}
-                <div class="mb-3">
-                    <label for="sort_by" class="form-label">Sort By:</label>
-                    <select name="sort_by" class="form-control">
-                        <option value="default">Default</option>
-                        <option value="price">Price</option>
-                        <option value="date">Date of publication</option>
-                    </select>
-                </div>
-                <div class="mb-3">
-                    <br>
-                </div>
-                <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
-            </form>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="col-md-10 ms-sm-auto col-lg-10 px-md-4" style="overflow: auto;">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-            <a href="{% url 'accounts:search_beatmakers' %}">Search Beatmakers</a>
-            <form method="GET" class="w-100">
-                {% csrf_token %}
-                <div class="input-group">
-                    <input type="text" id="search" name="search" class="form-control" placeholder="Search..."
-                        value="{{ search_term }}">
-                    <button type="submit" class="btn btn-primary">Search</button>
-                </div>
-            </form>
-        </div>
-
-<!-- Content Area with Beats -->
-<div style="height: calc(100vh - 220px); overflow-y: auto; margin-top: 20px; padding-top: 20px; padding-right: 20px; padding-left: 20px;">
-  {% if beats %}
-  {% for beat in beats %}
-  <div id="beat_{{ beat.id }}"
-      style="border-radius: 4px; padding: 0px; margin-bottom: 10px; position: relative;">
-      <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
-          <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
-              <div style="position: relative;">
-                  <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}"
-                      alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
-                  {% if beat.title|upper|length > 9 %}
-                  <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title|uppercase_and_slice }}...
-                  </strong></h1>
-                  {% else %}
-                  <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title.upper }}</strong></h1>
-                  {% endif %}
-                  <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
-                      <h1 style="overflow-wrap: break-word;">
-                          <strong>{{ beat.artist }}</strong>
-                      </h1>
-                      {% if beat.artist|get_artist_rank == 'admin' %}
-                      <p style="position: absolute; color: red;">
-                          <strong>{{ beat.artist|get_artist_rank }}</strong>
-                      </p>
-                      {% elif beat.artist|get_artist_rank == 'diamond' %}
-                      <p style="position: absolute; color: rgb(50, 110, 187);">
-                        <strong>{{ beat.artist|get_artist_rank }}</strong>
-                      </p>
-                      {% else %}
-                      <p style="position: absolute;">
-                          <strong>{{ beat.artist|get_artist_rank }}</strong>
-                      </p>
-                      {% endif %}
-                  </div>
-              </div>
-              <img class="square-image-small" src="{{ beat.cover_image.url }}"
-                  alt="{{ beat.title }} Cover Overlay" style="
-                  width: 140px;
-                  height: 140px;
-                  position: absolute;
-                  top: 50%;
-                  left: 50%;
-                  transform: translate(-50%, -50%);
-                  -webkit-border-top-right-radius: 20px;
-                  -webkit-border-bottom-right-radius: 4px;
-                  -moz-border-radius-topright: 4px;
-                  -moz-border-radius-bottomright: 4px;
-                  border-top-right-radius: 4px;
-                  border-bottom-right-radius: 4px;">
-          </div>
-          <div style="height: 100%; width: 2px; background-color: #007bff;"></div>
-          <div style="flex: 2 0 0; margin-right: 20px; display: flex; flex-wrap: wrap; padding-bottom: 20px; padding-top: 20px;">
-              <div style="display: flex;">
-                  <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
-                  <p style="margin-bottom: 10px;">{{ beat.description }}</p>
-              </div>
-              {% if beat.audio_file_url %}
-              <div style="width: 100%; margin-top: 10px;">
-                  <audio id="audio_{{ beat.id }}" controls style="width: 100%;" ontimeupdate="updateProgressBar({{ beat.id }})">
-                      <source src="{{ beat.audio_file_url }}" type="audio/mp3">
-                      Your browser does not support the audio element.
-                  </audio>
-                  <div class="audio-controls">
-                      <!-- @ts-ignore -->
-                      <!-- eslint-disable-next-line -->
-                      <button onclick="togglePlayPause({{ beat.id }})" style="position: absolute;top: 60px;left: 623px;">
-                        <!-- eslint-enable-next-line -->
-                          <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
-                          <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
-                      </button>
-                      <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' 
-                      class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
-                      <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip">0:00</div>
-                  </div>
-                  <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
-                  <div style="min-height: 54px; min-width: 815.22;">
-                      <h3><strong>{{ beat.price }} €</strong></h3>
-                  </div>
-              </div>
-              {% else %}
-              <p style="color: #999;">Audio file not found.</p>
-              {% endif %}
-          </div>
-      </div>
-  </div>
-  {% endfor %}
+<div class="bodyPage" style="display: flex; flex-direction: row;">
+  <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29); width: 160px; display: flex; flex-direction: column;">
+    <div class="position-sticky pt-3" style="flex-grow: 1;">
+        <h5 class="text-center">Side Menu</h5>
+        <ul class="nav flex-column">
+        </ul>
+        <form method="GET" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="sort_by" class="form-label">Sort By:</label>
+                <select name="sort_by" class="form-control">
+                    <option value="default">Default</option>
+                    <option value="price">Price</option>
+                    <option value="date">Date of publication</option>
+                </select>
+            </div>
+            <div class="mb-3">
+                <br>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+        </form>
+    </div>
+</nav>
+<div id="arrowdiv" class="{% if sidebar_collapsed %}collapsed{% endif %}">
+  {% if sidebar_collapsed %}
+    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
   {% else %}
-  <p style="color: #999;">No beats uploaded yet.</p>
+    <i class="fa-solid fa-chevron-left" style="color: #ffffff;"></i>
   {% endif %}
 </div>
+<!-- Main Content -->
+<main id="main-content" class="col-12" style="overflow: auto;">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <a href="{% url 'accounts:search_beatmakers' %}">Search Beatmakers</a>
+        <form method="GET" class="w-100">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Search..."
+                    value="{{ search_term }}">
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
+        </form>
+    </div>
 
-<!-- Optional: Display Error Message form-->
-{% if error %}
-<div class="alert alert-warning" role="alert">
-  {{ error }}
-</div>
-{% endif %}
+    <!-- Content Area with Beats -->
+    <div class="content-area" style="height: calc(100vh - 220px); overflow-y: auto; margin-top: 20px; padding: 20px;">
+        {% if beats %}
+        {% for beat in beats %}
+        <div id="beat_{{ beat.id }}" class="beat-item" style="border-radius: 4px; padding: 0px; margin-bottom: 10px; position: relative;">
 
-    </main>
+            <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
+                <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
+                    <div style="position: relative;">
+                        <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
+                        
+                        {% if beat.title|upper|length > 9 %}
+                        <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title|uppercase_and_slice }}...</strong></h1>
+                        {% else %}
+                        <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title.upper }}</strong></h1>
+                        {% endif %}
+                        <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
+                            <h1 style="overflow-wrap: break-word;">
+                                <strong>{{ beat.artist }}</strong>
+                            </h1>
+                            {% if beat.artist|get_artist_rank == 'admin' %}
+                            <p style="position: absolute; color: red;">
+                                <strong>{{ beat.artist|get_artist_rank }}</strong>
+                            </p>
+                            {% elif beat.artist|get_artist_rank == 'diamond' %}
+                            <p style="position: absolute; color: rgb(50, 110, 187);">
+                                <strong>{{ beat.artist|get_artist_rank }}</strong>
+                            </p>
+                            {% else %}
+                            <p style="position: absolute;">
+                                <strong>{{ beat.artist|get_artist_rank }}</strong>
+                            </p>
+                            {% endif %}
+                        </div>
+                    </div>
+                    <img class="square-image-small" src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover Overlay" style="width: 140px; height: 140px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                </div>
+                <div style="height: 100%; width: 2px; background-color: #007bff;"></div>
+                <div style="flex: 2 0 0; margin-right: 20px; display: flex; flex-wrap: wrap; padding: 20px;">
+                    <div style="display: flex;">
+                        <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
+                        <p style="margin-bottom: 10px;">{{ beat.description }}</p>
+                    </div>
+                    {% if beat.audio_file_url %}
+                    <div style="width: 100%; margin-top: 10px;">
+                        <audio id="audio_{{ beat.id }}" controls style="width: 100%;" ontimeupdate="updateProgressBar({{ beat.id }})">
+                            <source src="{{ beat.audio_file_url }}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                        <div class="audio-controls">
+                            <!-- @ts-ignore -->
+                            <!-- eslint-disable-next-line -->
+                            <button onclick="togglePlayPause({{ beat.id }})" style="position: absolute;top: 64px;left: 708px;">
+                                <!-- eslint-enable-next-line -->
+                                <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
+                                <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
+                            </button>
+                            <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
+                            <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style="margin-left: -330px; padding-top: 4px;">0:00</div>
+                        </div>
+                        <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
+                        <div style="min-height: 54px; min-width: 815.22;">
+                            <h3><strong>{{ beat.price }} €</strong></h3>
+                        </div>
+                    </div>
+                    {% else %}
+                    <p style="color: #999;">Audio file not found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p style="color: #999;">No beats uploaded yet.</p>
+        {% endif %}
+    </div>
+
+    <!-- Optional: Display Error Message form-->
+    {% if error %}
+    <div class="alert alert-warning" role="alert">
+        {{ error }}
+    </div>
+    {% endif %}
+</main>
 </div>
 
 <style>
@@ -170,8 +149,13 @@
     }
 
     audio {
-    display: none;
-}
+        display: none;
+    }
+
+    input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField .form-control {
+        background: #fff;
+        background-color: #fff;
+    }
 
     audio::-webkit-media-controls-panel {
         background-color: rgb(51, 51, 51);
@@ -191,39 +175,86 @@
         margin-right: 5px;
         cursor: pointer;
     }
-    .play-btn{
-      position: absolute;
-      
+
+    .play-btn {
+        position: absolute;
     }
 
     .audio-controls button:hover {
         background-color: #0056b3;
     }
 
-    #THEDIV{
-      transition: all, 0.1s ease-in;
+    #THEDIV {
+        transition: all 0.1s ease-in;
     }
-    #THEDIV:hover{
-      -webkit-box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.61); 
-      box-shadow: 0px 0px 16px 8px rgba(0,0,0,0.31);
-      margin-bottom: 2px;
-      background-color: #2d373f5d;
+
+    #THEDIV:hover {
+        -webkit-box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.61);
+        box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.31);
+        margin-bottom: 2px;
+        background-color: #2d373f5d;
     }
-    .seekbar{
-      position: absolute;
-      width: 160px;
-      top:66px;
-      left:663px;
-      background-color: #66666600;
+    #arrowdiv {
+      position: relative;
+      height: 100%; 
+      width: 80px; 
+      background-color: #1b1b1b00; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center;
+      transition: all, 0.1s, ease-in-out;
+      padding: 0 8px;
+      left: 0%;
+      transform: translate(0%, 0%);
+      cursor: pointer;
+      z-index: 1100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
     }
-    .audio-controls button{
-      background-color: #ffffff00;
-      height:34px;
-      width: 34px;
+    #arrowdiv.collapsed {
+    left: -310px; /* Adjusted left position when collapsed */
+}
+
+    #arrowdiv:hover {
+      background-color: #1b1b1bFF;
     }
-    .audio-controls:hover button:hover{
-      background-color: #ffffff31;
-      border-radius: 3px;
+    #sidebar {
+        background-color: rgb(29, 29, 29);
+        transition: transform 0.3s ease-in-out;
+        z-index: 1000;
+    }
+    #sidebar.collapsed {
+        transform: translateX(-320px); /* Collapsed position */
+        display: none;
+    }
+    .seekbar {
+        position: absolute;
+        width: 160px;
+        top: 66px;
+        left: 743px;
+        background-color: #66666600;
+    }
+
+    .audio-controls button {
+        background-color: #ffffff00;
+        height: 34px;
+        width: 34px;
+    }
+
+    .audio-controls:hover button:hover {
+        background-color: #ffffff31;
+        border-radius: 3px;
+    }
+    #main-content {
+      transition: transform 0.3s ease-in-out;
+    }
+    #main-content.collapsed {
+      transform: translateX(-300px);
+    }
+    .col-12 {
+        width: 100%;
     }
 </style>
 
@@ -286,6 +317,29 @@
       tooltip.innerHTML = time;
       tooltip.style.left = (value / seekbar.max) * 100 + '%';
   }
-  </script>
+  function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    const arrowIcon = document.querySelector('#arrowdiv i');
+    const arrowDiv = document.getElementById('arrowdiv');
+    const mainContent = document.getElementById('main-content');
+
+    sidebar.classList.toggle('collapsed');
+    mainContent.classList.toggle('collapsed');
+    arrowDiv.classList.toggle('collapsed');
+
+    // Toggle between fa-chevron-left and fa-chevron-right
+    if (sidebar.classList.contains('collapsed')) {
+        arrowIcon.classList.remove('fa-chevron-left');
+        arrowIcon.classList.add('fa-chevron-right');
+    } else {
+        arrowIcon.classList.remove('fa-chevron-right');
+        arrowIcon.classList.add('fa-chevron-left');
+    }
+}
+
+document.getElementById('arrowdiv').addEventListener('click', toggleSidebar);
+
+
+</script>
 
 {% endblock content %}
