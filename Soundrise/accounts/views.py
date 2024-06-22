@@ -135,6 +135,8 @@ def explore(request):
         filtered_models = filtered_models.filter(title__icontains=search_term)
         if not filtered_models.exists():
             error = f"No beats corresponding to: {search_term}"
+    else:
+        search_term =""
     
     # Applying price filter
     cursor_price = request.GET.get('cursor_price')
@@ -208,6 +210,9 @@ def search_beatmakers(request):
         
         if not filtered_models.exists():
             error = f"No beatmakers corresponding to: {search_term}"
+            search_term =""
+    else:
+        search_term ="" 
     
     context = {
         'beatmakers': filtered_models,
@@ -216,3 +221,12 @@ def search_beatmakers(request):
     }
     
     return render(request, 'pages/search_beatmakers.html', context)
+
+def detail_beat(request, beat_id):
+    beat = get_object_or_404(Beats, id=beat_id)
+
+    context = {
+        'beat': beat,
+    }
+
+    return render(request, 'pages/detail_beat.html', context)

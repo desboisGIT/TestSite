@@ -3,7 +3,7 @@ from .models import Beats
 
 class BeatsAdmin(admin.ModelAdmin):
     # Fields to display in the list view
-    list_display = ('title', 'artist', 'genre', 'release_date', 'price')
+    list_display = ('title','id', 'artist', 'genre', 'release_date', 'price')
     
     # Fields to filter the list by
     list_filter = ('genre', 'release_date', 'artist')

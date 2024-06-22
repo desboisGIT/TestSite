@@ -16,12 +16,8 @@ urlpatterns = [
     path('recherhche/', views.recherche, name='recherhce'),
     path('parametre/page/<str:page>/', views.parametre_onglet, name='parametre_onglet'),
     path('explore/',views.explore,name='explore'),
-    path('search_beatmakers/',views.search_beatmakers,name='search_beatmakers')
-    
-    
-    
-
-   
+    path('search_beatmakers/',views.search_beatmakers,name='search_beatmakers'),
+    path('detail_beat/<int:beat_id>/', views.detail_beat, name='detail_beat'),
 ]
 
 

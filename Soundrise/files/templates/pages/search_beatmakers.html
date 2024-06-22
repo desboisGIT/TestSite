@@ -1,18 +1,22 @@
 {% extends 'layout/layout.html' %}
 
 {% block content %}
-<main class="col-md-10 ms-sm-auto col-lg-10 px-md-4" >
-  
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-      <a href="{% url 'accounts:explore'  %}" >Search Beats</a>
-      <form method="GET" class="w-100">
-        {% csrf_token %}
-        <div class="input-group">
-          <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}">
-          <button type="submit" class="btn btn-primary">Search</button>
-        </div>
-      </form>
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 90%; align-self: center;">
+  <a href="{% url 'accounts:explore'  %}" >Search Beats</a>
+  <form method="GET" class="w-100">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="text" id="search" name="search" class="form-control" placeholder="Search..."  value="{{ search_term }}">
+      <button type="submit" class="btn btn-primary">Search</button>
     </div>
+  </form>
+</div>
+<div style="height: 65%;width: 100%; display: flex; flex-direction: row; justify-content: space-around;">
+<div style="height: 100%;width: 200px;background-color: rgb(63, 61, 61);text-align: center; font-size: 20px;">Side menu</div>
+<div class="col-md-10 ms-sm-auto col-lg-10 px-md-4"style="display: flex;flex-direction:column; align-self:end;overflow-y: scroll;height:100% "  >
+  
+  
+    
     {% if error %}
     <div class="alert alert-warning" role="alert">
       {{ error }}
@@ -20,15 +24,21 @@
     {% endif %}
     {% for beatmaker in beatmakers %}
     <div class="card mb-3">
-        <div class="card bg-dark">
-            <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{beatmaker.profile_picture}}" alt="profile_picture">
+        <div class="card bg-dark" style="display: flex;flex-direction: row;">
+            <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{beatmaker.profile_picture}}" alt="profile_picture" style="height: 200px;width: 200px;">
             <h3 class="card-title">{{ beatmaker.username }} <h6 class="card-title">{{ beatmaker.profile_free_text }}</h6> </h5>
                 <div class="card-apercu-beatmakers">
-                    {%for beat in %}
+                    
                 </div>
             
             
         </div>
     </div>
+  
+  
+
 {% endfor %}
+</div>
+
+</div>
 {% endblock content %}

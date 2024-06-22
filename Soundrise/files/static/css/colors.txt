@@ -1,0 +1,8 @@
+background 1:
+    rgb(36, 36, 36)
+background 2:
+    rgb(18, 18, 18)
+div 1:
+    rgb(20, 20, 20)
+div 2:
+    rgb(29, 29, 29)

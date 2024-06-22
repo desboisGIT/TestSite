@@ -1,0 +1,23 @@
+{% extends 'layout/layout.html' %}
+
+{% block content %}
+<div class="mainDiv-detail_beat">
+    <img src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" style="position: absolute; width: 100%; border-radius: 1px; filter: blur(20px); opacity: 20%;">
+    <div id="menu-detail_beat"></div>
+</div>
+
+<style>
+#menu-detail_beat {
+    height: 80%;
+    width: 25%;
+    background-color: rgb(41, 41, 41);
+    position: relative;
+    margin-bottom: 48px;
+    margin-left: 48px;
+    border-radius: 15px;
+}
+.mainDiv-detail_beat{
+    position: relative; height: 100vh; display: flex; align-items: center;
+}
+</style>
+{% endblock content %}

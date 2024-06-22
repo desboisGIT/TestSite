@@ -40,8 +40,7 @@
         <form method="GET" class="w-100">
             {% csrf_token %}
             <div class="input-group">
-                <input type="text" id="search" name="search" class="form-control" placeholder="Search..."
-                    value="{{ search_term }}">
+                <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}" >
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
         </form>
@@ -51,21 +50,21 @@
     <div class="content-area" style="height: calc(100vh - 220px); overflow-y: auto; margin-top: 20px; padding: 20px;">
         {% if beats %}
         {% for beat in beats %}
+        <a href="{% url 'accounts:detail_beat' beat.id %}" style="color: #fff;">
         <div id="beat_{{ beat.id }}" class="beat-item" style="border-radius: 4px; padding: 0px; margin-bottom: 10px; position: relative;">
 
             <div id="THEDIV" style="display: flex; flex-wrap: wrap; position: relative;">
                 <div style="flex: 1 0 200px; margin-right: 20px; position: relative; overflow: hidden;">
                     <div style="position: relative;">
                         <img class="rounded square-image-small gradientDiv" src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover" style="width: 100%; border-radius: 1px; top: 65px;">
-                        
                         {% if beat.title|upper|length > 9 %}
-                        <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title|uppercase_and_slice }}...</strong></h1>
+                        <h1 style="position: absolute; top:95px; left:10px;" class="noselect"><strong>{{ beat.title|uppercase_and_slice }}...</strong></h1>
                         {% else %}
-                        <h1 style="position: absolute; top:95px; left:10px;"><strong>{{ beat.title.upper }}</strong></h1>
+                        <h1 style="position: absolute; top:95px; left:10px;" class="noselect"><strong>{{ beat.title.upper }}</strong></h1>
                         {% endif %}
                         <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
-                            <h1 style="overflow-wrap: break-word;">
-                                <strong>{{ beat.artist }}</strong>
+                            <h1 style="overflow-wrap: break-word;" class="beatArtist">
+                                <strong><a href="#" style="color: #fff;">{{ beat.artist }}</a></strong>
                             </h1>
                             {% if beat.artist|get_artist_rank == 'admin' %}
                             <p style="position: absolute; color: red;">
@@ -82,10 +81,12 @@
                             {% endif %}
                         </div>
                     </div>
-                    <img class="square-image-small" src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover Overlay" style="width: 140px; height: 140px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                    <a href="#">
+                        <img class="square-image-small coverimage" src="{{ beat.cover_image.url }}" alt="{{ beat.title }} Cover Overlay" style="width: 140px; height: 140px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-top-right-radius: 4px; border-bottom-right-radius: 4px;">
+                    </a>
                 </div>
-                <div style="height: 100%; width: 2px; background-color: #007bff;"></div>
-                <div style="flex: 2 0 0; margin-right: 20px; display: flex; flex-wrap: wrap; padding: 20px;">
+                <div style="height: 100%;  background-color: #007bff;"></div>
+                <div style="flex: 2 0 0; margin-right: 0px; display: flex; flex-wrap: wrap; padding: 20px;width: 300px;">
                     <div style="display: flex;">
                         <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
                         <p style="margin-bottom: 10px;">{{ beat.description }}</p>
@@ -98,38 +99,40 @@
                         </audio>
                         <div class="audio-controls">
                             <!-- @ts-ignore -->
-                            <!-- eslint-disable-next-line -->
-                            <button onclick="togglePlayPause({{ beat.id }})" style="position: absolute;top: 64px;left: 708px;">
+                            <!-- eslint-disable-next-line  -->
+                            <button onclick="togglePlayPause({{ beat.id }})" style="position: relative ;">
                                 <!-- eslint-enable-next-line -->
                                 <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
                                 <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
                             </button>
                             <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
-                            <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style="margin-left: -330px; padding-top: 4px;">0:00</div>
+                            <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style=" height: 34px; padding-top: 4px;">0:00</div>
                         </div>
                         <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
                         <div style="min-height: 54px; min-width: 815.22;">
                             <h3><strong>{{ beat.price }} €</strong></h3>
                         </div>
+                        
                     </div>
+                    
                     {% else %}
                     <p style="color: #999;">Audio file not found.</p>
                     {% endif %}
+                    
+                </div>
+                <div style="height: 100%;width: 10%; display: flex;justify-content:space-around ;">
+                    <i class="fa-solid fa-heart" style="color: #ff0000;"></i>
+                    <i class="fa-solid fa-bookmark" style="color: #ffffff;"></i>
                 </div>
             </div>
         </div>
+        </a>
         {% endfor %}
         {% else %}
-        <p style="color: #999;">No beats uploaded yet.</p>
+        <p style="color: #999;"> {{ error }} </p>
         {% endif %}
     </div>
 
-    <!-- Optional: Display Error Message form-->
-    {% if error %}
-    <div class="alert alert-warning" role="alert">
-        {{ error }}
-    </div>
-    {% endif %}
 </main>
 </div>
 
@@ -163,8 +166,9 @@
 
     .audio-controls {
         display: flex;
-        justify-content: center;
+        justify-content: space-around;
         margin-top: 5px;
+        width: 500px;
     }
 
     .audio-controls button {
@@ -177,7 +181,8 @@
     }
 
     .play-btn {
-        position: absolute;
+        position: relative;
+        height: 34px;
     }
 
     .audio-controls button:hover {
@@ -187,7 +192,10 @@
     #THEDIV {
         transition: all 0.1s ease-in;
     }
-
+    .beatArtist:hover {
+        text-decoration: underline;
+        cursor: pointer;
+    }
     #THEDIV:hover {
         -webkit-box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.61);
         box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.31);
@@ -230,10 +238,9 @@
         display: none;
     }
     .seekbar {
-        position: absolute;
+        position: relative;
         width: 160px;
-        top: 66px;
-        left: 743px;
+        margin-top: 4px;
         background-color: #66666600;
     }
 
@@ -256,6 +263,16 @@
     .col-12 {
         width: 100%;
     }
+    .noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
 </style>
 
 <script>
