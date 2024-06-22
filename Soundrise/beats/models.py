@@ -16,5 +16,18 @@ class Beats(models.Model):
     BPM = models.IntegerField(default=0)
     key = models.CharField(default="B♭m", max_length=5)
     description = models.CharField(default="",max_length=500)
+    views = models.ManyToManyField(CustomUser, related_name='viewed_beats', blank=True)
+    
+    def __str__(self):
+        return self.title
 
+    def add_view(self, user):
+        if user not in self.views.all():
+            self.views.add(user)
+            return True
+        return False
+
+    @property
+    def view_count(self):
+        return self.views.count()
     

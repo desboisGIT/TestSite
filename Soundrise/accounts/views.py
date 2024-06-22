@@ -1,15 +1,12 @@
 import os, glob
 from pathlib import Path
-from pyexpat.errors import messages
 from django.conf import settings
-from django.http import HttpResponseForbidden
+from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from .forms import ParametreForm, ParametreProForm, RegisterForm
 from accounts.models import CustomUser
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from beats.models import Beats
 from django.db.models import Q
 
@@ -214,8 +211,6 @@ def toggle_follow(request, user_id):
     
     # Redirect back to the profile page of the user_to_follow
     return redirect('accounts:profile', username=user_to_follow.username)
-
-
 
 
 def search_beatmakers(request):

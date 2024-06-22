@@ -41,6 +41,12 @@ html, body {
     padding: 0;
 
 }
+.theBut{
+  border: none;
+  box-shadow: none;
+  background-color: rgb(20, 20, 20);
+  color: #EEE;
+}
 #profile-menu-button {
   margin-right: 20px;
 }
@@ -62,6 +68,22 @@ html, body {
 
 .navbar-top-item{
   margin: 0px 10px;
+}
+.btn-grad {
+  background-image: linear-gradient(to right, #2b5876 0%, #aa56be  51%, #2b5876  100%);
+  padding: 5px 10px;
+  text-align: center;
+  text-transform: uppercase;
+  transition: 0.5s;
+  background-size: 200% auto;
+  color: white;            
+  border-radius: 50px;
+}
+
+.btn-grad:hover {
+  background-position: right center; /* change the direction of the change here */
+  color: #fff;
+  text-decoration: none;
 }
 .profile-menu {
   display: none;

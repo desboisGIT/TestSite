@@ -8,4 +8,5 @@ app_name = 'beats'
 
 urlpatterns = [
     path('upload/', views.upload_beat, name='upload_beat'),
+    path('update_views/', views.update_views, name='update_views'),
 ]

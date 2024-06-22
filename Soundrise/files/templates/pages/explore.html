@@ -88,7 +88,7 @@
                 <div style="height: 100%;  background-color: #007bff;"></div>
                 <div style="flex: 2 0 0; margin-right: 0px; display: flex; flex-wrap: wrap; padding: 20px;width: 300px;">
                     <div style="display: flex;">
-                        <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }}</p>
+                        <p style="color: #666; margin-bottom: 5px;">{{ beat.genre }} - {{ beat.release_date }} - {{ beat.view_count }} plays</p>
                     </div>
                     {% if beat.audio_file_url %}
                     <div style="width: 100%; margin-top: 10px;">
@@ -316,6 +316,24 @@
           playIcon.style.display = 'inline-block';
           pauseIcon.style.display = 'none';
       }
+          // Ajax call to update views
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '{% url "beats:update_views" %}', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                console.log('Views updated successfully:', response.views);
+            } else {
+                console.error('Failed to update views:', response.error);
+            }
+        }
+    };
+    xhr.send('beat_id=' + beatId);
+
   }
   function copyLink(copyText) {
     copyText = 'http://192.168.1.26:8000' + copyText;

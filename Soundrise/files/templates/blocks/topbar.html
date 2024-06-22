@@ -1,28 +1,59 @@
 {% block topbar %}
-    <nav class="navbar" style="background-color: rgb(29, 29, 29); border-bottom: 1px solid #464646;">
-        <div id="left"></div>
-        <div id="center">
-            <a href="{% url 'content:index' %}" id='logo_home' class="navbar-top-item"><strong>Soundrise</strong></a>
-            {% if user.is_staff %}
-                <a href="{% url 'admin:index' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Admin</a>
-            {% endif %}
-            
-            {% if user.is_authenticated %}
-                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Explore</a>
-                <a href="{% url 'beats:upload_beat' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Sell</a>
-                <a href="{% url 'accounts:profile' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Profile</a>
-            {% else %}
-                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(81, 157, 228)">Explore</a>
-            {% endif %}
-        </div>
-        <div id="right">
-            {% if user.is_authenticated %}
-            <a href="{% url 'accounts:logout' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Logout</a>
-        {% else %}
-            <a href="{% url 'accounts:login' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Login</a>
-            <a href="{% url 'accounts:register' %}" class="navbar-top-item"  style="color: rgb(81, 157, 228)">Register</a>
-        {% endif %}
+    <nav class="navbar" style="background-color: rgb(29, 29, 29); border-bottom: 1px solid #464646; ">
+        <div id="left">
 
         </div>
+
+        
+        <div id="center" style="display: flex;">
+
+            <a href="{% url 'content:index' %}" id='logo_home' class="navbar-top-item" style="padding: 7px 0px;"><strong>Soundrise</strong></a>
+            
+            {% if user.is_authenticated %}
+                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(255, 255, 255); padding: 7px 0px;">Explore</a>
+                <div>
+                    <form action="{% url 'accounts:explore' %}" method="GET" class="w-100 d-flex">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" id="search" name="search" class="form-control me-2" placeholder="Search..." style="width: 300px;">
+                            <button type="submit" class="theBut" style="-webkit-border-top-right-radius: 5px;
+                                    -webkit-border-bottom-right-radius: 5px;
+                                    -moz-border-radius-topright: 5px;
+                                    -moz-border-radius-bottomright: 5px;
+                                    border-top-right-radius: 5px;
+                                    border-bottom-right-radius: 5px;">Search</button>
+                        </div>
+                    </form>
+                    
+                </div>
+
+                <a href="{% url 'accounts:profile' %}" class="navbar-top-item"  style="color: rgb(255, 255, 255); padding: 7px 0px;">Profile</a>
+            {% else %}
+                <a href="{% url 'accounts:explore' %}" class="navbar-top-item" style="color: rgb(255, 255, 255); padding: 7px 0px;">Explore</a>
+                <div>
+                    <form method="GET" class="w-100 d-flex">
+                        {% csrf_token %}
+                        <div class="input-group">
+                            <input type="text" id="search" name="search" class="form-control me-2" placeholder="Search..." value="{{ search_term }}" style="width: 300px;">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </div>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+
+        <div id="right">
+            {% if user.is_authenticated %}
+            <a href="{% url 'accounts:logout' %}" class="navbar-top-item"  style="color: rgb(255, 255, 255); padding: 7px 0px;">Logout</a>
+            {% else %}
+            <a href="{% url 'accounts:login' %}" class="navbar-top-item"  style="color: rgb(255, 255, 255); padding: 7px 0px;">Login</a>
+            <a href="{% url 'accounts:register' %}" class="navbar-top-item"  style="color: rgb(255, 255, 255); padding: 7px 0px;">Register</a>
+            {% endif %}
+            {% if user.is_staff %}
+            <a href="{% url 'admin:index' %}" style="color: rgb(255, 255, 255); padding: 7px 0px;">Admin</a>
+            {% endif %}
+        </div>
     </nav>
+
+
 {% endblock topbar %}

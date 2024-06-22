@@ -5,8 +5,18 @@
     <div class="row" style="margin-right: 0px; margin-left: 0px; margin-top: 0px;">
         <div class="col-md-4 text-center">
             <img src="{{ user_profile.profile_picture }}" class="img-fluid rounded-circle mb-3 square-image-big" alt="Profile Picture">
-            {% if user.is_staff %}
-            <p style="color: red;">Admin</p>
+            {% if user_profile.rank == 'admin' %}
+            <p style="color: red;">
+                <strong>{{ user_profile.rank }}</strong>
+            </p>
+            {% elif user_profile.rank == 'diamond' %}
+            <p style="color: rgb(50, 110, 187);">
+                <strong>{{ user_profile.rank }}</strong>
+            </p>
+            {% else %}
+            <p>
+                <strong>{{ user_profile.rank }}</strong>
+            </p>
             {% endif %}
             <h2>{{ user_profile.username }}</h2>
             <h4 class="text-muted">{{ user_profile.full_name }}</h4>
