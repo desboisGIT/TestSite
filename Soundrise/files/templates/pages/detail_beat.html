@@ -32,6 +32,13 @@
         <h3 style="overflow-wrap: break-word; max-width: 70%; color: #555555; font-size: small;"></h3>
         <p>followers: {{ follower_count }}</p>
         <p>followed acounts: {{ following_count }}</p>
+        {% if request.user != user %}
+        {% if request.user in user.followers.all %}
+            <a href="{% url 'accounts:toggle_follow' user.id beat.id %}" class="btn btn-danger" style="color: #ffffff;">Unfollow</a>
+        {% else %}
+            <a href="{% url 'accounts:toggle_follow' user.id beat.id %}" class="btn btn-primary" style="color: #ffffff;">Follow</a>
+        {% endif %}
+    {% endif %}
         <form method="POST">
             {% csrf_token %}
             {% if request.user.is_authenticated %}
@@ -45,7 +52,7 @@
                     </button>
                 {% endif %}
             {% else %}
-                <p>Please <a href="{% url 'login' %}">log in</a> to like this beat.</p>
+                <p>Please <a href="{% url 'accounts:login' %}">log in</a> to like this beat.</p>
             {% endif %}
         </form>
         <div id="info-div">

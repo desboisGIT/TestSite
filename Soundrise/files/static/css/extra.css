@@ -218,3 +218,46 @@ input[type="range"] {
 		background: #333;
 		background-color: #333;
 	}
+            /* Basic styles to remove blue border on focus */
+        input[type="text"],
+        input[type="search"],
+        input[type="password"],
+        input[type="email"],
+        input[type="url"],
+        input[type="number"],
+        input[type="tel"],
+        textarea,
+        select {
+            outline: none;
+            background-color: rgb(51, 51, 51);
+        }
+
+        /* Optionally, you can remove border and box-shadow as well */
+        input[type="text"]:focus,
+        input[type="search"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border: none; /* Remove border if you want */
+            box-shadow: none; /* Remove box-shadow if you want */
+        }
+
+        /* Custom styles for focused state (optional) */
+        input[type="text"]:focus,
+        input[type="search"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            border: 2px solid #cccccc; /* Custom border color */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Custom box-shadow */
+            background-color: rgb(51, 51, 51);
+        }

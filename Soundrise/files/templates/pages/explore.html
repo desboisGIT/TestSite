@@ -16,6 +16,7 @@
                     <label for="sort_by" class="form-label" style="color: #fff;">Sort By:</label>
                     <select name="sort_by" class="form-control" style="color: #fff;">
                         <option value="default" {% if sort_by == 'default' %} selected {% endif %}>Default</option>
+                        <option value="trending" {% if sort_by == 'trending' %} selected {% endif %}>Trending</option>
                         <option value="price" {% if sort_by == 'price' %} selected {% endif %}>Price (reversed)</option>
                         <option value="price (reversed)" {% if sort_by == 'price (reversed)' %} selected {% endif %}>Price</option>
                         <option value="distance" {% if sort_by == 'distance' %} selected {% endif %}>Distance no</option>
@@ -23,6 +24,7 @@
                         <option value="latest" {% if sort_by == 'latest' %} selected {% endif %}>Latest</option>
                         <option value="oldest" {% if sort_by == 'oldest' %} selected {% endif %}>Oldest</option>
                         <option value="rating" {% if sort_by == 'rating' %} selected {% endif %}>Rating no</option>
+                        
                     </select>
                 </div>
             
@@ -68,12 +70,18 @@
 <!-- Main Content -->
 <main id="main-content" class="col-12" style="overflow: auto;">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 1200px; margin-left: 40px;">
-        <a href="{% url 'accounts:search_beatmakers' %}">Search Beatmakers</a>
+        <a href="{% url 'accounts:search_beatmakers' %}" style="color: #fff;">Search Beatmakers</a>
         <form method="GET" class="w-100">
             {% csrf_token %}
             <div class="input-group" style="width: 500px; margin-left: 100px;">
-                <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}" >
-                <button type="submit" class="btn btn-primary">Search</button>
+                <input class="form-control" type="text" id="genre" name="genre" value=""style="color: #fff; display: none;">
+                <input class="form-control" type="date" id="release_date" name="release_date" value=""style="color: #fff; display: none;">
+                <input class="form-control" type="text" id="artist" name="artist" value="" style="color: #fff; display: none;">
+                <div>
+                    <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="" >
+                    <button type="submit" class="searchbtn">Search</button>
+                </div>
+                
             </div>
         </form>
     </div>
@@ -94,6 +102,7 @@
                         {% else %}
                         <h1 style="position: absolute; top:95px; left:10px;" class="noselect"><strong>{{ beat.title.upper }}</strong></h1>
                         {% endif %}
+                        
                         <div style="position: relative; top: 20px; left: 65%; background-color: rgba(31, 31, 31, 0.473); width: 220px; max-height: 80px;">
                             <h1 style="overflow-wrap: break-word;" class="beatArtist">
                                 <strong><a href="{% url 'accounts:profile' beat.artist.username %}" style="color: #fff;">{{ beat.artist }}</a></strong>
@@ -158,7 +167,7 @@
                                                     </div>
                                                 </button>
                                             {% else %}
-                                                <button type="submit" name="like_button" style="background: none; border: none;">
+                                                <button type="submit" name="like_button" style="background: none; border: none;" onclick="updateViews({{ beat.id }})">
                                                     <div style="display: flex; align-items: center; color: #ffffff;">
                                                         <i class="fa-regular fa-heart fa-xs" style="color: #f8f8f8; margin-right: 4px;"></i>
                                                         <span style="font-size: 12px;">{{ beat.like_count }}</span>
@@ -176,7 +185,10 @@
                                 
                             </h3>
                         </div>
+                        {% if beat.score in top_3_scores %}
+                        <div style="position: absolute; top:118px;left: 419px; background-color: #ed3a3a42; border-radius: 100px; text-align: center; align-items: center; padding: 5px 10px; display: flex;"><strong style="margin-right: 5px;">Trends</strong> <i class="fa-solid fa-chart-line" style="color: #ffffff;"></i></div>
                         <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
+                        {% endif %}
                     </div>
                     
                     {% else %}
@@ -266,6 +278,31 @@
 #searchnone{
     display: none;
 }
+#search{
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    width: 400px;
+}
+.searchbtn
+{
+    border-top-right-radius: 50px;
+    border-bottom-right-radius: 50px;
+    border: none;
+    padding-right: 11px;
+    position: absolute;
+    top: 1px;
+    left: 338px;
+    padding: 6px 1px;
+    background-color: #2d373f00;
+    color: #fff;
+}
+select:focus {
+    outline: none;
+    border: none; /* Optional: removes the border entirely */
+    box-shadow: none; /* Optional: removes any box-shadow */
+}
+
     #arrowdiv:hover {
       background-color: #1b1b1bFF;
     }
@@ -374,7 +411,7 @@ priceRange.addEventListener('input', function() {
   priceValue.textContent = price;
 });
 
-  function togglePlayPause(beatId) {
+function togglePlayPause(beatId) {
       var audio = document.getElementById('audio_' + beatId);
       var playIcon = document.getElementById('play_icon_' + beatId);
       var pauseIcon = document.getElementById('pause_icon_' + beatId);
@@ -421,6 +458,28 @@ priceRange.addEventListener('input', function() {
     xhr.send('beat_id=' + beatId);
 
   }
+  function updateViews(beatId) {
+
+          // Ajax call to update views
+    var csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '{% url "beats:update_views" %}', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.setRequestHeader('X-CSRFToken', csrftoken);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            if (response.success) {
+                console.log('Views updated successfully:', response.views);
+            } else {
+                console.error('Failed to update views:', response.error);
+            }
+        }
+    };
+    xhr.send('beat_id=' + beatId);
+
+  }
+
   function copyLink(copyText) {
     copyText = 'http://192.168.1.26:8000' + copyText;
     if (!navigator.clipboard) {

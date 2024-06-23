@@ -29,9 +29,9 @@
             <p>followed acounts: {{ following_count }}</p>
             {% if request.user != user_profile %}
                 {% if request.user in user_profile.followers.all %}
-                    <a href="{% url 'accounts:toggle_follow' user_profile.id %}" class="btn btn-danger">Unfollow</a>
+                    <a href="{% url 'accounts:toggle_follow' user_profile.id 0 %}" class="btn btn-danger">Unfollow</a>
                 {% else %}
-                    <a href="{% url 'accounts:toggle_follow' user_profile.id %}" class="btn btn-primary">Follow</a>
+                    <a href="{% url 'accounts:toggle_follow' user_profile.id 0 %}" class="btn btn-primary">Follow</a>
                 {% endif %}
             {% endif %}
         </div>

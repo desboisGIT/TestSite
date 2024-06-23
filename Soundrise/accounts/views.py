@@ -167,6 +167,9 @@ def explore(request):
     
     # Applying sort order
     sort_by = request.GET.get('sort_by', 'default')
+    if sort_by == 'trending':
+        filtered_models = filtered_models.order_by('-score')
+        resetButton = True
     if sort_by == 'price':
         filtered_models = filtered_models.order_by('-price')
         resetButton = True
@@ -220,6 +223,9 @@ def explore(request):
     for beat in filtered_models:
         beat.audio_file_url = get_audio_file(beat)  # Assuming get_audio_file is a function to get audio file URL
     
+    top_3_beats = sorted(filtered_models, key=lambda b: b.score, reverse=True)[:3]
+    top_3_scores = [beat.score for beat in top_3_beats]
+
     context = {
         'beats': filtered_models,
         'search_term': search_term,
@@ -230,15 +236,27 @@ def explore(request):
         'artist': artist,
         'release_date': release_date,
         'resetButton': resetButton,
+        'top_3_scores':top_3_scores,
     }
     
     return render(request, 'pages/explore.html', context)
 
 
-
-
 @login_required
-def toggle_follow(request, user_id):
+def toggle_follow(request, user_id, beat_id):
+    if beat_id == 0:
+        user_to_follow = get_object_or_404(CustomUser, id=user_id)
+        current_user = request.user
+        
+        # Logic to toggle follow/unfollow
+        if current_user in user_to_follow.followers.all():
+            user_to_follow.followers.remove(current_user)
+        else:
+            user_to_follow.followers.add(current_user)
+        
+        # Redirect back to the detail_beat page with the correct beat_id
+        return redirect('accounts:profile', username=user_to_follow.username)
+    
     user_to_follow = get_object_or_404(CustomUser, id=user_id)
     current_user = request.user
     
@@ -248,8 +266,8 @@ def toggle_follow(request, user_id):
     else:
         user_to_follow.followers.add(current_user)
     
-    # Redirect back to the profile page of the user_to_follow
-    return redirect('accounts:profile', username=user_to_follow.username)
+    # Redirect back to the detail_beat page with the correct beat_id
+    return redirect('accounts:detail_beat', beat_id=beat_id)
 
 
 def search_beatmakers(request):
