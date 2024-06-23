@@ -127,11 +127,10 @@ def parametre_onglet(request, page):
         context = {}
     return render(request, 'pages/parametre/'+page+'.html', context)
     
-
 def explore(request):
     search_term = request.GET.get('search')
-    if search_term == None:
-        search_term=""
+    if search_term is None:
+        search_term = ""
     error = None
     filtered_models = Beats.objects.all()
     resetButton = False
@@ -187,8 +186,28 @@ def explore(request):
     if order == 'desc':
         filtered_models = filtered_models.reverse()
     
-    # Check if reset button is clicked
-
+    # Handle like/unlike button form submissions
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            beat_id = request.POST.get('beat_id')  # Assuming you have a hidden input in the form with beat_id
+            beat = get_object_or_404(Beats, id=beat_id)
+            if 'like_button' in request.POST:
+                if beat.add_like(request.user):
+                    # Handle successful like addition
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user already liked the beat
+                    pass  # You can redirect or render an error message
+            elif 'unlike_button' in request.POST:
+                if beat.remove_like(request.user):
+                    # Handle successful like removal
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user hasn't liked the beat
+                    pass  # You can redirect or render an error message
+        else:
+            # Handle case where user is not authenticated
+            pass  # You can redirect or render a message to log in
     
     # Get all unique artist names from the filtered beats
     artist_ids = filtered_models.values_list('artist', flat=True).distinct()
@@ -276,24 +295,36 @@ def search_beatmakers(request):
 def detail_beat(request, beat_id):
     beat = get_object_or_404(Beats, id=beat_id)
     user = beat.artist
-    context = {
-        'beat': beat,
-        'user': user,
-    }
-
-    return render(request, 'pages/detail_beat.html', context)
-def detail_beat(request, beat_id):
-    beat = get_object_or_404(Beats, id=beat_id)
-    user = beat.artist
     is_followed = user.is_followed_by_user(request.user)
     follower_count = user.get_follower_count()
     following_count = user.get_following_count()
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            if 'like_button' in request.POST:
+                if beat.add_like(request.user):
+                    # Handle successful like addition
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user already liked the beat
+                    pass  # You can redirect or render an error message
+            elif 'unlike_button' in request.POST:
+                if beat.remove_like(request.user):
+                    # Handle successful like removal
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user hasn't liked the beat
+                    pass  # You can redirect or render an error message
+        else:
+            # Handle case where user is not authenticated
+            pass  # You can redirect or render a message to log in
+
     context = {
         'beat': beat,
         'user': user,
         'is_followed': is_followed,
         'follower_count': follower_count,
-        'following_count':following_count,
+        'following_count': following_count,
     }
 
     return render(request, 'pages/detail_beat.html', context)

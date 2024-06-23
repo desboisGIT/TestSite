@@ -55,7 +55,7 @@
             <form method="GET" class="w-100">
                 {% csrf_token %}
                 <div>
-                    <input type="text" id="searchnone" name="search" class="form-control" placeholder="Search..." value="d" >
+                    <input type="text" id="searchnone" name="search" class="form-control" placeholder="Search..." value="" >
                     <input class="form-control" type="text" id="artist" name="artist" value="" style="display: none;">
                     <input class="form-control" type="text" id="genre" name="genre" value="" style="display: none;">
                     <input class="form-control" type="date" id="release_date" name="release_date" value="" style="display: none;">
@@ -145,15 +145,38 @@
                         <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
                         <div style="min-height: 54px; min-width: 815.22;">
                             <h3><strong>{{ beat.price }} €</strong>
-                                <div style="margin-left: 200px;height: 10px;  display: flex;justify-content: space-around;width: 200px;">
-                                    <i class="fa-solid fa-heart fa-sm" style="color: #ff0000;"></i>
-                                    <i class="fa-solid fa-bookmark fa-sm" style="color: #ffffff;"></i>
-                                    <i class="fa-solid fa-comment fa-sm" style="color: #ffffff;"></i>
-                                    <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
+                                <div style="position: absolute; top:62px;left:1040px;">
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        {% if request.user.is_authenticated %}
+                                            <input type="hidden" name="beat_id" value="{{ beat.id }}">
+                                            {% if request.user in beat.likes.all %}
+                                                <button type="submit" name="unlike_button" style="background: none; border: none;">
+                                                    <div style="display: flex; align-items: center; color: #ffffff;">
+                                                        <i class="fa-solid fa-heart fa-xs" style="color: #c03535; margin-right: 4px;"></i>
+                                                        <span style="font-size: 12px;">{{ beat.like_count }}</span>
+                                                    </div>
+                                                </button>
+                                            {% else %}
+                                                <button type="submit" name="like_button" style="background: none; border: none;">
+                                                    <div style="display: flex; align-items: center; color: #ffffff;">
+                                                        <i class="fa-regular fa-heart fa-xs" style="color: #f8f8f8; margin-right: 4px;"></i>
+                                                        <span style="font-size: 12px;">{{ beat.like_count }}</span>
+                                                    </div>
+                                                </button>
+                                            {% endif %}
+                                        {% else %}
+                                            <div style="display: flex; align-items: center; color: #ffffff;">
+                                                <i class="fa-regular fa-heart fa-xs" style="color: #f8f8f8; margin-right: 4px;"></i>
+                                                <span style="font-size: 12px;">{{ beat.like_count }}</span>
+                                            </div>
+                                        {% endif %}
+                                    </form>
                                 </div>
+                                
                             </h3>
                         </div>
-                        
+                        <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
                     </div>
                     
                     {% else %}

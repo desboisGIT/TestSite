@@ -32,6 +32,22 @@
         <h3 style="overflow-wrap: break-word; max-width: 70%; color: #555555; font-size: small;"></h3>
         <p>followers: {{ follower_count }}</p>
         <p>followed acounts: {{ following_count }}</p>
+        <form method="POST">
+            {% csrf_token %}
+            {% if request.user.is_authenticated %}
+                {% if request.user in beat.likes.all %}
+                    <button type="submit" name="unlike_button" style="background: none; border: none;">
+                        <div style="display: flexbox; color: #ffffff;"><i class="fa-solid fa-heart" style="color: #c03535; margin-right: 4px;"></i> {{ beat.like_count }}</div>
+                    </button>
+                {% else %}
+                    <button type="submit" name="like_button" style="background: none; border: none;">
+                        <div style="display: flexbox; color: #ffffff;"><i class="fa-regular fa-heart" style="color: #ffffff; margin-right: 4px;"></i> {{ beat.like_count }}</div>
+                    </button>
+                {% endif %}
+            {% else %}
+                <p>Please <a href="{% url 'login' %}">log in</a> to like this beat.</p>
+            {% endif %}
+        </form>
         <div id="info-div">
             <h3 style="color: #555555; font-size: small;">information</h3>
             <div style="text-align: start; color: #868686">
