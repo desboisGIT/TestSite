@@ -1,94 +1,340 @@
 {% extends 'layout/layout.html' %}
 
 {% block content %}
-
-
-<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 90%; align-self: center;">
-  <a href="{% url 'accounts:explore'  %}" >Search Beats</a>
-  <form method="GET" class="w-100">
-    {% csrf_token %}
-    <div class="input-group">
-      <input type="text" id="search" name="search" class="form-control" placeholder="Search..."  value="{{ search_term }}">
-      <button type="submit" class="btn btn-primary">Search</button>
-    </div>
-  </form>
-</div>
-<div style="height: 65%;width: 100%; display: flex; flex-direction: row; justify-content: space-around;">
-<div style="height: 100%;width: 200px;background-color: rgb(63, 61, 61);text-align: center; font-size: 20px;">Side menu</div>
-<div class="col-md-10 ms-sm-auto col-lg-10 px-md-4"style="display: flex;flex-direction:column; align-self:end;overflow-y: scroll;height:100% "  >
-  
-  
-    
-    {% if error %}
-    <div class="alert alert-warning" role="alert">
-      {{ error }}
-    </div>
-    {% endif %}
-    {% for model in annotated_models %}
-    <div class="card mb-3">
-        <div class="card bg-dark" style="display: flex;flex-direction: row;">
-          
-              
-            
-              <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{ model.beatmaker.profile_picture }}" alt="profile_picture" style="height: 100px;width: 100px; margin: 20px;" >
-                <div style="display: flex;flex-direction: column; margin: 20px; width:300px ;" class="card-apercu-beatmakers">
-                  <h3 class="card-title" >{{ model.beatmaker.username }}  </h3>
-                  <h6 class="card-title">{{ model.beatmaker.profile_free_text }}</h6>
-                  <div class="tooltip-container" style="height: 20px;width: 125px; align-self: center;margin-top: 40px;margin-left: -480px;">
-                    <span class="tooltip">45k</span>
-                    <span class="text" style="color: black;">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 95 114"
-                        class="svgIcon"
-                      >
-                        <rect fill="black" rx="28.5" height="57" width="57" x="19"></rect>
-                        <path
-                          fill="black"
-                          d="M0 109.5C0 83.2665 21.2665 62 47.5 62V62C73.7335 62 95 83.2665 95 109.5V114H0V109.5Z"
-                        ></path>
-                      </svg>
-                      Follow</span
-                    >
-                  </div> 
-                </div>
-                <div style="max-width:700px ;height: 220px;width: 400px; align-self: end;overflow-x: scroll; display: flex ;flex-direction: row;">
-                    {% for beat in model.beats %}
-                      
-                      <div style="display: flex;flex-direction: column; margin-top: 0px; margin-left:  25px;">
-                         <div style="display: flex;flex-direction: column;">
-                          <div>
-                            <h6 style="height: 35px;margin-bottom: 5px;margin-top: 5px; ">{{ beat.title }}</h4>
-                          </div>
-                        </div>
-                        <img style="height: 100px;width: 100px;" src="{{ beat.cover_image.url }}" class="square-image-small coverimage"></img>
-                        <h6 style="height: 20px;font-size: 13px; margin-top: 10px;">{{ beat.genre }}</h6>
-                        <hr>
-        
-                      </div>
-                      <div style="height: 100%;width: 100px ;">
-
-                      </div>
-                      
-                  {% endfor %}
-                  
-                    </div>
-                     
-
+<div style="display: flex;flex-direction: row;">
+  <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29); width: 160px; display: flex; flex-direction: column;">
+    <div class="position-sticky pt-3" style="flex-grow: 1;">
+        <h5 class="text-center">Side Menu</h5>
+        <ul class="nav flex-column">
+        </ul>
+        <form method="GET" class="mt-4">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="sort_by" class="form-label">Sort By:</label>
+                <select name="sort_by" class="form-control">
+                    <option value="default">Default</option>
+                    <option value="price">Distance</option>
                     
-                  
-             
+                </select>
+            </div>
+            <div class="mb-3">
+                <br>
+            </div>
+            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+        </form>
+    </div>
+  </nav>
+  <div>
+  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 1200px; margin-left: 40px;">
+    <a href="{% url 'accounts:explore' %}" style="white-space: nowrap;">Search Beats</a>
+    <form method="GET" class="w-100">
+        {% csrf_token %}
+        <div class="input-group" style="width: 500px; margin-left: 145px;">
+            <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}"  >
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
+  </div>
+  
+  <div class="col-md-10 ms-sm-auto col-lg-10 px-md-4"style="display: flex;flex-direction:column;overflow-y: scroll;height:500px ; margin-left:65px;width: 1300px; "  >
+    
+    
+      
+      {% if error %}
+      <div class="alert alert-warning" role="alert">
+        {{ error }}
+      </div>
+      {% endif %}
+      {% for model in annotated_models %}
+      <div class="card " style="margin-bottom: 10px ;" >
+          <div class="card-bg" style="display: flex;flex-direction: row;background-color: #2d373f5d;border-radius: 20px;">
+            
                 
+              
+                <img  class="img-fluid rounded-circle mb-3 square-image-big" src="{{ model.beatmaker.profile_picture }}" alt="profile_picture" style="height: 100px;width: 100px; margin: 20px;" >
+                  <div style="display: flex;flex-direction: column; margin: 20px; width:300px ;" class="card-apercu-beatmakers">
+                    <h3 class="card-title" >{{ model.beatmaker.username }}  </h3>
+                    <h6 class="card-title">{{ model.beatmaker.profile_free_text }}</h6>
+                    
+                    <button class="button-sub">
+  
+                      
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"></path>
+                      </svg>
+  
+                      
+                      <div class="text-sub">
+                        Subscribe
+                      </div>
+  
+                    </button>
+                                    </div>
+                  <div style="max-height:200px ;height: 200px;width: 600px; align-self: end;overflow-y: scroll; display: flex ;flex-direction: column; margin-top: 10px;">
+                      {% for beat in model.beats %}
+                        <div style="height: 95px; width: 100%; display: flex; flex-direction: row; justify-content: space-between;">
+                         
+                          
+                          <img style="height: 50px;width: 50px;" src="{{ beat.cover_image.url }}" class="square-image-small coverimage"></img>
+                          <div style="display: flex; flex-direction: column;">
+                          <h6 style="height: 25px;margin-left: 20px;margin-bottom: 5px; ">{{ beat.title }}</h4>
+                          <h6 style="height: 10px;font-size: 13px; margin-left: 20px;margin-top:10px ;">{{ beat.genre }}</h6>
+                          
+                          </div>
+                          <a href="{% url 'accounts:detail_beat' beat.id %}" style="margin-left: 35px;margin-top: 35px;">Details</a>
+                          {% if beat.audio_file_url %}
+                      <div style="display: flex;flex-direction: column; width: 550px; align-items: end;">
+                      
+                      <div style="width: 300px; margin-top: 10px; ;">
+                          <audio id="audio_{{ beat.id }}" controls style="width: 100%;" ontimeupdate="updateProgressBar({{ beat.id }})">
+                              <source src="{{ beat.audio_file_url }}" type="audio/mp3">
+                              Your browser does not support the audio element.
+                          </audio>
+                          
+                          <div class="audio-controls" style="width: 300px; align-self: flex-end;">
+                              <!-- @ts-ignore -->
+                              <!-- eslint-disable-next-line  -->
+                              <button onclick="togglePlayPause({{ beat.id }})" style="position: relative ;">
+                                  <!-- eslint-enable-next-line -->
+                                  <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
+                                  <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
+                              </button>
+                              <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
+                              <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style=" height: 34px; padding-top: 4px;">0:00</div>
+                          </div>
+                          <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
+                          
+                          
+                      </div>
+                    </div>
+                      
+                      {% else %}
+                      <p style="color: #999;">Audio file not found.</p>
+                      {% endif %}
+                          
+                          
+          
+                        
+                      </div>
+                        <div style="height: 2px;width: 100%;background-color: white;margin-top: -20px;margin-bottom: 20px;"></div>
+                        
+                        
+                    {% endfor %}
+                    
+                      </div>
+                      
+                       
+  
+                      
+              
+                       
+                            
+                            
+                            
+                        
+        
+                    
+        
                 
             
-        </div>
-    </div>
+                
+           
+                    
+               
+                  
+                  
+              
+          </div>
+      </div>
+    
   
-
-  {% endfor %}
-</div>
-
-</div>
-
+    {% endfor %}
+  </div>
+  </div>
+  </div>
+  
+  </div>
+  <style>
+    .button-sub {
+    background-color: #ffffff00;
+    color: #fff;
+    width: 8em;
+    height: 2em;
+    border: #3654ff 0.2em solid;
+    border-radius: 11px;
+    text-align: right;
+    transition: all 0.6s ease;
+  }
+  
+  .button-sub:hover {
+    background-color: #3654ff;
+    cursor: pointer;
+  }
+  
+  .button-sub svg {
+    width: 1.6em;
+    margin: -0.45em 0.8em 1em;
+    position: absolute;
+    display: flex;
+    transition: all 0.6s ease;
+  }
+  
+  .button-sub:hover svg {
+    transform: translateX(5px);
+  }
+  
+  .text-sub {
+    margin: -0.25em  1.15em;
+    font-size: 12.5px;
+  }
+     .gradientDiv {
+          position: absolute;
+          
+          transform: translate(-50%, -50%);
+          -webkit-mask-image: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0)), """oui c'est rouge mais c'est juste la couleur c juste tkt"""
+              to(rgba(0, 0, 0, 1)));
+          mask-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0));
+      }
+    .card{
+      background-color: transparent;
+      width: 1100px;
+      border-radius: 20px;
+      align-items: center;
+      
+    }
+    .card-bg{
+      width: 1100px;
+    }
+    
+    .card:hover{
+      background-color:#ffffff31;
+       box-shadow: 0px 0px 16px 8px rgba(0, 0, 0, 0.31);
+       }
+  
+       audio {
+          display: none;
+      }
+  
+      audio::-webkit-media-controls-panel {
+          background-color: rgb(51, 51, 51);
+      }
+  
+      .audio-controls {
+          display: flex;
+          justify-content: space-around;
+          margin-top: 5px;
+          width: 500px;
+      }
+  
+      .audio-controls button {
+          background-color: #007bff;
+          color: #fff;
+          border: none;
+          padding: 5px 10px;
+          margin-right: 5px;
+          cursor: pointer;
+      }
+  
+      .play-btn {
+          position: relative;
+          height: 34px;
+      }
+  
+      .audio-controls button:hover {
+          background-color: #0056b3;
+      }
+  
+      .audio-controls button {
+          background-color: #ffffff00;
+          height: 34px;
+          width: 34px;
+      }
+  
+      .audio-controls:hover button:hover {
+          background-color: #ffffff31;
+          border-radius: 3px;
+      }
+  
+      .col-12 {
+          width: 100%;
+      }
+      .noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+  .pointerCursor{
+      cursor: pointer;
+  }
+  
+  </style>
+  
+  <script>
+    function togglePlayPause(beatId) {
+        var audio = document.getElementById('audio_' + beatId);
+        var playIcon = document.getElementById('play_icon_' + beatId);
+        var pauseIcon = document.getElementById('pause_icon_' + beatId);
+        var allAudios = document.querySelectorAll('audio');
+    
+        // Pause all other audios
+        allAudios.forEach(function(aud) {
+            if (aud.id !== 'audio_' + beatId) {
+                aud.pause();
+                var otherBeatId = aud.id.split('_')[1];
+                var otherPlayIcon = document.getElementById('play_icon_' + otherBeatId);
+                var otherPauseIcon = document.getElementById('pause_icon_' + otherBeatId);
+                otherPlayIcon.style.display = 'inline-block';
+                otherPauseIcon.style.display = 'none';
+            }
+        });
+    
+        // Toggle play/pause for the selected beat
+        if (audio.paused) {
+            audio.play();
+            playIcon.style.display = 'none';
+            pauseIcon.style.display = 'inline-block';
+        } else {
+            audio.pause();
+            playIcon.style.display = 'inline-block';
+            pauseIcon.style.display = 'none';
+        }
+    }
+    function seekAudio(beatId) {
+        var audio = document.getElementById('audio_' + beatId);
+        var seekbar = document.getElementById('seekbar_' + beatId);
+        var value = seekbar.value;
+        audio.currentTime = value;
+    }
+    
+    function updateProgressBar(beatId) {
+        var audio = document.getElementById('audio_' + beatId);
+        var progressBar = document.getElementById('progress_' + beatId);
+        var seekbar = document.getElementById('seekbar_' + beatId);
+    
+        var value = (audio.currentTime / audio.duration) * 100;
+        progressBar.value = value;
+        seekbar.value = audio.currentTime;
+    
+        updateSeekbarTooltip(seekbar);
+    }
+    
+    function updateSeekbarTooltip(seekbar) {
+        var tooltip = seekbar.nextElementSibling;
+        var value = seekbar.value;
+        var minutes = Math.floor(value / 60);
+        var seconds = Math.floor(value % 60);
+        var time = minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
+        tooltip.innerHTML = time;
+        tooltip.style.left = (value / seekbar.max) * 100 + '%';
+    }
+    
+  
+  
+  
+  
+  </script>
 {% endblock content %}

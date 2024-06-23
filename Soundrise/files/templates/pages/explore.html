@@ -4,42 +4,74 @@
 {% block content %}
 <link rel="stylesheet" href="{% static "css/extra.css" %}">
 <div class="bodyPage" style="display: flex; flex-direction: row;">
-  <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29); width: 160px; display: flex; flex-direction: column;">
-    <div class="position-sticky pt-3" style="flex-grow: 1;">
-        <h5 class="text-center">Side Menu</h5>
-        <ul class="nav flex-column">
-        </ul>
-        <form method="GET" class="mt-4">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="sort_by" class="form-label">Sort By:</label>
-                <select name="sort_by" class="form-control">
-                    <option value="default">Default</option>
-                    <option value="price">Price</option>
-                    <option value="date">Date of publication</option>
-                </select>
-            </div>
-            <div class="mb-3">
+    <nav id="sidebar" class="col-md-2 d-md-block text-white sidebar" style="background-color: rgb(29, 29, 29); width: 160px; display: flex; flex-direction: column; align-items: center; text-align: center;">
+        <div class="position-sticky pt-3" style="flex-grow: 1;">
+            <h5 class="text-center">Filters & Sortings</h5>
+            <ul class="nav flex-column">
+            </ul>
+            <form id="filter-form" method="GET" class="mt-4">
+                {% csrf_token %}
+                
+                <div class="form-group" style="color: #fff; margin-bottom: 20px;">
+                    <label for="sort_by" class="form-label" style="color: #fff;">Sort By:</label>
+                    <select name="sort_by" class="form-control" style="color: #fff;">
+                        <option value="default" {% if sort_by == 'default' %} selected {% endif %}>Default</option>
+                        <option value="price" {% if sort_by == 'price' %} selected {% endif %}>Price (reversed)</option>
+                        <option value="price (reversed)" {% if sort_by == 'price (reversed)' %} selected {% endif %}>Price</option>
+                        <option value="distance" {% if sort_by == 'distance' %} selected {% endif %}>Distance no</option>
+                        <option value="popularity" {% if sort_by == 'popularity' %} selected {% endif %}>Popularity no</option>
+                        <option value="latest" {% if sort_by == 'latest' %} selected {% endif %}>Latest</option>
+                        <option value="oldest" {% if sort_by == 'oldest' %} selected {% endif %}>Oldest</option>
+                        <option value="rating" {% if sort_by == 'rating' %} selected {% endif %}>Rating no</option>
+                    </select>
+                </div>
+            
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="price">Price range:</label>
+                    <div style="display: flex; justify-content: space-between;">
+                        <input type="range" id="price" name="cursor_price" min="0" max="1000" style="width: 175px;">   
+                        <div>0€ - <span id="price-value">all</span>€</div>
+                    </div>
+                </div>
+            
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="genre">Genre:</label>
+                    <input class="form-control" type="text" id="genre" name="genre" value="{{ genre }}"style="color: #fff;">
+                </div>
+            
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="artist">Artist name:</label>
+                    <input class="form-control" type="text" id="artist" name="artist" value="{{ artist }}" style="color: #fff;">
+                </div>
+            
+                <div class="form-group" style="margin-bottom: 20px;">
+                    <label for="release_date">Date:</label>
+                    <input class="form-control" type="date" id="release_date" name="release_date" value="{{ release_date }}"style="color: #fff;">
+                </div>
+            
                 <br>
-            </div>
-            <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
-        </form>
-    </div>
-</nav>
-<div id="arrowdiv" class="{% if sidebar_collapsed %}collapsed{% endif %}">
-  {% if sidebar_collapsed %}
-    <i class="fa-solid fa-chevron-right" style="color: #ffffff;"></i>
-  {% else %}
-    <i class="fa-solid fa-chevron-left" style="color: #ffffff;"></i>
-  {% endif %}
-</div>
+                <button class="btn btn-primary" type="submit" style="width: 80%;">Apply</button>
+            </form>
+            <form method="GET" class="w-100">
+                {% csrf_token %}
+                <div>
+                    <input type="text" id="searchnone" name="search" class="form-control" placeholder="Search..." value="d" >
+                    <input class="form-control" type="text" id="artist" name="artist" value="" style="display: none;">
+                    <input class="form-control" type="text" id="genre" name="genre" value="" style="display: none;">
+                    <input class="form-control" type="date" id="release_date" name="release_date" value="" style="display: none;">
+                    <button type="submit" class="btn btn-primary" style="width: 80%; margin-top: 20px;">Reset</button>
+                </div>
+            </form>
+        </div>
+    </nav>
+
 <!-- Main Content -->
 <main id="main-content" class="col-12" style="overflow: auto;">
-    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+    <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom" style="width: 1200px; margin-left: 40px;">
         <a href="{% url 'accounts:search_beatmakers' %}">Search Beatmakers</a>
         <form method="GET" class="w-100">
             {% csrf_token %}
-            <div class="input-group">
+            <div class="input-group" style="width: 500px; margin-left: 100px;">
                 <input type="text" id="search" name="search" class="form-control" placeholder="Search..." value="{{ search_term }}" >
                 <button type="submit" class="btn btn-primary">Search</button>
             </div>
@@ -105,8 +137,10 @@
                                 <i id="play_icon_{{ beat.id }}" class="fa-solid fa-play"></i>
                                 <i id="pause_icon_{{ beat.id }}" class="fas fa-pause" style="display: none;"></i>
                             </button>
-                            <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0' class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
-                            <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style=" height: 34px; padding-top: 4px;">0:00</div>
+                            <input type="range" id="seekbar_{{ beat.id }}" min="0" max="{{ beat.duration }}" step="1" value='0'style="
+                            margin-top: 0px;
+                        " class="seekbar" onchange="seekAudio({{ beat.id }})" oninput="updateSeekbarTooltip(this)">
+                            <div id="seekbar_tooltip_{{ beat.id }}" class="seekbar-tooltip" style="height: 34px;padding-top: 5px;margin-left: 6px;">0:00</div>
                         </div>
                         <progress id="progress_{{ beat.id }}" value="0" max="100" style="opacity: 0%;"></progress>
                         <div style="min-height: 54px; min-width: 815.22;">
@@ -164,18 +198,12 @@
         display: none;
     }
 
-    input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField .form-control {
-        background: #fff;
-        background-color: #fff;
-    }
-
     audio::-webkit-media-controls-panel {
         background-color: rgb(51, 51, 51);
     }
 
     .audio-controls {
         display: flex;
-        justify-content: space-around;
         margin-top: 5px;
         width: 500px;
     }
@@ -211,29 +239,10 @@
         margin-bottom: 2px;
         background-color: #2d373f5d;
     }
-    #arrowdiv {
-      position: relative;
-      height: 100%; 
-      width: 80px; 
-      background-color: #1b1b1b00; 
-      display: flex; 
-      align-items: center; 
-      justify-content: center;
-      transition: all, 0.1s, ease-in-out;
-      padding: 0 8px;
-      left: 0%;
-      transform: translate(0%, 0%);
-      cursor: pointer;
-      z-index: 1100;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: all 0.3s ease-in-out;
-    }
-    #arrowdiv.collapsed {
-    left: -310px; /* Adjusted left position when collapsed */
-}
 
+#searchnone{
+    display: none;
+}
     #arrowdiv:hover {
       background-color: #1b1b1bFF;
     }
@@ -263,11 +272,46 @@
         background-color: #ffffff31;
         border-radius: 3px;
     }
-    #main-content {
-      transition: transform 0.3s ease-in-out;
+    #arrowdiv {
+        position: relative;
+        height: 100%;
+        width: 80px;
+        background-color: #1b1b1b00;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease-in-out; /* Ensure transition is defined */
+        padding: 0 8px;
+        left: 0%;
+        transform: translate(0%, 0%);
+        cursor: pointer;
+        z-index: 1100;
     }
+
+    #arrowdiv.collapsed {
+        left: -320px; /* Adjusted left position when collapsed */
+    }
+
+    #arrowdiv:hover {
+        background-color: #1b1b1bFF;
+    }
+
+    #sidebar {
+        background-color: rgb(29, 29, 29);
+        transition: transform 0.3s ease-in-out; /* Ensure transition is defined */
+        z-index: 1000;
+    }
+
+    #sidebar.collapsed {
+        transform: translateX(-320px); /* Collapsed position */
+    }
+
+    #main-content {
+        transition: transform 0.3s ease-in-out; /* Ensure transition is defined */
+    }
+
     #main-content.collapsed {
-      transform: translateX(-300px);
+        transform: translateX(-300px); /* Adjusted transform value when sidebar collapsed */
     }
     .col-12 {
         width: 100%;
@@ -288,6 +332,25 @@
 </style>
 
 <script>
+
+
+// Update price value display as the user types in the price input field
+const priceInput = document.getElementById('price');
+const priceValue = document.getElementById('price-value');
+
+priceInput.addEventListener('input', function() {
+  const price = this.value || 0; // Get the current price value
+  priceValue.textContent = price; // Update the price display
+});
+
+// Update price value display when the slider is moved (as before)
+const priceRange = document.getElementById('price-range');
+
+priceRange.addEventListener('input', function() {
+  const price = this.value;
+  priceValue.textContent = price;
+});
+
   function togglePlayPause(beatId) {
       var audio = document.getElementById('audio_' + beatId);
       var playIcon = document.getElementById('play_icon_' + beatId);
@@ -393,27 +456,6 @@
       tooltip.innerHTML = time;
       tooltip.style.left = (value / seekbar.max) * 100 + '%';
   }
-  function toggleSidebar() {
-    const sidebar = document.getElementById('sidebar');
-    const arrowIcon = document.querySelector('#arrowdiv i');
-    const arrowDiv = document.getElementById('arrowdiv');
-    const mainContent = document.getElementById('main-content');
-
-    sidebar.classList.toggle('collapsed');
-    mainContent.classList.toggle('collapsed');
-    arrowDiv.classList.toggle('collapsed');
-
-    // Toggle between fa-chevron-left and fa-chevron-right
-    if (sidebar.classList.contains('collapsed')) {
-        arrowIcon.classList.remove('fa-chevron-left');
-        arrowIcon.classList.add('fa-chevron-right');
-    } else {
-        arrowIcon.classList.remove('fa-chevron-right');
-        arrowIcon.classList.add('fa-chevron-left');
-    }
-}
-
-document.getElementById('arrowdiv').addEventListener('click', toggleSidebar);
 
 
 </script>

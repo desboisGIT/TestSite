@@ -128,48 +128,58 @@ def parametre_onglet(request, page):
     return render(request, 'pages/parametre/'+page+'.html', context)
     
 
-
 def explore(request):
     search_term = request.GET.get('search')
+    if search_term == None:
+        search_term=""
     error = None
     filtered_models = Beats.objects.all()
+    resetButton = False
     
     # Applying search filter
     if search_term:
         filtered_models = filtered_models.filter(title__icontains=search_term)
         if not filtered_models.exists():
             error = f"No beats corresponding to: {search_term}"
-    else:
-        search_term =""
     
     # Applying price filter
     cursor_price = request.GET.get('cursor_price')
     if cursor_price:
         filtered_models = filtered_models.filter(price__lte=cursor_price)
+        resetButton = True
     
     # Applying genre filter
     genre = request.GET.get('genre')
     if genre:
-        filtered_models = filtered_models.filter(genre=genre)
+        filtered_models = filtered_models.filter(genre__icontains=genre)
+        resetButton = True
     
     # Applying artist filter
     artist = request.GET.get('artist')
     if artist:
-        filtered_models = filtered_models.filter(artist__icontains=artist)
+        filtered_models = filtered_models.filter(artist__username__icontains=artist)
+        resetButton = True
     
     # Applying release year filter
-    release_year = request.GET.get('release_year')
-    if release_year:
-        filtered_models = filtered_models.filter(release_year=release_year)
+    release_date = request.GET.get('release_date')
+    if release_date:
+        filtered_models = filtered_models.filter(release_date=release_date)
+        resetButton = True
     
     # Applying sort order
     sort_by = request.GET.get('sort_by', 'default')
     if sort_by == 'price':
+        filtered_models = filtered_models.order_by('-price')
+        resetButton = True
+    elif sort_by == 'price (reversed)':
         filtered_models = filtered_models.order_by('price')
-    elif sort_by == 'date':
+        resetButton = True
+    elif sort_by == 'latest':
+        filtered_models = filtered_models.order_by('-release_date')
+        resetButton = True
+    elif sort_by == 'oldest':
         filtered_models = filtered_models.order_by('release_date')
-    elif sort_by == 'duration':
-        filtered_models = filtered_models.order_by('duration')
+        resetButton = True
     # Add more sorting options as needed
     
     # Handling descending order
@@ -177,11 +187,14 @@ def explore(request):
     if order == 'desc':
         filtered_models = filtered_models.reverse()
     
+    # Check if reset button is clicked
+
+    
     # Get all unique artist names from the filtered beats
-    artist_names = filtered_models.values_list('artist', flat=True).distinct()
+    artist_ids = filtered_models.values_list('artist', flat=True).distinct()
     
     # Get user data for all these artists
-    users = CustomUser.objects.filter(username__in=artist_names)
+    users = CustomUser.objects.filter(id__in=artist_ids)
     user_dict = {user.username: {'user': user, 'rank': user.rank} for user in users}
     
     # Prepare audio file URLs
@@ -193,8 +206,15 @@ def explore(request):
         'search_term': search_term,
         'error': error,
         'user_dict': user_dict,
+        'sort_by': sort_by,
+        'genre': genre,
+        'artist': artist,
+        'release_date': release_date,
+        'resetButton': resetButton,
     }
+    
     return render(request, 'pages/explore.html', context)
+
 
 
 
@@ -236,12 +256,14 @@ def search_beatmakers(request):
     for beatmaker in filtered_models:
         # Use related_name 'uploaded_beats' defined in Beats model
         beats = beatmaker.uploaded_beats.all()
+        for beat in beats:
+            beat.audio_file_url = get_audio_file(beat)
         annotated_models.append({
             'beatmaker': beatmaker,
             'beats': beats,
             
         })
-
+    
     context = {
         'annotated_models': annotated_models,  # Use annotated_models instead of beatmakers
         'search_term': search_term,
@@ -251,6 +273,15 @@ def search_beatmakers(request):
 
     return render(request, 'pages/search_beatmakers.html', context)
 
+def detail_beat(request, beat_id):
+    beat = get_object_or_404(Beats, id=beat_id)
+    user = beat.artist
+    context = {
+        'beat': beat,
+        'user': user,
+    }
+
+    return render(request, 'pages/detail_beat.html', context)
 def detail_beat(request, beat_id):
     beat = get_object_or_404(Beats, id=beat_id)
     user = beat.artist
