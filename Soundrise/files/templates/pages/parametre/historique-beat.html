@@ -1,0 +1,16 @@
+{% extends 'pages/parametre.html' %}
+
+{% block content2 %}
+<div class = "onglet-parametre-default">
+    <div class="recherche-act">
+        <div class="nothing"></div>
+        <div class="nothing"></div>
+        <button class="but-act"  ><a href="{% url 'accounts:historique_beat'%}" style="color : white">Beat</a></button>
+        <button class="but-act" ><a href="{% url 'accounts:historique_artist'%}" style="color : white">Artist</a></button>
+        <button class="but-act" ><a href="{% url 'accounts:historique_recherche'%}" style="color : white">research</a></button>
+        <div class="nothing"></div>
+        <div class="nothing"></div>
+    </div>
+    
+</div>
+{% endblock content2 %}

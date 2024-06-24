@@ -1,5 +1,7 @@
+import datetime
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.db.models import Count
 
 class CustomUser(AbstractUser):
     full_name = models.CharField(max_length=100)
@@ -12,6 +14,14 @@ class CustomUser(AbstractUser):
     darkTheme = models.BooleanField(default=True)
     rank = models.CharField(default='basic', max_length=30)
     followers = models.ManyToManyField('self', symmetrical=False, related_name='following', blank=True)
+    like_number = models.IntegerField(default=0)
+
+
+    def subscription_count(self):
+        return self.followers.count()
+
+    def subscriber_count(self):
+        return self.following.count()
 
     def get_follower_count(self):
         return self.followers.count()
@@ -21,3 +31,9 @@ class CustomUser(AbstractUser):
 
     def is_followed_by_user(self, user):
         return self.followers.filter(id=user.id).exists()
+
+    def liked_beats_count(self):
+        return self.liked_beats.count()
+
+
+

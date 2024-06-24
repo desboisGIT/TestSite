@@ -1,8 +1,8 @@
-import datetime
 from django.db import models
 from django.utils import timezone
+from django.conf import settings
+
 from accounts.models import CustomUser
-from django.utils.timezone import make_aware
 
 class Beats(models.Model):
     title = models.CharField(max_length=60)
@@ -19,51 +19,61 @@ class Beats(models.Model):
     views = models.ManyToManyField(CustomUser, related_name='viewed_beats', blank=True)
     likes = models.ManyToManyField(CustomUser, related_name='liked_beats', blank=True)
     score = models.FloatField(default=0)
-
+    
     def calculate_score(self):
         # Calculate likes to views ratio
         likes_count = self.likes.count()
         views_count = self.views.count()
-        likes_views_ratio = likes_count / views_count if views_count > 0 else 0
+        if views_count > 0:
+            likes_views_ratio = likes_count / views_count
+        else:
+            likes_views_ratio = 0
 
         # Normalize likes to views ratio
         normalized_likes_views_ratio = min(likes_views_ratio, 1.0)  # Cap at 1.0
 
         # Calculate author's followers compared to site average
         average_followers = self.calculate_average_followers_amount()
-        author_followers = self.artist.get_follower_count()
-        followers_factor = min(author_followers / average_followers, 2.0) if average_followers > 0 else 1.0
-
-        if self.release_date:
-            # Convert release_date to a timezone-aware datetime object
-            release_date = make_aware(datetime.datetime.combine(self.release_date, datetime.datetime.min.time()))
-            days_since_release = (timezone.now() - release_date).days
-            if days_since_release > 0:
-                decay_factor = 1 / (1 + days_since_release / 30)  # Adjust 30 for time scale
-            else:
-                decay_factor = 1.0
+        print(average_followers)
+        author_followers = self.artist.followers.count()
+        if average_followers > 0:
+            followers_factor = min(author_followers / average_followers, 2.0)  # Cap at 2 times average
         else:
-            decay_factor = 1.0  # Handle cases where release_date is None
+            followers_factor = 1.0
 
-        # Weight factors for likes, views, and decay
-        likes_weight = 0.6
-        views_weight = 0.4
+        # Calculate time decay for views
+        days_since_release = (timezone.now().date() - self.release_date).days
+        if days_since_release > 0:
+            decay_factor = 1 / (1 + days_since_release / 30)  # Adjust 30 for time scale
+        else:
+            decay_factor = 1.0
 
-        # Combine factors into a final score calculation
+        # Combine factors into a final score calculation (adjust weights as needed)
         final_score = (
-            (normalized_likes_views_ratio * likes_weight) +
-            ((self.views.count() / 1000) * views_weight) +
-            (followers_factor * 0.2) +
-            (decay_factor * 0.3)
+            normalized_likes_views_ratio * 0.5 +
+            followers_factor * 0.3 +
+            decay_factor * 0.2
         )
 
         # Update the score field in the object and save
         self.score = final_score
         self.save()
 
+    @staticmethod
+    def calculate_average_followers_amount():
+        beatmakers = CustomUser.objects.filter(is_staff=True)  # Assuming all staff users are beat makers
+        total_followers = sum(beatmaker.get_follower_count() for beatmaker in beatmakers)
+        if beatmakers.exists():
+            average_followers_amount = total_followers / len(beatmakers)
+        else:
+            average_followers_amount = 0
+        return average_followers_amount
+
     def add_like(self, user):
         if user not in self.likes.all():
             self.likes.add(user)
+            user.like_number += 1  # Update the user's like number
+            user.save()
             self.calculate_score()  # Recalculate score on like addition
             return True
         return False
@@ -71,6 +81,8 @@ class Beats(models.Model):
     def remove_like(self, user):
         if user in self.likes.all():
             self.likes.remove(user)
+            user.like_number -= 1  # Update the user's like number
+            user.save()
             self.calculate_score()  # Recalculate score on like removal
             return True
         return False
@@ -85,18 +97,7 @@ class Beats(models.Model):
 
     def __str__(self):
         return self.title
-
-    def calculate_average_followers_amount(self):
-        beatmakers = CustomUser.objects.all()
-        total_followers = sum(beatmaker.get_follower_count() for beatmaker in beatmakers)
-        
-        if beatmakers.exists():
-            average_followers_amount = total_followers / len(beatmakers)
-        else:
-            average_followers_amount = 0
-        
-        return average_followers_amount
-
+    
     
     @property
     def like_count(self):

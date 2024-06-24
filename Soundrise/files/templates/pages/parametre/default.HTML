@@ -1,21 +1,22 @@
 {% extends 'pages/parametre.html' %}
 {% block content2 %}
+
 <div class="onglet-def">
-    <div class="profil-def" >
-        <div class="profil2-def">
+    <div class="profil-def"style="height: 520px;" >
+        <div class="profil2-def" >
             <a href="{% url 'accounts:profile' %}">Profil</a>
         <img  src="{{ user.profile_picture }}" class="logo-def" alt="Profile Picture"></img>
         <div class ="nom"><a>{{user.username}}</a></div>
         <div class ="bio-def"><a>{{user.profile_free_text}}</a></div>
-        <div class ="abonnement-def"><a>Abonnement premium</a></div>
+        <div class ="abonnement-def ">{{user.rank}}<a></a></div>
         <div class ="vente-def"><a>beats Vendus</a></div>
         <div class ="ecoute-def"><a>34k écoutes</a></div>
-        <div class ="abonne-def"><a>103k abonnés</a></div>
+        <div class ="abonne-def"><a>{{follower_count}} abonnés</a></div>
         </div>
     </div>
     <div class ="compte-reste"><a></a>
         <div class = "bio2-def">Bio</div>
-        <input type = "text" class = "espace-def" placeholder="Qui êtes vous ?" value={{user.profile_free_text}}></a>
+        <input type = "text" class = "espace-def" placeholder="Qui êtes vous ?" value="{{user.profile_free_text}}"style="white-space:wrap"></a>
             <div class ="question-def">Qui êtes vous ?</div>
         </input>
                     
@@ -102,7 +103,7 @@
                     
                     <input type="submit" class="send-def">
                 </form>
-                <button class="suppr" onclick="navigate('suppr')">Supprimer le comtpe</button>
+                <button class="suppr" onclick="navigate('suppr')" style="white-space: nowrap; width: 200px;background-color: transparent;">Supprimer le comtpe</button>
             </div> 
         </div>
     </div> 

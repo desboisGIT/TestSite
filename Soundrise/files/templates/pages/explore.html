@@ -180,6 +180,7 @@
                                                 <span style="font-size: 12px;">{{ beat.like_count }}</span>
                                             </div>
                                         {% endif %}
+                                        <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
                                     </form>
                                 </div>
                                 
@@ -187,7 +188,6 @@
                         </div>
                         {% if beat.score in top_3_scores %}
                         <div style="position: absolute; top:118px;left: 419px; background-color: #ed3a3a42; border-radius: 100px; text-align: center; align-items: center; padding: 5px 10px; display: flex;"><strong style="margin-right: 5px;">Trends</strong> <i class="fa-solid fa-chart-line" style="color: #ffffff;"></i></div>
-                        <i class="fa-solid fa-link fa-sm pointerCursor" style="color: #ffffff;" onclick="copyLink('{% url 'accounts:detail_beat' beat.id %}')"></i>
                         {% endif %}
                     </div>
                     

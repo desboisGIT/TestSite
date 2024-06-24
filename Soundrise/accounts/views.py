@@ -1,11 +1,11 @@
 import os, glob
 from pathlib import Path
 from django.conf import settings
-from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from .forms import ParametreForm, ParametreProForm, RegisterForm
 from accounts.models import CustomUser
+from transaction.forms import CompteBancaireForm , PayPalAccountForm
 from django.contrib.auth.decorators import login_required
 from beats.models import Beats
 from django.db.models import Q
@@ -112,7 +112,7 @@ def parametre(request):
                   
         elif form2.is_valid():
             form2.save()
-
+    
     return render(request, 'pages/parametre.html')
 
 
@@ -196,7 +196,6 @@ def explore(request):
             beat = get_object_or_404(Beats, id=beat_id)
             if 'like_button' in request.POST:
                 if beat.add_like(request.user):
-                    # Handle successful like addition
                     pass  # You can redirect or render a success message
                 else:
                     # Handle case where user already liked the beat
@@ -271,6 +270,8 @@ def toggle_follow(request, user_id, beat_id):
 
 
 def search_beatmakers(request):
+    user = request.user
+    is_followed = user.is_followed_by_user(request.user)
     search_term = request.GET.get('search')
     error = None
     filtered_models = CustomUser.objects.all()  # Default queryset with all beatmakers
@@ -306,9 +307,11 @@ def search_beatmakers(request):
         'search_term': search_term,
         'error': error,
         'beatmakers': filtered_models,
+        'is_followed':is_followed,
     }
 
     return render(request, 'pages/search_beatmakers.html', context)
+
 
 def detail_beat(request, beat_id):
     beat = get_object_or_404(Beats, id=beat_id)
@@ -347,3 +350,125 @@ def detail_beat(request, beat_id):
 
     return render(request, 'pages/detail_beat.html', context)
 
+def parametre_tableau(request):
+    user = request.user
+    uploaded_beats = Beats.objects.filter(artist=user)
+    latest_model = uploaded_beats.latest('release_date')
+    context = {
+        'user':user,
+        'latest_model':latest_model,
+        
+    }
+
+    return render(request, 'pages/parametre/tableau', context)
+    
+def parametre_default(request):
+    user = request.user
+    follower_count = user.get_follower_count()
+    context={
+        'follower_count':follower_count,
+    }
+    return render(request, 'pages/parametre/default', context)
+
+def create_card(request):
+    return render(request, 'pages/create_card.html')
+def parametre_transaction(request):
+    return render(request, 'pages/parametre/transaction.html')
+
+
+def parametre_like(request):
+    user = request.user
+
+    user_likes = []  # Initialize an empty list to store liked beats
+
+    if user.is_authenticated:
+        user_likes = Beats.objects.filter(likes=user)
+    
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            beat_id = request.POST.get('beat_id')  # Assuming you have a hidden input in the form with beat_id
+            beat = get_object_or_404(Beats, id=beat_id)
+            if 'like_button' in request.POST:
+                if beat.add_like(request.user):
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user already liked the beat
+                    pass  # You can redirect or render an error message
+            elif 'unlike_button' in request.POST:
+                if beat.remove_like(request.user):
+                    # Handle successful like removal
+                    pass  # You can redirect or render a success message
+                else:
+                    # Handle case where user hasn't liked the beat
+                    pass  # You can redirect or render an error message
+        else:
+            # Handle case where user is not authenticated
+            pass  # You can redirect or render a message to log in
+
+    context = {
+        'user': user,
+        'user_likes': user_likes,
+    }
+
+    return render(request, 'pages/parametre/activite-beat.html', context)
+def parametre_fav(request):
+    user=request.user
+    beats=Beats.objects.all()
+    favs=None
+    for beat in beats :
+        if user.has_fav():
+            favs.append(beat)
+        else:
+            pass
+    context = {
+            'user':user,
+            'fav':favs,
+
+        }
+
+                
+    return render(request,'pages/parametre/activite-fav.html',context)
+def parametre_com(request):
+    return render(request,'pages/parametre/activite-com.html')
+
+def historique_beat(request):
+     return render(request,'pages/parametre/historique-beat.html')
+def historique_artist(request):
+     return render(request,'pages/parametre/historique-artist.html')
+def historique_recherche(request):
+     return render(request,'pages/parametre/historique-recherche.html')
+
+
+def create_card(request):
+    if not request.user.is_authenticated:
+        return redirect('login_views')  # Redirect to login if not authenticated
+
+    compte_bancaire_form = CompteBancaireForm(request.POST or None)
+    paypal_account_form = PayPalAccountForm(request.POST or None)
+
+    if compte_bancaire_form.is_valid():
+        # Save Compte Bancaire form
+        compte_bancaire = compte_bancaire_form.save(commit=False)
+        compte_bancaire.user = request.user
+        compte_bancaire.save()
+
+        # Redirect to specific success page for Compte Bancaire
+        return redirect('accounts:parametre_transaction')
+
+    elif paypal_account_form.is_valid():
+        # Save PayPal account form
+        paypal_account = paypal_account_form.save(commit=False)
+        paypal_account.user = request.user
+        paypal_account.save()
+
+        # Redirect to specific success page for PayPal account
+        return redirect('accounts:parametre_transaction')
+
+    else:
+        # Handle invalid forms
+        context = {
+            'compte_bancaire_form': compte_bancaire_form,
+            'paypal_account_form': paypal_account_form,
+        }
+        return render(request, 'pages/create_card.html', context)

@@ -15,10 +15,10 @@
                     </g>
                   </svg>
             </div>
-            <p class="title-card1">Likes</p>
+            <a class="title-card1" href="{%url 'accounts:parametre_like'%}">Likes</a>
             <p class="text-card1">Check all your likes in one place.</p>
         </div>
-        <div class="card-fav2" onclick="navigate('parametre-activite-fav')">
+        <div class="card-fav2" >
             <div class="icon-card2">
                 <svg
                 width="6.8501029mm"
@@ -36,11 +36,11 @@
                     d="m -192.36104,48.666952 c -0.0661,-0.02469 -0.12275,-0.09858 -0.15735,-0.158014 l -0.0661,-0.113676 v -4.6245 -4.624484 l 0.0661,-0.06593 c 0.0661,-0.06593 0.0956,-0.06593 3.36135,-0.06593 h 3.29039 l 0.0661,0.08492 0.0661,0.08492 v 4.569133 c 0,4.959991 0.009,4.70645 -0.18884,4.854603 -0.15735,0.123239 -0.44266,0.125952 -0.58773,5.37e-4 -0.0247,-0.03131 -0.74188,-0.54388 -1.09685,-0.794716 -0.25301,-0.18967 -0.98306,-0.705693 -1.31442,-0.947371 -0.15736,-0.113676 -0.25302,-0.173749 -0.28449,-0.158013 -0.0247,0.02469 -2.49947,1.784817 -2.67653,1.915643 -0.12379,0.08241 -0.34127,0.104044 -0.47068,0.04369 z m 0.60669,-0.6639 c 0.65451,-0.472823 1.11183,-0.803288 1.30489,-0.94011 0.12276,-0.08241 0.38905,-0.278134 0.60422,-0.43581 0.44513,-0.324532 0.60915,-0.430044 0.66931,-0.430044 0.0247,0 0.12276,0.0536 0.22186,0.120527 1.21727,0.877265 2.72408,1.948835 2.75559,1.961159 0.0247,0.01235 0.0247,-0.872196 0.0247,-4.405103 l -0.009,-4.420896 -2.9957,-0.0083 -2.99587,-0.0083 v 4.429412 4.429426 l 0.0956,-0.05771 c 0.0661,-0.03131 0.18884,-0.135515 0.3355,-0.233856 z"
                     id="path4" /></g></svg>
             </div>
-            <p class="title-card2">Favourites</p>
+            <a class="title-card2" href="{% url 'accounts:parametre_fav'%}">Favourites</a>
             <p class="text-card2">Check all your favourites in one place.</p>
         </div>
-        <div class="card-fav3" onclick="navigate('parametre-activite-com')">
-            <div class="card-fav3" onclick="navigate('parametre-activite-com')">
+        <div class="card-fav3">
+            <div class="card-fav3" >
                 <div class="icon-card3">
                     <svg
 width="10.43872mm"
@@ -101,7 +101,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
                 
                  
                 </div>
-                <p class="title-card3">Commentaires</p>
+                <a class="title-card3" href="{% url 'accounts:parametre_com'%}">Commentaires</a>
                 <p class="text-card3">Check all your comments in one place.</p>
             </div>
         </div>
@@ -173,10 +173,7 @@ xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
                 <div class="subject-com">song remix</div>
                 <div class="date-com">19/11</div>
             </div>
-            <div class="ligne">
-                <div class="subject">remix beat luis</div>
-                <div class="date">19/11</div>
-            </div>
+            
             <div class="ligne-com">
                 <div class="subject-com">David guetto</div>
                 <div class="date-com">19/11</div>

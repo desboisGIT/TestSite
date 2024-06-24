@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'accounts',
     'content',
     'dark',
+    'transaction',
 ]
 
 MIDDLEWARE = [

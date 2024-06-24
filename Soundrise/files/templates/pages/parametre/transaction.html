@@ -6,6 +6,7 @@
     <div class="onglet-tr">
         <h2 class="title-tr">Mes cartes</h2>
         <div class="cartes">
+            
             <div class="flip-card">
                 <div class="flip-card-inner">
                     <div class="flip-card-front">
@@ -147,9 +148,9 @@
             </div>
             
             
-            <button class="add-tr" onclick="navigate('add-cb')">
+            <button class="add-tr" >
                 <span class="span-tr ">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> Create
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path fill="none" d="M0 0h24v24H0z"></path><path fill="currentColor" d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"></path></svg> <a href="{% url 'accounts:create_card'%}" style="color: white;">Create</a>
                 </span>
             </button>
             

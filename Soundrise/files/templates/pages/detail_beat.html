@@ -23,7 +23,19 @@
         </div>
     </div>
     
-    <div id="menu-detail_beat-middle"></div>
+    <div id="menu-detail_beat-middle">
+        <div id="price_menu">
+            <div id='grid3x2'>
+                    <div class="grid-item"><strong>BASIC .mp3</strong></div>
+                    <div class="grid-item"><strong>PRENIUM .waw</strong></div>
+                    <div class="grid-item"><strong>UNLIMITED .wav</strong></div>
+                    <div class="grid-item"><strong>PRO STEMS</strong></div>
+                    <div class="grid-item"><strong>FULL MONETISATION</strong></div>
+                    <div class="grid-item"><strong>EXCLUSIVE</strong></div>
+                </strong>
+            </div>
+        </div>
+    </div>
     
     <div id="menu-detail_beat-right">
         <img src="{{ user.profile_picture }}" class="img-fluid rounded-circle mb-3 square-image-x-fill" alt="Profile Picture">
@@ -149,6 +161,45 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: rgb(243, 1, 1);
+    background: linear-gradient(180deg, rgba(30,30,30,1) 0%, rgba(25,25,25,1) 16%, rgba(20,20,20,1) 100%);
+    transition: background-color 1s;
+}
+#menu-detail_beat-middle:hover{
+    background-color: steelblue;
+
+}
+#grid3x2 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Three columns of equal width */
+    grid-template-rows: repeat(2, minmax(0, 1fr)); /* Two rows that fill available space */
+    gap: 20px; /* Gap between grid items */
+    justify-content: center; /* Center-align grid items horizontally */
+    width: 100%;
+    height: 100%; /* Ensure the grid container fills its parent's height */
+}
+
+#grid3x2 .grid-item {
+    background-color: #00000000;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    border: #555555 solid 1px;
+    /* Make grid items fill the entire grid cell */
+    width: 100%; /* Ensure items stretch to fill the width of the grid cell */
+    max-height: 300px; /* Set maximum height for each grid item */
+    display: flex; /* Use flexbox to align content vertically */
+    justify-content: center; /* Center-align content horizontally */
+    align-items: center; /* Center-align content vertically */
+    overflow: hidden; /* Hide overflow content */
+    padding: 0px 20px;
+    padding-top: 20px;
+    padding-bottom: 100px;
+}
+#price_menu{
+    width: 100%;
+    padding: 2px 20px;
 }
 
 .square-image-x-fill::before {

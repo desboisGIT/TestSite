@@ -19,6 +19,16 @@ urlpatterns = [
     path('explore/',views.explore,name='explore'),
     path('search_beatmakers/',views.search_beatmakers,name='search_beatmakers'),
     path('detail_beat/<int:beat_id>/', views.detail_beat, name='detail_beat'),
+    path('parametre/default',views.parametre_default,name='parametre_default'),
+    path('create_card/',views.create_card,name='create_card'),
+    path('parametre/activite-beat', views.parametre_like, name='parametre_like'),
+    path('parametre/activite-fav', views.parametre_fav, name='parametre_fav'),
+    path('parametre/activite-com', views.parametre_com, name='parametre_com'),
+    path('parametre/historique-beat', views.historique_beat, name='historique_beat'),
+    path('parametre/historique-artist', views.historique_artist, name='historique_artist'),
+    path('parametre/historique-recherche', views.historique_recherche, name='historique_recherche'),
+    path('parametre/transaction',views.parametre_transaction,name="parametre_transaction"),
+    
 ]
 
 

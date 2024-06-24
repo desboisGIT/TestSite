@@ -50,11 +50,10 @@
 
         <div class ="donnees">
             <div class="donnees2" onclick="navigate('dernier-beat')">
-            <div class="donnees3">Dernier Beat
+            <div class="donnees3">Latest Beat
             <div class="j">
                 <div class="analy">Ecoutes</div>
-                <div class="data-tab">1.6K</div>
-                
+                <div class="data-tab">{{latest_model.title}}</div>
             
             </div>  
             <div class="j">
@@ -69,6 +68,7 @@
                 
                 
             </div>
+            
             <div >
                 <div ></div>
                 <div ></div>
@@ -77,17 +77,19 @@
             </div>
         </div>
     </div>
+    
     <div class = "stats">
         <div class="stat1">
             <div class="stat2-1" onclick="navigate('ecoutes-infos')">Ecoutes
-            <div class="nombre">10k</div>
-            <div class="info-tab">en hausse de 35%</div>
+                
+            <div class="nombre">{{user_account.like_numbers}}</div>
+            <div class="info-tab">en hausse de %</div>
             </div>
         </div>
         <div class="stat1">
             <div class="stat2-2" onclick="navigate('abonnes-infos')">Abonnés
-            <div class="nombre">100k</div>
-            <div class="info-tab">en hausse de 15%</div>
+            <div class="nombre">{{ user_account.follower_count }}</div>
+            <div class="info-tab">en hausse de %</div>
             </div>
         </div>
         <div class="stat1">
@@ -134,7 +136,7 @@
                             
                         
                     </div>
-                    <div class="inf3">{{beat.price}}</div>
+                    <div class="inf3">{{beat.price}}€</div>
                     </div>
                     {% endfor %}
                 {% else %}
