@@ -28,7 +28,6 @@ psutil==5.9.5
 pycryptodome==3.17
 pyfiglet==0.8.post1
 Pygments==2.18.0
-pyinstaller @ file:///C:/Users/robch/Desktop/git%20clone/empyrean/build/pyinstaller-5.1
 pyinstaller-hooks-contrib==2024.7
 pyobf2==1.2.0
 pywin32==306
