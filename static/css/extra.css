@@ -1,0 +1,263 @@
+/********** Range Input Styles **********/
+/*Range Reset*/
+input[type="range"] {
+    -webkit-appearance: none;
+     appearance: none;
+     background: transparent;
+     cursor: pointer;
+     width: 15rem;
+ }
+ 
+ /* Removes default focus */
+ input[type="range"]:focus {
+   outline: none;
+ }
+ 
+ /***** Chrome, Safari, Opera and Edge Chromium styles *****/
+ /* slider track */
+ input[type="range"]::-webkit-slider-runnable-track {
+    background-color: #313131;
+    border-radius: 0.5rem;
+    height: 0.5rem;  
+ }
+ 
+ /* slider thumb */
+ input[type="range"]::-webkit-slider-thumb {
+    border: 1px solid #313131;
+   -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    margin-top: -4px; /* Centers thumb on the track */
+    border-radius: 60px;
+ 
+    /*custom styles*/
+    background-color: #202020;
+    height: 1rem;
+    width: 1rem;
+ }
+ 
+ input[type="range"]:focus::-webkit-slider-thumb {   
+   border: 1px solid #313131;
+   outline: none;
+   outline-offset: 0.125rem; 
+   border-radius: 60px;
+   animation: outlineAnimation 1s linear infinite;
+ }
+
+ /******** Firefox styles ********/
+ /* slider track */
+ input[type="range"]::-moz-range-track {
+    background-color: #313131;
+    border-radius: 0.5rem;
+    height: 0.5rem;
+ }
+ 
+ /* slider thumb */
+ input[type="range"]::-moz-range-thumb {
+    border: none; /*Removes extra border that FF applies*/
+    border-radius: 60px;
+ 
+    /*custom styles*/
+    background-color: #272727;
+    height: 1rem;
+    width: 1rem;
+ }
+ 
+ input[type="range"]:focus::-moz-range-thumb {
+   border: 1px solid #313131;
+   outline: 3px solid #313131;
+   outline-offset: 0.125rem; 
+ }
+ 
+
+
+
+
+
+
+
+    .text-white {
+        color: #fff;
+    }
+
+    .form-label {
+        color: #ccc;
+    }
+
+    .form-control {
+        background-color: #333;
+        color: #ccc;
+        border: 1px solid #555;
+    }
+
+    .form-control:focus {
+        background-color: #444;
+        border-color: #777;
+    }
+
+    .nav.flex-column .nav-link {
+        color: #ccc;
+    }
+
+    #price-value {
+        color: #ccc;
+        margin-left: 5px;
+    }
+
+
+
+
+
+
+
+    .beatArtist {
+        color: #ccc;
+        text-decoration: none;
+    }
+
+    .beatArtist:hover {
+        text-decoration: underline;
+    }
+
+    .audio-controls {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+    .audio-controls button {
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        cursor: pointer;
+    }
+
+    .audio-controls button:hover {
+        background-color: #0056b3;
+    }
+
+    .progress {
+        height: 5px;
+        margin-top: 10px;
+        background-color: #555;
+    }
+
+    .progress-bar {
+        background-color: #007bff;
+    }
+
+    #arrowdiv {
+        background-color: #1d1d1d;
+        color: #fff;
+        position: relative;
+        height: 100%;
+        width: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        z-index: 1100;
+        transition: all 0.3s ease-in-out;
+    }
+
+    #arrowdiv.collapsed {
+        left: -320px; /* Adjusted left position when collapsed */
+    }
+
+    #arrowdiv:hover {
+        background-color: #333;
+    }
+
+    #main-content {
+        overflow: auto;
+        padding: 20px;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently supported by Chrome, Edge, Opera and Firefox */
+    }
+
+    .pointerCursor {
+        cursor: pointer;
+    }
+
+
+
+    .input-group {
+        width: 500px;
+        margin-left: 100px;
+    }
+
+    .input-group input {
+        background-color: #333;
+        color: #ccc;
+        border: 1px solid #555;
+    }
+
+    .input-group input:focus {
+        background-color: #444;
+        border-color: #777;
+    }
+
+    .border-bottom {
+        border-bottom: 1px solid #555;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .border-bottom .nav-link {
+        color: #ccc;
+    }
+
+	input[type=text], input[type=password], input[type=email], input[type=url], input[type=number], input[type=tel], textarea, select, .vTextField .form-control {
+		background: #333;
+		background-color: #333;
+	}
+            /* Basic styles to remove blue border on focus */
+        input[type="text"],
+        input[type="search"],
+        input[type="password"],
+        input[type="email"],
+        input[type="url"],
+        input[type="number"],
+        input[type="tel"],
+        textarea,
+        select {
+            outline: none;
+            background-color: rgb(51, 51, 51);
+        }
+
+        /* Optionally, you can remove border and box-shadow as well */
+        input[type="text"]:focus,
+        input[type="search"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            outline: none;
+            border: none; /* Remove border if you want */
+            box-shadow: none; /* Remove box-shadow if you want */
+        }
+
+        /* Custom styles for focused state (optional) */
+        input[type="text"]:focus,
+        input[type="search"]:focus,
+        input[type="password"]:focus,
+        input[type="email"]:focus,
+        input[type="url"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus,
+        textarea:focus,
+        select:focus {
+            border: 2px solid #cccccc; /* Custom border color */
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2); /* Custom box-shadow */
+            background-color: rgb(51, 51, 51);
+        }
