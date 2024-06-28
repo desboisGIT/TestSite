@@ -22,12 +22,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'SECRET_KEY_ON_ADMIN_DISCORD'
+SECRET_KEY = 'django-insecure-y- fzh5kfn1jm-i)8s+d^kk_@#ehtuzb+m@jus74!5!)7ezga2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['soundrise.fr', 'www.soundrise.com', 'localhost', '127.0.0.1','85.215.209.167']
+ALLOWED_HOSTS = ['soundrise.fr', 'www.soundrise.fr', 'localhost', '127.0.0.1','85.215.209.167']
 
 LOGIN_REDIRECT_URL = 'success'
 LOGOUT_REDIRECT_URL = 'login'
